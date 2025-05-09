@@ -1,4 +1,21 @@
-.nav-container {
+
+			   [id="footer-time"].page {
+               z-index: -1337;
+               min-height: var(--viewport-height);
+               justify-content: flex-start;
+               }
+               [id="footer-time"] .page-content {
+			   display: flex;
+               text-align: left;
+               align-items: flex-end;
+               padding: 1.2rem;
+               padding-bottom: 1.1rem;
+               }
+               [id="footer-time"] .page-layout {
+               align-items: flex-end;
+               }
+  
+  .nav-container {
   display: flex;
   flex-wrap: wrap;
   align-items: flex-start;
@@ -66,4 +83,68 @@ a {
 
 #header-navigation {
 	z-index: 1337;
+}
+
+.page-content {
+  text-align: left;
+  padding-bottom: 5.1rem;
+}
+
+/* header row */
+.project-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 19px;
+  margin-top: 19px;
+}
+.project-index {
+  flex: 0 0 236px;
+  font-weight: bold;
+}
+.project-header-text {
+  flex: 1;
+}
+.project-title {
+  font-size: 1rem;
+  line-height: 1.2;
+}
+.project-years {
+  margin-top: 0.25em;
+  font-size: 1rem;
+  color: #333;
+}
+
+/* description beneath title */
+.project-description {
+  margin-top: 1rem;
+  padding-left: 255px; /* 236px + 19px gutter */
+}
+.project-description p {
+  margin-bottom: 1rem;
+}
+
+/* photographer credit */
+.photo-caption {
+  margin-top: 0.5rem;
+  padding-left: 255px;
+  text-align: right;
+  font-size: 0.875rem;
+  color: #777;
+}
+
+/* gallery (if needed) */
+.project-gallery {
+  display: flex;
+  gap: 19px;
+  overflow-x: auto;
+  margin-top: 1.5rem;
+  padding-left: 255px;
+}
+.gallery-slide {
+  flex: 0 0 745px;
+}
+.gallery-slide img {
+  display: block;
+  width: 100%;
+  height: auto;
 }

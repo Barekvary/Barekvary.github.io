@@ -318,8 +318,6 @@ body.editing .page.fixed.allow-scroll[editing="true"] .page-content * {
 }
 
 .page-content {
-    display: flex;
-    flex-direction: row;
     height: 100%;
     align-items: flex-start;
     border-color: transparent;

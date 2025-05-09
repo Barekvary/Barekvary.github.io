@@ -92,14 +92,3 @@ function initializeSmoothScroll() {
 }
 
 document.addEventListener('DOMContentLoaded', initializeSmoothScroll);
-
-// Zoom compensation
-
-function compensateZoom() {
-	const inv = 1.25 / window.devicePixelRatio;
-    document.body.style.zoom = inv;
-}
-
-window.addEventListener('DOMContentLoaded', compensateZoom);
-window.addEventListener('resize', compensateZoom);
-compensateZoom();

@@ -1,5 +1,5 @@
-
-document.addEventListener('DOMContentLoaded', function() {
+// Clock/timer function
+function initializeClock() {
   function updateClock() {
     const now = new Date();
     document.getElementById('hour').textContent = String(now.getHours()).padStart(2, '0');
@@ -9,7 +9,11 @@ document.addEventListener('DOMContentLoaded', function() {
   
   updateClock();
   setInterval(updateClock, 1000);
-  
+}
+document.addEventListener('DOMContentLoaded', initializeClock);
+
+// Smooth scroll and UI interaction function
+function initializeSmoothScroll() {
   document.querySelectorAll('.nav-links a, a[rel="top"]').forEach(anchor => {
     anchor.addEventListener('click', function(e) {
       e.preventDefault();
@@ -27,8 +31,7 @@ document.addEventListener('DOMContentLoaded', function() {
       const targetElement = document.querySelector(targetId);
       
       if (targetElement) {
-        const headerHeight = document.querySelector('#header-navigation').offsetHeight;
-        const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - headerHeight;
+        const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
         
         window.scrollTo({
           top: targetPosition,
@@ -86,4 +89,17 @@ document.addEventListener('DOMContentLoaded', function() {
       this.style.transform = 'scale(1)';
     });
   });
-});
+}
+
+document.addEventListener('DOMContentLoaded', initializeSmoothScroll);
+
+// Zoom compensation
+
+function compensateZoom() {
+	const inv = 1.5 / window.devicePixelRatio;
+    document.body.style.zoom = inv;
+}
+
+window.addEventListener('DOMContentLoaded', compensateZoom);
+window.addEventListener('resize', compensateZoom);
+compensateZoom();

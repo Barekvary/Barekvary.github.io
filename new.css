@@ -63,3 +63,7 @@ a {
 * {
 	font-family: "Inter" !important;
 }
+
+#header-navigation {
+	z-index: 1337;
+}

@@ -250,13 +250,6 @@ bodycopy * a {
     position: absolute;
 }
 
-.page.overlay,
-.page.overlay .page-layout,
-.page.fixed,
-.page.fixed .page-layout {
-    pointer-events: none;
-}
-
 body.editing .page.overlay .page-content,
 body.editing .page.overlay .page-content *,
 body.editing .page.fixed .page-content,
@@ -264,7 +257,6 @@ body.editing .page.fixed .page-content *,
 body.editing .page.fixed.allow-scroll .page-content,
 body.editing .page.fixed.allow-scroll .page-content *,
 body.editing .page:not([editing="true"]) {
-    /*pointer-events: none;*/
     -moz-user-select: none;
     -webkit-user-select: none;
     -ms-user-select: none;
@@ -367,7 +359,6 @@ body.editing .page.fixed.allow-scroll[editing="true"] .page-content * {
     overflow-y: auto;
     overflow-x: hidden;
     max-height: 100vh;
-    pointer-events: none;
 }
 
 [position="fixed"] bodycopy {
@@ -429,7 +420,6 @@ h9 {
 .overlay-content {
     position: fixed;
     inset: 0;
-    pointer-events: none;
     max-height: 100dvh;
     --viewport-height: 100dvh;
     overflow: auto;
@@ -461,20 +451,9 @@ body.has-scrollable-overlay .overlay-content.top-overlay media-item::part(iframe
     pointer-events: auto;
 }
 
-.overlay-content.is-passthrough-overlay .page,
-.overlay-content.is-passthrough-overlay .page-layout {
-    pointer-events: none;
-}
 
 .overlay-content.is-passthrough-overlay .page-content {
     pointer-events: auto;
-}
-
-.overlay-content.is-content-passthrough-overlay .page,
-.overlay-content.is-content-passthrough-overlay .page-layout,
-.overlay-content.is-content-passthrough-overlay .page-content,
-.overlay-content.is-content-passthrough-overlay .page-content bodycopy {
-    pointer-events: none;
 }
 
 .overlay-content.is-content-passthrough-overlay .page-content bodycopy > *:not(column-set),
@@ -619,7 +598,6 @@ body.editing .overlay-content .page[editing="true"] bodycopy > * {
     content: '';
     inset: 0;
     z-index: 1;
-    pointer-events: none;
 }
 
 .backdrop:not(.clip){
@@ -683,7 +661,6 @@ body.editing .overlay-content .page[editing="true"] bodycopy > * {
     position: absolute;
     inset: var(--pin-padding-top, 0) 0 var(--pin-padding-bottom, 0) 0;
     z-index: 10;
-    pointer-events: none !important;
 
     /** this emulates .page **/
     display: flex;
@@ -728,7 +705,6 @@ body.editing .overlay-content .page[editing="true"] bodycopy > * {
 ::part(slideshow-nav) {
 
     transition: opacity 222ms ease-in-out;
-    pointer-events: none;
 
     -moz-user-select: none;
     -webkit-user-select: none;
@@ -957,11 +933,6 @@ media-item .caption.empty {
     content: ', '
 }
 
-media-item[drag="true"]::part(media),
-[contenteditable="true"] iframe {
-    pointer-events: none;
-}
-
 
 column-set+* {
     --gutter-expand: 1;
@@ -1178,7 +1149,6 @@ button#edit.edit svg path {
     z-index: 5002;
     position: fixed;
     inset: 0;
-    pointer-events: none;
     transform: translateZ(999px);
 }
 
@@ -1187,14 +1157,12 @@ button#edit.edit svg path {
     position: absolute;
     z-index: 99;
     inset: 0;
-    pointer-events: none;
 }
 
 /*****************************
     PAGINATION
 ******************************/
 .pagination-watcher {
-    pointer-events: none;
     height: 1px;
     margin-top: -1px;
     width: 100%;
@@ -1220,7 +1188,6 @@ body {
 .colorfilter-base {
     position: absolute;
     inset: 0;
-    pointer-events: none;
 }
 
 .colorfilter-color {
@@ -1281,7 +1248,6 @@ body {
 .flying-object,
 .flying-object * {
     user-select: none;
-    pointer-events: none !important;
 }
 
 /*****************************
@@ -1357,7 +1323,6 @@ audio-player::part(label) {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    pointer-events: none;
     user-select: none;
     margin: auto auto auto 0;
     flex: 0 3 auto;
@@ -1383,16 +1348,6 @@ audio-player::part(stream-anim):before {
 audio-player::part(stream-anim) {
     user-select: none;
     margin: auto auto auto 0
-}
-
-audio-player::part(buffer),
-audio-player::part(current-time),
-audio-player::part(note-svg),
-audio-player::part(play-text),
-audio-player::part(separator),
-audio-player::part(total-time) {
-    user-select: none;
-    pointer-events: none
 }
 
 audio-player::part(buffer),

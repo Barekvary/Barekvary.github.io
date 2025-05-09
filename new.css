@@ -1,0 +1,33 @@
+.nav-container {
+  display: flex;
+  align-items: stretch;
+  justify-content: flex-start;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  width: 100%;
+  margin-top: calc(var(--gutter-expand, 0) * 19px);
+}
+
+.nav-index {
+  flex: 0 0 66px;
+  max-width: 100%;
+  margin-right: 19px;
+  word-wrap: break-word;
+  position: relative;
+}
+
+.nav-index::first-line {
+  font-size: 1.25rem;
+}
+
+.nav-links {
+  flex: 1;
+  max-width: 100%;
+  word-wrap: break-word;
+  position: relative;
+}
+
+a {
+	color: rgba(0, 0, 0, 0.85);
+	text-decoration: none;
+}

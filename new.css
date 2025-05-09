@@ -475,10 +475,6 @@ a {
 	transform-origin: center
 }
 
-[contenteditable=true] a:active {
-	opacity: 1
-}
-
 small {
 	max-width: 100%;
 	text-decoration: inherit
@@ -552,7 +548,8 @@ a:active {
 }
 
 .grey-caption a {
-	color: rgba(0, 0, 0, .4)
+	color: rgba(0, 0, 0, .4);
+	font-weight: 400;
 }
 
 [thumbnail-index] .caption {

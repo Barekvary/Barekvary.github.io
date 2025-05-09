@@ -411,6 +411,21 @@
          audio-player {--font-size: 1.2rem;}
          audio-player {font-size: calc(var(--font-scale) * var(--font-size));}
       </style>
+	  <style>
+	  [id="footer-time"].page {
+               min-height: var(--viewport-height);
+               justify-content: flex-start;
+               }
+               [id="footer-time"] .page-content {
+               text-align: left;
+               align-items: flex-end;
+               padding: 1.2rem;
+               padding-bottom: 1.1rem;
+               }
+               [id="footer-time"] .page-layout {
+               align-items: flex-end;
+               }
+		</style>
    </head>
    <body>
       <div class="content">
@@ -420,49 +435,6 @@
                   <bodycopy>
                      <column-set>
                         <template shadowrootmode="open">
-                           
-                           <style>
-                              :host{
-                              visibility: visible;
-                              --columns-gutter: 19px;
-                              margin-top: calc(var(--gutter-expand, 0) * 19px);
-                              width: 100%;
-                              position: relative;
-                              contain: layout;
-                              clear: both;							
-                              display: flex;
-                              align-items: stretch;
-                              justify-content: flex-start;							
-                              flex-direction: row;
-                              flex-wrap: nowrap;							
-                              }
-                           </style>
-                           <style>
-                              ::slotted(column-unit:not(:last-child)) {
-                              margin-right: 19px;
-                              }
-                              ::slotted(column-unit) {
-                              display: block;
-                              word-wrap: break-word;
-                              position: relative;
-                              max-width: 100%;   
-                              flex-grow: 0;
-                              flex-shrink: 0;
-                              flex-basis: var(--column-width);
-                              width: var(--column-width);
-                              }
-                              ::slotted(column-unit:last-child) {
-                              flex-grow: 1;
-                              }
-                              ::slotted(column-unit[slot="0"]) {
-                              --column-width: 66px;
-                              --resize-parent-width: 66px;							
-                              }
-                              ::slotted(column-unit[slot="1"]) {
-                              --column-width: 915.953125px;
-                              --resize-parent-width: 915.953125px;							
-                              }				
-                           </style>
                            <div tabindex="-1" data-nosnippet="true" style="height: 0px; width: 100%; min-width: 100%; overflow: hidden; display: block; align-self: flex-start; visibility: hidden; pointer-events: none; box-sizing: border-box; z-index: -1; position: absolute; inset: 0px auto;">
                               <div tabindex="-1" style="width: 100%;"></div>
                               <div tabindex="-1" style="width: 1rem;"></div>
@@ -646,20 +618,6 @@
                   </bodycopy>
                </div>
             </div>
-            <style>[id="footer-time"].page {
-               min-height: var(--viewport-height);
-               justify-content: flex-start;
-               }
-               [id="footer-time"] .page-content {
-               text-align: left;
-               align-items: flex-end;
-               padding: 1.2rem;
-               padding-bottom: 1.1rem;
-               }
-               [id="footer-time"] .page-layout {
-               align-items: flex-end;
-               }
-            </style>
          </div>
          <div id="top-info" page-url="info-desktop" class="page pinned pinned-top overlay stacked-page">
             <a id="info-desktop"></a>

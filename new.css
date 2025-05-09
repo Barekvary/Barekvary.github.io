@@ -172,11 +172,14 @@ a {
 	flex: 0 0 745px
 }
 
-.gallery-slide img {
+.gallery-slide img,
+.gallery-slide .gallery-media {
 	display: block;
 	width: 100%;
 	height: auto
 }
+
+
 
 .content {
 	display: flex;

@@ -115,7 +115,7 @@ a {
 .info-main img {
 	margin-left: 51px;
 	width: 164px;
-	height: auto
+	height: fit-content;
 }
 
 .info-text {
@@ -134,7 +134,6 @@ a {
 
 .project-index {
 	flex: 0 0 255px;
-	font-weight: 700
 }
 
 .project-title {

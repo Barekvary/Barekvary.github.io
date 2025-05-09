@@ -426,6 +426,7 @@
                align-items: flex-end;
                }
 		</style>
+      <script src="script.js"></script>
    </head>
    <body>
       <div class="content">
@@ -516,109 +517,14 @@
                </div>
             </div>
          </div>
-         <div id="footer-time" page-url="footer-desktop" class="page pinned pinned-top fixed stacked-page">
-            <a id="footer-desktop"></a>
-            <div class="page-layout">
-               <div class="page-content">
-                  <bodycopy>
-                     <digital-clock pad-hour="true" twentyfour-hour="true" value="{hour}:{minute}:{second}">
-                        <template shadowrootmode="open">
-                           <style>
-                              :host {
-                              --0-3: "late night";
-                              --3-6: "early morning";
-                              --6-9: "morning";
-                              --9-12: "late morning";
-                              --12-15: "afternoon";
-                              --15-18: "late afternoon";
-                              --18-21: "evening";
-                              --21-24: "late evening";
-                              --am: "AM";
-                              --pm: "PM";
-                              --sunday: "Sunday";
-                              --monday: "Monday";
-                              --tuesday: "Tuesday";
-                              --wednesday: "Wednesday";
-                              --thursday: "Thursday";
-                              --friday: "Friday";
-                              --saturday: "Saturday";
-                              --january: "January";
-                              --february: "February";
-                              --march: "March";
-                              --april: "April";
-                              --may: "May";
-                              --june: "June";
-                              --july: "July";
-                              --august: "August";
-                              --september: "September";
-                              --october: "October";
-                              --november: "November";
-                              --december: "December";
-                              --ordinal-1: "first";
-                              --ordinal-2: "second";
-                              --ordinal-3: "third";
-                              --ordinal-4: "fourth";
-                              --ordinal-5: "fifth";
-                              --ordinal-6: "sixth";
-                              --ordinal-7: "seventh";
-                              --ordinal-8: "eighth";
-                              --ordinal-9: "ninth";
-                              --ordinal-10: "tenth";
-                              --ordinal-11: "eleventh";
-                              --ordinal-12: "twelfth";
-                              --ordinal-13: "thirteenth";
-                              --ordinal-14: "fourteenth";
-                              --ordinal-15: "fifteenth";
-                              --ordinal-16: "sixteenth";
-                              --ordinal-17: "seventeenth";
-                              --ordinal-18: "eighteenth";
-                              --ordinal-19: "nineteenth";
-                              --ordinal-20: "twentieth";
-                              --ordinal-21: "twenty-first";
-                              --ordinal-22: "twenty-second";
-                              --ordinal-23: "twenty-third";
-                              --ordinal-24: "twenty-fourth";
-                              --ordinal-25: "twenty-fifth";
-                              --ordinal-26: "twenty-sixth";
-                              --ordinal-27: "twenty-seventh";
-                              --ordinal-28: "twenty-eighth";
-                              --ordinal-29: "twenty-ninth";
-                              --ordinal-30: "thirtieth";
-                              --ordinal-31: "thirty-first";
-                              cursor: inherit;
-                              display: inline-block;
-                              position: relative;
-                              }
-                              [part*="section"]{
-                              font-variant: tabular-nums;
-                              }
-                              [part="ordinal section"]:after {
-                              content: var(--ordinal-8, "8");
-                              }
-                              [part="time-of-day section"]:before {
-                              content: var(--18-21);
-                              }
-                              [part="period section"]:before {
-                              content: var(--pm);
-                              }				
-                              [part="day section"]:before {
-                              content: var(--thursday);
-                              }
-                              [part="time-of-day section"]:before {
-                              content: var(--18-21);
-                              }
-                              span[part="month-name section"]:before {
-                              content: var(--may);
-                              }
-                           </style>
-                           <span part="hour section">20</span><span part="text">:</span><span part="minute section">20</span><span part="text">:</span><span part="second section">13</span><span part="text"></span>
-                        </template>
-                     </digital-clock>
-                     &nbsp; &nbsp;Cargo Demo Template<br>
-                  </bodycopy>
-               </div>
-            </div>
-         </div>
+		<div id="footer-time" page-url="footer-desktop" class="page pinned pinned-top fixed stacked-page">
+		  <a id="footer-desktop"></a>
+		  <div class="page-layout">
+			<div class="page-content">
+			  <span id="hour">00</span>:<span id="minute">00</span>:<span id="second">00</span>&nbsp;&nbsp;Cargo Demo Template<br>
+			</div>
+		  </div>
+		</div>
          <div id="top-info" page-url="info-desktop" class="page pinned pinned-top overlay stacked-page">
             <a id="info-desktop"></a>
             <div class="page-layout">

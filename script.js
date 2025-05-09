@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', function() {
   window.addEventListener('scroll', function() {
     const scrollPosition = window.scrollY;
     
-    document.querySelectorAll('.page.stacked-page').forEach(section => {
+    document.querySelectorAll('.page').forEach(section => {
       if (!section.id.startsWith('project-')) return;
       
       const sectionTop = section.offsetTop;

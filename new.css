@@ -229,16 +229,6 @@ bodycopy * a {
 	flex: 1 0 auto
 }
 
-@supports (height:100svh) {
-	.page.stacked-page {
-		--viewport-height: 100svh
-	}
-
-	.page.stacked-page+.page.stacked-page {
-		--viewport-height: 100vh
-	}
-}
-
 .overlay-content {
 	mix-blend-mode: var(--overlay-mix, normal)
 }

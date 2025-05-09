@@ -1,11 +1,16 @@
 .nav-container {
   display: flex;
-  align-items: stretch;
+  flex-wrap: wrap;
+  align-items: flex-start;
   justify-content: flex-start;
-  flex-direction: row;
-  flex-wrap: nowrap;
   width: 100%;
   margin-top: calc(var(--gutter-expand, 0) * 19px);
+}
+
+#nav-index-title {
+  flex: 0 0 100%;
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
 }
 
 .nav-index {
@@ -13,18 +18,12 @@
   max-width: 100%;
   margin-right: 19px;
   word-wrap: break-word;
-  position: relative;
-}
-
-.nav-index::first-line {
-  font-size: 1.25rem;
 }
 
 .nav-links {
   flex: 1;
   max-width: 100%;
   word-wrap: break-word;
-  position: relative;
 }
 
 a {

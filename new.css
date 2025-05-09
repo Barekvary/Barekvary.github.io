@@ -30,3 +30,35 @@ a {
 	color: rgba(0, 0, 0, 0.85);
 	text-decoration: none;
 }
+
+.info-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.info-main {
+  display: flex;
+  align-items: flex-start;
+  gap: 19px;
+}
+
+.info-main img {
+  width: 164px;
+  height: auto;
+}
+
+.info-text {
+  margin-left: 71px; /* 255 - 164 */
+  flex: 1;
+}
+
+.grey-caption {
+  margin-top: 1rem;
+  margin-left: 255px;
+  color: #777;
+  font-size: 0.875rem;
+}
+
+* {
+	font-family: "Inter" !important;
+}

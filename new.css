@@ -173,12 +173,11 @@ a {
 }
 
 .gallery-slide img,
-.gallery-slide .gallery-media {
+.gallery-media {
 	display: block;
-	width: 100%;
-	height: auto
+	height:500px;
+	width:auto;
 }
-
 
 
 .content {

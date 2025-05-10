@@ -44,6 +44,7 @@
   width: 164px;
 }
 .info-text {
+  max-width: calc(100vw - 255px);
   margin-left: 21px;
   flex: 1;
 }
@@ -102,7 +103,7 @@
 }
 .project-description {
   margin-top: 1rem;
-  padding-left: 255px;
+  max-width: calc(100vw - 255px);
 }
 .project-description p {
   margin-bottom: 1rem;

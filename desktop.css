@@ -1,5 +1,6 @@
 [id=footer-time].page {
   justify-content: flex-start;
+  position: fixed;
 }
 [id=footer-time] .page-content {
   padding-bottom: 1.1rem;
@@ -23,6 +24,7 @@
 [id=header-navigation].page {
   min-height: auto;
   justify-content: flex-start;
+  position: fixed;
 }
 [id=header-navigation] .page-content {
   text-align: left;
@@ -73,15 +75,7 @@
   mix-blend-mode: var(--page-mix, normal);
 }
 .page.pinned-bottom {
-  flex: 0;
-  z-index: 2;
-  left: 0;
-  right: 0;
   bottom: 0;
-  transform: unset;
-}
-.page.fixed {
-  position: fixed;
 }
 .page-layout {
   flex-grow: 1;

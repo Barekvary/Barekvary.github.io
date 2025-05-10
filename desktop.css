@@ -31,6 +31,10 @@
   text-align: left;
 }
 
+.nav-links > a.active {
+	font-weight: 500;
+}
+
 .info-container {
   display: flex;
   flex-direction: column;

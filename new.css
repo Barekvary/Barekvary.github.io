@@ -13,19 +13,8 @@ body {
 	box-sizing: border-box
 }
 
-body,
-html {
-	min-height: var(--viewport-height, 100vh);
-}
-
 html {
 	font-size: 19px;
-	touch-action: manipulation;
-	position: relative;
-	overflow-anchor: none;
-}
-
-body {
 }
 
 * {
@@ -42,8 +31,6 @@ a:active {
 }
 
 [id=footer-time].page {
-	z-index: -1337;
-	min-height: var(--viewport-height);
 	justify-content: flex-start
 }
 
@@ -134,12 +121,15 @@ a:active {
 	color: #777
 }
 
+.gallery-wrapper, .grey-caption {
+	margin-left: 255px;
+}
+
 .gallery-wrapper {
 	width: calc(100% - 255px);
 	height: 450px;
 	overflow: hidden;
 	position: relative;
-	margin-left: 255px;
 }
 
 .gallery-wrapper .project-gallery {
@@ -167,8 +157,6 @@ a:active {
 .gallery-nav {
 	position: absolute;
 	top: 50%;
-	transform: translateY(-50%);
-	z-index: 10;
 	background: rgba(0, 0, 0, 0.3);
 	border: none;
 	color: #fff;
@@ -205,8 +193,6 @@ a:active {
 }
 
 .page {
-	--split-backdrop-height: calc(var(--viewport-height) / 2);
-	--split-content-height: calc(var(--viewport-height) - var(--split-backdrop-height));
 	position: relative;
 	display: flex;
 	justify-content: center;
@@ -239,7 +225,6 @@ a:active {
 	align-items: flex-start;
 	justify-content: flex-start;
 	width: 0%;
-	mix-blend-mode: var(--page-layout-mix, normal)
 }
 
 .page-content {
@@ -260,24 +245,19 @@ a:active {
 }
 
 .grey-caption {
-	--text-style: "Grey Caption";
 	font-size: 1.1rem;
 	font-weight: 410;
 	color: rgba(0, 0, 0, .4);
-	font-family: "Monument Grotesk Variable";
 	font-style: normal;
 	line-height: 1.15;
 	letter-spacing: 0;
 	display: block;
-	font-variation-settings: 'slnt' 0, 'MONO' 0;
-	font-feature-settings: "tnum"
-	margin-top: 1rem;
 	margin-left: 255px;
 	color: #777;
-	font-size: .875rem font-size: calc(var(--font-scale) * var(--font-size)) --font-size: 1.1rem
+	font-size: .9rem;
+	font-weight: 400;
 }
 
 .grey-caption a {
 	color: rgba(0, 0, 0, .4);
-	font-weight: 400;
 }

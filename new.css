@@ -68,7 +68,6 @@ a {
 	padding-bottom: 1.1rem
 }
 
-
 #header-navigation {
 	z-index: 1337
 }
@@ -91,10 +90,6 @@ a {
 [id=header-navigation].page {
 	min-height: auto;
 	justify-content: flex-start
-}
-
-[id=header-navigation] .page-layout {
-	align-items: flex-start
 }
 
 [id=header-navigation] .page-content {
@@ -230,10 +225,6 @@ a {
 	flex: 1 0 auto
 }
 
-.overlay-content {
-	mix-blend-mode: var(--overlay-mix, normal)
-}
-
 .page {
 	--split-backdrop-height: calc(var(--viewport-height) / 2);
 	--split-content-height: calc(var(--viewport-height) - var(--split-backdrop-height));
@@ -246,14 +237,6 @@ a {
 	width: 100%;
 	flex: 0;
 	mix-blend-mode: var(--page-mix, normal)
-}
-
-.overlay-content .page {
-	mix-blend-mode: unset
-}
-
-.page.overlay {
-	position: absolute
 }
 
 .page.pinned-bottom,
@@ -285,10 +268,6 @@ a {
 	max-height: var(--viewport-height, 100vh)
 }
 
-.page.overlay {
-	position: absolute
-}
-
 .page-layout {
 	flex-grow: 1;
 	position: relative;
@@ -310,139 +289,13 @@ a {
 	-webkit-filter: var(--page-content-filter, none)
 }
 
-.overlay-content {
-	position: fixed;
-	inset: 0;
-	max-height: 100dvh;
-	--viewport-height: 100dvh;
-	overflow: auto
-}
-
-.overlay-content::-webkit-scrollbar {
-	display: none
-}
-
-.overlay-content .page-layout {
-	min-height: fit-content
-}
-
-.overlay-content.overlay-open .page:has(.has-content-backdrop-filter):not(:has(.backdrop)) {
-	will-change: background-color;
-	animation: overlayOpenWithoutOpacity var(--overlay-open-duration) var(--overlay-open-easing, 'ease-in-out')
-}
-
-@keyframes overlayOpen {
-	from {
-		opacity: var(--overlay-open-from-opacity, 1);
-		background-color: var(--overlay-open-from-background-color, transparent)
-	}
-
-	to {
-		opacity: 1
-	}
-}
-
-@keyframes overlayOpenWithoutOpacity {
-	from {
-		background-color: var(--overlay-open-from-background-color, transparent)
-	}
-}
-
-@keyframes overlayOpenOpacity {
-	from {
-		opacity: var(--overlay-open-from-opacity, 1)
-	}
-
-	to {
-		opacity: 1
-	}
-}
-
-@keyframes overlayOpenContent {
-	from {
-		transform: var(--overlay-open-content-from-transform, translate3d(0, 0, 0));
-		clip-path: var(--overlay-open-content-from-clip-mask, inset(0 0 0 0))
-	}
-
-	to {
-		transform: translate3d(0, 0, 0);
-		clip-path: var(--overlay-open-content-to-clip-mask, inset(0 0 0 0))
-	}
-}
-
-@keyframes overlayClose {
-	to {
-		opacity: var(--overlay-close-to-opacity, 1);
-		background-color: var(--overlay-close-to-background-color, transparent)
-	}
-}
-
-@keyframes overlayCloseWithoutOpacity {
-	to {
-		background-color: var(--overlay-close-to-background-color, transparent)
-	}
-}
-
-@keyframes overlayCloseOpacity {
-	to {
-		opacity: var(--overlay-close-to-opacity, 1)
-	}
-}
-
-@keyframes overlayCloseContent {
-	from {
-		transform: translate3d(0, 0, 0);
-		clip-path: var(--overlay-close-content-from-clip-mask, inset(0 0 0 0))
-	}
-
-	to {
-		transform: var(--overlay-close-content-to-transform, translate3d(0, 0, 0));
-		clip-path: var(--overlay-close-content-to-clip-mask, inset(0 0 0 0))
-	}
-}
-
-::part(slideshow-nav) {
-	transition: opacity 222ms ease-in-out;
-	-moz-user-select: none;
-	-webkit-user-select: none;
-	-ms-user-select: none;
-	user-select: none;
-	-webkit-tap-highlight-color: transparent;
-	-webkit-touch-callout: none;
-	--button-size: 30px;
-	--button-inset: 20px;
-	--button-icon-color: rgba(255, 255, 255, 0.9);
-	--button-icon-scale: 1;
-	--button-icon-stroke-width: 1.5px;
-	--button-icon-stroke-linecap: butt;
-	--button-background-color: rgba(87, 87, 87, 0.35);
-	--button-background-radius: 50%;
-	--button-active-opacity: 0.7
-}
-
-small {
-	max-width: 100%;
-	text-decoration: inherit
-}
-
-@keyframes loopTranslate {
-	0% {
-		transform: translateZ(0)
-	}
-
-	50% {
-		transform: translateZ(1px)
-	}
-
-	100% {
-		transform: translateZ(0)
-	}
-}
-
-a[rel=show-cart][show-count]:after {
-	counter-reset: variable var(--cart-item-count);
-	content: " (" counter(variable) ")";
-	display: var(--cart-item-count-display, none)
+.page-content {
+	padding: 1rem;
+	text-align: left;
+	padding-bottom: 3.8rem;
+	padding-top: 1.2rem;
+	padding-right: 1.2rem;
+	padding-left: 1.2rem
 }
 
 a:active {
@@ -451,25 +304,6 @@ a:active {
 
 .content {
 	border-color: rgba(0, 0, 0, .85)
-}
-
-.caption {
-	font-size: .7rem;
-	font-weight: 480;
-	color: rgba(0, 0, 0, .75);
-	font-family: "Monument Grotesk Variable";
-	font-style: normal;
-	line-height: 1.2;
-	letter-spacing: 0;
-	display: block;
-	font-variation-settings: 'slnt' 0, 'MONO' 0;
-	--font-size: 0.7rem;
-	font-size: calc(var(--font-scale) * var(--font-size))
-}
-
-.caption a {
-	color: rgba(0, 0, 0, .75);
-	text-decoration: none
 }
 
 .grey-caption {
@@ -484,7 +318,7 @@ a:active {
 	display: block;
 	font-variation-settings: 'slnt' 0, 'MONO' 0;
 	font-feature-settings: "tnum"
-		margin-top: 1rem;
+	margin-top: 1rem;
 	margin-left: 255px;
 	color: #777;
 	font-size: .875rem font-size: calc(var(--font-scale) * var(--font-size)) --font-size: 1.1rem
@@ -493,32 +327,4 @@ a:active {
 .grey-caption a {
 	color: rgba(0, 0, 0, .4);
 	font-weight: 400;
-}
-
-[thumbnail-index] .caption {
-	text-align: left
-}
-
-.page-content {
-	padding: 1rem;
-	text-align: left;
-	padding-bottom: 3.8rem;
-	padding-top: 1.2rem;
-	padding-right: 1.2rem;
-	padding-left: 1.2rem
-}
-
-.page-layout {
-	align-items: flex-start;
-}
-
-::part(slideshow-nav) {
-	--button-size: 30px;
-	--button-inset: 20px;
-	--button-icon-color: rgba(255, 255, 255, 0.9);
-	--button-icon-stroke-width: 1.5px;
-	--button-icon-stroke-linecap: none;
-	--button-background-color: rgba(87, 87, 87, 0.35);
-	--button-background-radius: 50%;
-	--button-active-opacity: 0.7
 }

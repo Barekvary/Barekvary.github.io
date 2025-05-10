@@ -72,8 +72,8 @@ html {
   flex-grow: 1;
 }
 .pages {
-  width: 42%;
-  margin-left: 58%;
+  width: 50%;
+  margin-left: 50%;
   flex: 1 0 auto;
 }
 .page {

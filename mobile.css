@@ -1,8 +1,11 @@
 [id=footer-time].page {
   justify-content: flex-start;
+  position: absolute;
 }
 [id=footer-time] .page-content {
   padding-bottom: 1.1rem;
+  text-align: right;
+  margin-top: 5.5px;
 }
 
 .nav-container {
@@ -38,9 +41,7 @@
   gap: 19px;
 }
 .info-main img {
-  margin-left: 51px;
   width: 164px;
-  height: fit-content;
 }
 .info-text {
   margin-left: 21px;
@@ -70,14 +71,6 @@
   flex: 0;
   mix-blend-mode: var(--page-mix, normal);
 }
-.page.pinned-bottom {
-  position: absolute;
-}
-
-.page.pinned-bottom .page-content {
-  text-align: right;
-  margin-top: 5.5px;
-}
 
 #header-navigation .page-content {
 	padding-right: 0;
@@ -93,22 +86,16 @@
   width: 0%;
 }
 .page-content {
-  height: 100%;
-  align-items: flex-start;
   width: 100%;
-  padding: 1rem;
-  text-align: left;
+  padding: 1.2rem;
   padding-bottom: 3.8rem;
-  padding-top: 1.2rem;
-  padding-right: 1.2rem;
-  padding-left: 1.2rem;
 }
 
 .project-header {
   display: flex;
 }
 .project-index {
-  flex: 0 0 255px;
+  flex: 0 0 40px;
 }
 .project-years {
   margin-top: 0.25em;

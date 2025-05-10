@@ -1,6 +1,7 @@
 [id=footer-time].page {
   justify-content: flex-start;
   position: fixed;
+  bottom: 0;
 }
 [id=footer-time] .page-content {
   padding-bottom: 1.1rem;
@@ -74,9 +75,6 @@
   flex: 0;
   mix-blend-mode: var(--page-mix, normal);
 }
-.page.pinned-bottom {
-  bottom: 0;
-}
 .page-layout {
   flex-grow: 1;
   position: relative;
@@ -87,15 +85,9 @@
   width: 0%;
 }
 .page-content {
-  height: 100%;
-  align-items: flex-start;
   width: 100%;
-  padding: 1rem;
-  text-align: left;
+  padding: 1.2rem;
   padding-bottom: 3.8rem;
-  padding-top: 1.2rem;
-  padding-right: 1.2rem;
-  padding-left: 1.2rem;
 }
 
 .project-header {

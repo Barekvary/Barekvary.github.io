@@ -161,7 +161,7 @@ a {
 }
 
 .gallery-wrapper {
-  width: 745px;
+  width: calc(100% - 255px);
   height: 450px;
   overflow: hidden;
   position: relative;
@@ -177,6 +177,7 @@ a {
 .gallery-wrapper .gallery-slide {
   flex: 0 0 100%;
   height: 100%;
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -218,7 +219,8 @@ a {
 }
 
 .pages {
-	width: 100%;
+	width: 42%;
+	margin-left: 58%;
 	flex: 1 0 auto
 }
 
@@ -316,12 +318,6 @@ a {
 
 .overlay-content .page-layout {
 	min-height: fit-content
-}
-
-.overlay-content .page,
-.overlay-content .page-content,
-.overlay-content .page-layout {
-	pointer-events: auto
 }
 
 .overlay-content.overlay-open .page:has(.has-content-backdrop-filter):not(:has(.backdrop)) {
@@ -499,10 +495,6 @@ a:active {
 	text-align: left
 }
 
-.page {
-	justify-content: flex-end
-}
-
 .page-content {
 	padding: 1rem;
 	text-align: left;
@@ -514,7 +506,6 @@ a:active {
 
 .page-layout {
 	align-items: flex-start;
-	max-width: 42%
 }
 
 ::part(slideshow-nav) {

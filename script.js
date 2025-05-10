@@ -1,4 +1,4 @@
-// Clock/timer function
+// Clock / timer function
 function initializeClock() {
   function updateClock() {
     const now = new Date();
@@ -10,110 +10,89 @@ function initializeClock() {
   updateClock();
   setInterval(updateClock, 1000);
 }
+
 document.addEventListener('DOMContentLoaded', initializeClock);
 
-// Smooth scroll and UI interaction function
+// Smooth scroll and active link highlighting
 function initializeSmoothScroll() {
   document.querySelectorAll('.nav-links a, a[rel="top"]').forEach(anchor => {
     anchor.addEventListener('click', function(e) {
       e.preventDefault();
-      
       const targetId = this.getAttribute('href');
-      
+
       if (targetId === '#' || this.getAttribute('rel') === 'top') {
-        window.scrollTo({
-          top: 0,
-          behavior: 'smooth'
-        });
+        window.scrollTo({ top: 0, behavior: 'smooth' });
         return;
       }
-      
+
       const targetElement = document.querySelector(targetId);
-      
       if (targetElement) {
         const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
-        
-        window.scrollTo({
-          top: targetPosition,
-          behavior: 'smooth'
-        });
+        window.scrollTo({ top: targetPosition, behavior: 'smooth' });
       }
     });
   });
-  
+
   window.addEventListener('scroll', function() {
     const scrollPosition = window.scrollY;
-    
     document.querySelectorAll('.page').forEach(section => {
       if (!section.id.startsWith('project-')) return;
-      
       const sectionTop = section.offsetTop;
       const sectionHeight = section.offsetHeight;
-      
-      const correspondingAnchor = section.querySelector('a[id^="test-project"]');
-      if (!correspondingAnchor) return;
-      
-      const navLink = document.querySelector(`.nav-links a[href="#${correspondingAnchor.id}"]`);
+      const anchor = section.querySelector('a[id^="test-project"]');
+      if (!anchor) return;
+      const navLink = document.querySelector(`.nav-links a[href="#${anchor.id}"]`);
       if (!navLink) return;
-      
+
       if (scrollPosition >= sectionTop - 200 && scrollPosition < sectionTop + sectionHeight - 200) {
-        document.querySelectorAll('.nav-links a').forEach(link => {
-          link.classList.remove('active');
-        });
-        
+        document.querySelectorAll('.nav-links a').forEach(link => link.classList.remove('active'));
         navLink.classList.add('active');
       }
     });
-    
+
     if (scrollPosition < 400) {
-      document.querySelectorAll('.nav-links a').forEach(link => {
-        link.classList.remove('active');
-      });
-      
+      document.querySelectorAll('.nav-links a').forEach(link => link.classList.remove('active'));
       const infoLink = document.querySelector('.nav-links a[rel="top"]');
       if (infoLink) infoLink.classList.add('active');
     }
   });
-  
-  setTimeout(() => {
-    window.dispatchEvent(new Event('scroll'));
-  }, 100);
-  
-  document.querySelectorAll('.gallery-slide img').forEach(img => {
-    img.addEventListener('mouseenter', function() {
-      this.style.transition = 'transform 0.3s ease';
-      this.style.transform = 'scale(1.02)';
-    });
-    
-    img.addEventListener('mouseleave', function() {
-      this.style.transform = 'scale(1)';
-    });
-  });
+
+  setTimeout(() => window.dispatchEvent(new Event('scroll')), 100);
 }
 
 document.addEventListener('DOMContentLoaded', initializeSmoothScroll);
 
-// Gallery
+// Gallery slider with dynamic buttons
 function initializeSliders() {
   document.querySelectorAll('.gallery-wrapper').forEach(wrapper => {
     const gallery = wrapper.querySelector('.project-gallery');
     const slides  = Array.from(gallery.children);
-    let   index   = 0;
+    let index = 0;
 
-    const prevBtn = wrapper.querySelector('.gallery-prev');
-    const nextBtn = wrapper.querySelector('.gallery-next');
+    const prevBtn = document.createElement('button');
+    prevBtn.className = 'gallery-nav gallery-prev';
+    prevBtn.setAttribute('aria-label', 'Previous slide');
+    prevBtn.textContent = '‹';
+    wrapper.appendChild(prevBtn);
+
+    const nextBtn = document.createElement('button');
+    nextBtn.className = 'gallery-nav gallery-next';
+    nextBtn.setAttribute('aria-label', 'Next slide');
+    nextBtn.textContent = '›';
+    wrapper.appendChild(nextBtn);
 
     function update() {
-      gallery.style.transform = `translateX(-${index * 100}%)`;
-      prevBtn.disabled = (index === 0);
-      nextBtn.disabled = (index === slides.length - 1);
+      gallery.style.transform = `translateX(-${index * 100}% )`;
     }
 
     prevBtn.addEventListener('click', () => {
-      if (index > 0) { index--; update(); }
+      index = index > 0 ? index - 1 : slides.length - 1;
+      update();
     });
+
     nextBtn.addEventListener('click', () => {
-      if (index < slides.length - 1) { index++; update(); }
+      index = index < slides.length - 1 ? index + 1 : 0;
+      update();
     });
 
     update();

@@ -145,8 +145,6 @@
 .gallery-slide img,
 .gallery-slide video {
   height: 100%;
-  width: auto;
-  object-fit: contain;
 }
 .gallery-nav {
   position: absolute;

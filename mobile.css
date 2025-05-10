@@ -65,6 +65,7 @@
 }
 .pages {
   flex: 1 0 auto;
+  max-width: 100vw;
 }
 .page {
   position: relative;
@@ -120,7 +121,7 @@
 }
 
 .gallery-wrapper {
-  width: calc(100% - 255px);
+  width: 100%;
   height: 450px;
   overflow: hidden;
   position: relative;
@@ -140,9 +141,10 @@
 }
 .gallery-slide img,
 .gallery-slide video {
+  width: 100%;
+}
+.gallery-slide video {
   height: 100%;
-  width: auto;
-  object-fit: contain;
 }
 .gallery-nav {
   position: absolute;

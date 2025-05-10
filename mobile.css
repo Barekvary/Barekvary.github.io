@@ -103,7 +103,8 @@
 }
 .project-description {
   margin-top: 1rem;
-  max-width: calc(100vw - 255px);
+  margin-left: 40px;
+  max-width: calc(100vw - 40px - 22.8px - 20px);
 }
 .project-description p {
   margin-bottom: 1rem;

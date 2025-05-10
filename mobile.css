@@ -116,11 +116,10 @@
 }
 .photo-caption {
   text-align: right;
-  font-size: 0.875rem;
+  font-size: 0.675rem;
 }
 
 .gallery-wrapper {
-  display:none;
   width: calc(100% - 255px);
   height: 450px;
   overflow: hidden;
@@ -166,7 +165,6 @@
 .grey-caption {
   font-size: 0.9rem;
   font-weight: 400;
-  color: #777;
   display: block;
   font-style: normal;
   line-height: 1.15;

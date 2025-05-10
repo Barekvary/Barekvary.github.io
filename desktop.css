@@ -31,6 +31,10 @@
   text-align: left;
 }
 
+.nav-links > a:hover {
+	opacity: 0.8;
+}
+
 .nav-links > a.active {
 	font-weight: 500;
 }
@@ -112,7 +116,7 @@
 }
 .photo-caption {
   text-align: right;
-  font-size: 0.875rem;
+  font-size: 0.675rem;
 }
 
 .gallery-wrapper,
@@ -165,7 +169,6 @@
 .grey-caption {
   font-size: 0.9rem;
   font-weight: 400;
-  color: #777;
   display: block;
   font-style: normal;
   line-height: 1.15;

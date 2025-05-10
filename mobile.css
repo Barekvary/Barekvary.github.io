@@ -8,6 +8,10 @@
   margin-top: 5.5px;
 }
 
+html {
+  font-size: 19px;
+}
+
 .nav-container {
   display: flex;
   flex-wrap: wrap;

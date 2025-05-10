@@ -7,6 +7,10 @@
   padding-bottom: 1.1rem;
 }
 
+html {
+  font-size: 15px;
+}
+
 .nav-container {
   display: flex;
   flex-wrap: wrap;

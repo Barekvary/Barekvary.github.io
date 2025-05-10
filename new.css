@@ -1,13 +1,10 @@
 body {
 	--baseColor-accent-rgb: 255, 0, 0;
 	--baseColor-accent-reverse-rgb: 255, 255, 255;
-	--mobile-scale: 1.5;
 	--mobile-padding-offset: 0.6;
-	--swatch-1: rgba(0, 0, 0, 0.85);
-	--swatch-2: rgba(0, 0, 0, 0.75);
-	--swatch-3: rgba(0, 0, 0, 0.6);
-	--swatch-4: rgba(0, 0, 0, 0.4);
-	--swatch-5: rgba(0, 0, 0, 0.25)
+	-moz-osx-font-smoothing: grayscale;
+	-webkit-font-smoothing: antialiased;
+	-webkit-text-size-adjust: none;
 }
 
 * {
@@ -19,34 +16,16 @@ body {
 body,
 html {
 	min-height: var(--viewport-height, 100vh);
-	margin: 0;
-	padding: 0
 }
 
 html {
-	--mobile-scale: 1;
-	font-size: var(--base-size);
+	font-size: 19px;
 	touch-action: manipulation;
-	position: relative
+	position: relative;
+	overflow-anchor: none;
 }
 
 body {
-	-moz-osx-font-smoothing: grayscale;
-	-webkit-font-smoothing: antialiased;
-	-webkit-text-size-adjust: none;
-	display: flex;
-	flex-direction: column;
-	width: 100%;
-	min-height: var(--viewport-height, 100vh);
-	justify-content: flex-start;
-	margin: 0;
-	padding: 0;
-	background-color: #fff
-}
-
-body,
-html {
-	overflow-anchor: none
 }
 
 * {
@@ -58,6 +37,10 @@ a {
 	text-decoration: none
 }
 
+a:active {
+	opacity: .7
+}
+
 [id=footer-time].page {
 	z-index: -1337;
 	min-height: var(--viewport-height);
@@ -66,10 +49,6 @@ a {
 
 [id=footer-time] .page-content {
 	padding-bottom: 1.1rem
-}
-
-#header-navigation {
-	z-index: 1337
 }
 
 .nav-container {
@@ -89,7 +68,7 @@ a {
 
 [id=header-navigation].page {
 	min-height: auto;
-	justify-content: flex-start
+	justify-content: flex-start;
 }
 
 [id=header-navigation] .page-content {
@@ -239,33 +218,17 @@ a {
 	mix-blend-mode: var(--page-mix, normal)
 }
 
-.page.pinned-bottom,
-.page.pinned-top {
+.page.pinned-bottom {
 	flex: 0;
 	z-index: 2;
 	left: 0;
-	right: 0
-}
-
-.page.pinned-bottom {
+	right: 0;
+	bottom: 0;
 	transform: unset
-}
-
-.page.pinned-top {
-	top: 0
-}
-
-.page.pinned-bottom {
-	bottom: 0
 }
 
 .page.fixed {
 	position: fixed;
-	max-height: var(--viewport-height, 100vh)
-}
-
-.page.fixed .page-layout {
-	max-height: var(--viewport-height, 100vh)
 }
 
 .page-layout {
@@ -285,8 +248,6 @@ a {
 	border-color: transparent;
 	border-width: 0;
 	width: 100%;
-	filter: var(--page-content-filter, none);
-	-webkit-filter: var(--page-content-filter, none)
 }
 
 .page-content {
@@ -296,14 +257,6 @@ a {
 	padding-top: 1.2rem;
 	padding-right: 1.2rem;
 	padding-left: 1.2rem
-}
-
-a:active {
-	opacity: .7
-}
-
-.content {
-	border-color: rgba(0, 0, 0, .85)
 }
 
 .grey-caption {

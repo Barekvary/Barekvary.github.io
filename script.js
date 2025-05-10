@@ -92,3 +92,32 @@ function initializeSmoothScroll() {
 }
 
 document.addEventListener('DOMContentLoaded', initializeSmoothScroll);
+
+// Gallery
+function initializeSliders() {
+  document.querySelectorAll('.gallery-wrapper').forEach(wrapper => {
+    const gallery = wrapper.querySelector('.project-gallery');
+    const slides  = Array.from(gallery.children);
+    let   index   = 0;
+
+    const prevBtn = wrapper.querySelector('.gallery-prev');
+    const nextBtn = wrapper.querySelector('.gallery-next');
+
+    function update() {
+      gallery.style.transform = `translateX(-${index * 100}%)`;
+      prevBtn.disabled = (index === 0);
+      nextBtn.disabled = (index === slides.length - 1);
+    }
+
+    prevBtn.addEventListener('click', () => {
+      if (index > 0) { index--; update(); }
+    });
+    nextBtn.addEventListener('click', () => {
+      if (index < slides.length - 1) { index++; update(); }
+    });
+
+    update();
+  });
+}
+
+document.addEventListener('DOMContentLoaded', initializeSliders);

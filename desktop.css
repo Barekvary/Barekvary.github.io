@@ -123,6 +123,10 @@ html {
   font-size: 0.675rem;
 }
 
+.gallery-wrapper,
+.grey-caption {
+  margin-left: 255px;
+}
 .gallery-wrapper {
   width: 100%;
   height: 450px;

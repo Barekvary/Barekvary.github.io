@@ -129,7 +129,7 @@ html {
 }
 .gallery-wrapper {
   width: calc(100%-255px);
-  height: 450px;
+  height: 350px;
   overflow: hidden;
   position: relative;
 }
@@ -150,8 +150,10 @@ html {
 .gallery-slide video {
   width: 100%;
 }
-.gallery-slide video {
+.gallery-vertical img,
+.gallery-vertical video {
   height: 100%;
+  width: auto;
 }
 .gallery-nav {
   position: absolute;

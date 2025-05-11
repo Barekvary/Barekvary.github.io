@@ -128,7 +128,7 @@ html {
   margin-left: 255px;
 }
 .gallery-wrapper {
-  width: 100%;
+  width: calc(100%-255px);
   height: 450px;
   overflow: hidden;
   position: relative;

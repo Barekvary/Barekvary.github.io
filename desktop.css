@@ -123,12 +123,8 @@ html {
   font-size: 0.675rem;
 }
 
-.gallery-wrapper,
-.grey-caption {
-  margin-left: 255px;
-}
 .gallery-wrapper {
-  width: calc(100% - 255px);
+  width: 100%;
   height: 450px;
   overflow: hidden;
   position: relative;
@@ -147,6 +143,9 @@ html {
   align-items: center;
 }
 .gallery-slide img,
+.gallery-slide video {
+  width: 100%;
+}
 .gallery-slide video {
   height: 100%;
 }

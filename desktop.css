@@ -127,9 +127,8 @@ html {
 .grey-caption {
   margin-left: 255px;
 }
-.gallery-wrapper {
-  width: calc(100%-255px);
-  height: 350px;
+.gallery-wrapper {      
+  aspect-ratio: 395 / 350;
   overflow: hidden;
   position: relative;
 }

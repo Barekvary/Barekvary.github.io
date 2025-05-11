@@ -129,6 +129,8 @@ html {
   height: 450px;
   overflow: hidden;
   position: relative;
+  touch-action: pan-y;
+  overscroll-behavior: contain;
 }
 .gallery-wrapper .project-gallery {
   display: flex;

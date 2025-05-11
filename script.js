@@ -104,6 +104,25 @@ function initializeSliders() {
         });
 
         update();
+		let startX = 0;
+		const threshold = wrapper.clientWidth * 0.2;
+
+		wrapper.addEventListener('touchstart', e => {
+		  startX = e.touches[0].clientX;
+		}, {passive: true});
+
+		wrapper.addEventListener('touchend', e => {
+		  const endX = e.changedTouches[0].clientX;
+		  const diff = endX - startX;
+
+		  if (Math.abs(diff) > threshold) {
+			if (diff > 0)
+			  index = index > 0 ? index - 1 : slides.length - 1;
+			else 
+			  index = index < slides.length - 1 ? index + 1 : 0;
+			update();
+		  }
+		}, {passive: true});
     });
 }
 

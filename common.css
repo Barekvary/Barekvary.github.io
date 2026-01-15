@@ -4,7 +4,9 @@ body {
   -webkit-text-size-adjust: none;
 }
 
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -26,11 +28,133 @@ a:active {
 .project-title {
   font-weight: 600;
 }
+
 .project-years {
   color: #333;
 }
-.photo-caption, 
+
+.photo-caption,
 .grey-caption,
 .grey-caption a {
   color: #888;
+}
+
+/* Fullscreen Modal */
+#fullscreen-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.95);
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+#fullscreen-modal.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+#fullscreen-content-wrapper {
+  max-width: 90%;
+  max-height: 90%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#fullscreen-content-wrapper img,
+#fullscreen-content-wrapper video {
+  max-width: 100%;
+  max-height: 90vh;
+  object-fit: contain;
+}
+
+#fullscreen-close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 3rem;
+  cursor: pointer;
+  z-index: 10000;
+  line-height: 1;
+}
+
+.fullscreen-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  /* Center vertically */
+  background: rgba(0, 0, 0, 0.5);
+  /* Semi-transparent background */
+  border: none;
+  color: white;
+  font-size: 3rem;
+  width: 3.5rem;
+  height: 3.5rem;
+  cursor: pointer;
+  z-index: 10000;
+  display: flex;
+  /* Center the arrow */
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  /* Rounded button */
+  padding-bottom: 5px;
+  /* Visual adjustment for arrow */
+  transition: background 0.2s;
+}
+
+.fullscreen-nav:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+#fullscreen-prev {
+  left: 20px;
+}
+
+#fullscreen-next {
+  right: 20px;
+}
+
+/* Maximize Button in Gallery */
+.gallery-maximize {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: rgba(0, 0, 0, 0.5);
+  border: none;
+  color: white;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 4px;
+  cursor: pointer;
+  z-index: 10;
+  opacity: 0;
+  transition: opacity 0.2s;
+  font-size: 1.2rem;
+  padding-bottom: 3px;
+}
+
+.gallery-wrapper:hover .gallery-maximize {
+  opacity: 1;
+}
+
+@media (hover: none) {
+  .gallery-maximize {
+    opacity: 1;
+  }
 }

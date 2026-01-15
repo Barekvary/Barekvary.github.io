@@ -2,6 +2,7 @@
   justify-content: flex-start;
   position: absolute;
 }
+
 [id=footer-time] .page-content {
   padding-bottom: 1.1rem;
   text-align: right;
@@ -31,6 +32,7 @@ html {
   min-height: auto;
   justify-content: flex-start;
 }
+
 [id=header-navigation] .page-content {
   text-align: left;
 }
@@ -38,24 +40,28 @@ html {
 
 .info-main {
   display: block;
-  overflow: auto;        
+  overflow: auto;
 }
+
 .info-main img {
   width: 164px;
   float: left;
   margin-right: 19px;
   margin-bottom: 19px;
 }
+
 .info-text {
   max-width: calc(100vw - 21px * 2);
   flex: 1;
 }
+
 .info-text p {
-  width:100%;
+  width: 100%;
 }
+
 .info-text p:not(:first-child) {
   clear: both;
-  margin-top: 1rem; 
+  margin-top: 1rem;
 }
 
 .content {
@@ -67,10 +73,12 @@ html {
   position: relative;
   flex-grow: 1;
 }
+
 .pages {
   flex: 1 0 auto;
   max-width: 100vw;
 }
+
 .page {
   position: relative;
   display: flex;
@@ -84,7 +92,7 @@ html {
 }
 
 #header-navigation .page-content {
-	padding-right: 0;
+  padding-right: 0;
 }
 
 .page-layout {
@@ -96,6 +104,7 @@ html {
   justify-content: flex-start;
   width: 0%;
 }
+
 .page-content {
   width: 100%;
   padding: 1.2rem;
@@ -105,20 +114,25 @@ html {
 .project-header {
   display: flex;
 }
+
 .project-index {
   flex: 0 0 40px;
 }
+
 .project-years {
   margin-top: 0.25em;
 }
+
 .project-description {
   margin-top: 1rem;
   margin-left: 40px;
   max-width: calc(100vw - 40px - 22.8px - 20px);
 }
+
 .project-description p {
   margin-bottom: 1rem;
 }
+
 .photo-caption {
   text-align: right;
   font-size: 0.675rem;
@@ -132,11 +146,13 @@ html {
   touch-action: pan-y;
   overscroll-behavior: contain;
 }
+
 .gallery-wrapper .project-gallery {
   display: flex;
   height: 100%;
   transition: transform 0.3s ease;
 }
+
 .gallery-wrapper .gallery-slide {
   flex: 0 0 100%;
   height: 100%;
@@ -145,13 +161,14 @@ html {
   justify-content: center;
   align-items: center;
 }
+
 .gallery-slide img,
 .gallery-slide video {
   width: 100%;
-}
-.gallery-slide video {
   height: 100%;
+  object-fit: contain;
 }
+
 .gallery-nav {
   position: absolute;
   top: 50%;
@@ -163,9 +180,11 @@ html {
   height: 2.5rem;
   cursor: pointer;
 }
+
 .gallery-prev {
   left: 0.5rem;
 }
+
 .gallery-next {
   right: 0.5rem;
 }

@@ -3,6 +3,7 @@
   position: fixed;
   bottom: 0;
 }
+
 [id=footer-time] .page-content {
   padding-bottom: 1.1rem;
 }
@@ -31,32 +32,36 @@ html {
   justify-content: flex-start;
   position: fixed;
 }
+
 [id=header-navigation] .page-content {
   text-align: left;
 }
 
-.nav-links > a:hover {
-	opacity: 0.8;
+.nav-links>a:hover {
+  opacity: 0.8;
 }
 
-.nav-links > a.active {
-	font-weight: 500;
+.nav-links>a.active {
+  font-weight: 500;
 }
 
 .info-container {
   display: flex;
   flex-direction: column;
 }
+
 .info-main {
   display: flex;
   align-items: flex-start;
   gap: 19px;
 }
+
 .info-main img {
   margin-left: 51px;
   width: 164px;
   height: fit-content;
 }
+
 .info-text {
   margin-left: 21px;
   flex: 1;
@@ -71,11 +76,13 @@ html {
   position: relative;
   flex-grow: 1;
 }
+
 .pages {
-  width: 46%;
-  margin-left: 54%;
+  width: 60%;
+  margin-left: 40%;
   flex: 1 0 auto;
 }
+
 .page {
   position: relative;
   display: flex;
@@ -87,6 +94,7 @@ html {
   flex: 0;
   mix-blend-mode: var(--page-mix, normal);
 }
+
 .page-layout {
   flex-grow: 1;
   position: relative;
@@ -96,6 +104,7 @@ html {
   justify-content: flex-start;
   width: 0%;
 }
+
 .page-content {
   width: 100%;
   padding: 1.2rem;
@@ -105,19 +114,24 @@ html {
 .project-header {
   display: flex;
 }
+
 .project-index {
   flex: 0 0 255px;
 }
+
 .project-years {
   margin-top: 0.25em;
 }
+
 .project-description {
   margin-top: 1rem;
   padding-left: 255px;
 }
+
 .project-description p {
   margin-bottom: 1rem;
 }
+
 .photo-caption {
   text-align: right;
   font-size: 0.675rem;
@@ -127,16 +141,19 @@ html {
 .grey-caption {
   margin-left: 255px;
 }
-.gallery-wrapper {      
-  aspect-ratio: 395 / 350;
+
+.gallery-wrapper {
+  aspect-ratio: 16 / 9;
   overflow: hidden;
   position: relative;
 }
+
 .gallery-wrapper .project-gallery {
   display: flex;
   height: 100%;
   transition: transform 0.3s ease;
 }
+
 .gallery-wrapper .gallery-slide {
   flex: 0 0 100%;
   height: 100%;
@@ -145,15 +162,20 @@ html {
   justify-content: center;
   align-items: center;
 }
+
 .gallery-slide img,
 .gallery-slide video {
   width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
+
 .gallery-vertical img,
 .gallery-vertical video {
   height: 100%;
   width: auto;
 }
+
 .gallery-nav {
   position: absolute;
   top: 50%;
@@ -165,9 +187,11 @@ html {
   height: 2.5rem;
   cursor: pointer;
 }
+
 .gallery-prev {
   left: 0.5rem;
 }
+
 .gallery-next {
   right: 0.5rem;
 }

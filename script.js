@@ -108,7 +108,7 @@ function initializeSliders() {
         slides.forEach(slide => {
             const media = slide.querySelector('img, video');
             if (media) {
-                media.style.cursor = 'pointer'; // Indicate clickable
+                media.style.cursor = 'zoom-in'; // Indicate magnifying glass
                 media.addEventListener('click', openFsCallback);
             }
         });

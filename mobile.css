@@ -169,24 +169,9 @@ html {
   object-fit: contain;
 }
 
-.gallery-nav {
-  position: absolute;
-  top: 50%;
-  background: rgba(0, 0, 0, 0.3);
-  border: none;
-  color: #fff;
-  font-size: 2rem;
-  width: 2.5rem;
-  height: 2.5rem;
-  cursor: pointer;
-}
-
-.gallery-prev {
-  left: 0.5rem;
-}
-
-.gallery-next {
-  right: 0.5rem;
+.gallery-nav,
+.gallery-maximize {
+  display: none !important;
 }
 
 .grey-caption {

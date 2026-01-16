@@ -96,7 +96,10 @@ function initializeSliders() {
         wrapper.appendChild(maxBtn);
 
         const openFsCallback = () => {
-            openFullscreen(slides, index);
+            // Only open fullscreen if not on mobile (check width > 768px)
+            if (window.innerWidth > 768) {
+                openFullscreen(slides, index);
+            }
         };
 
         maxBtn.addEventListener('click', openFsCallback);
@@ -110,8 +113,29 @@ function initializeSliders() {
             }
         });
 
+        const pagination = document.createElement('div');
+        pagination.className = 'gallery-pagination';
+        wrapper.appendChild(pagination);
+
+        // create dots
+        slides.forEach((_, i) => {
+            const dot = document.createElement('button');
+            dot.className = 'gallery-dot';
+            dot.setAttribute('aria-label', `Go to slide ${i + 1}`);
+            dot.addEventListener('click', (e) => {
+                e.stopPropagation(); // prevent opening fullscreen
+                index = i;
+                update();
+            });
+            pagination.appendChild(dot);
+        });
+
         function update() {
             gallery.style.transform = `translateX(-${index * 100}% )`;
+            // update dots
+            Array.from(pagination.children).forEach((dot, i) => {
+                dot.classList.toggle('active', i === index);
+            });
         }
 
         prevBtn.addEventListener('click', () => {

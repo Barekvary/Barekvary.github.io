@@ -153,6 +153,39 @@ a:active {
   opacity: 1;
 }
 
+/* Pagination Dots */
+.gallery-pagination {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+  z-index: 10;
+  pointer-events: none;
+  /* Allow clicks to pass through structure if needed, but we want buttons clickable */
+}
+
+.gallery-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.3);
+  /* Dark grey for inactive */
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.3s;
+  pointer-events: auto;
+  /* Re-enable pointer events for buttons */
+}
+
+.gallery-dot.active {
+  background: rgba(0, 0, 0, 0.8);
+  /* Darker/Black for active */
+  transform: scale(1.2);
+}
+
 @media (hover: none) {
   .gallery-maximize {
     opacity: 1;

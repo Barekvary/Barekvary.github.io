@@ -1,4 +1,10 @@
-body {
+body {/* Fonts */
+@font-face {
+  font-family: 'Hypatia Sans Pro';
+  src: url('./fonts/fonnts.com-Hypatia_Sans_Pro_Semibold.otf');
+  font-weight: 600;
+  font-style: normal;
+}
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   -webkit-text-size-adjust: none;
@@ -191,3 +197,535 @@ a:active {
     opacity: 1;
   }
 }
+
+/* ========== Dota 2 Match Found Overlay ========== */
+
+#match-found-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 99999; /* Always on top during the modal phase */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 1.5s ease, visibility 1.5s ease;
+  pointer-events: none;
+}
+
+#match-found-overlay.visible {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: all;
+}
+
+#match-found-overlay.fading-out {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+#match-found-overlay.hiding {
+  opacity: 0;
+  pointer-events: none;
+}
+
+#match-found-overlay.hidden {
+  display: none;
+}
+
+/* ---- Backdrop: solid dark (fades in) ---- */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+#match-found-backdrop {
+  position: absolute;
+  inset: 0;
+  background: #05080a;
+  overflow: hidden;
+  animation: fadeIn 0.8s ease-out both;
+}
+
+/* Particle canvas — fills backdrop, sits behind dialog */
+#match-particles {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+@keyframes dialogAppear {
+  from {
+    opacity: 0;
+    transform: scale(2);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* ---- Static non-uniform border glow (3x size) ---- */
+#match-found-dialog {
+  position: relative;
+  z-index: 1;
+  width: 768px;
+  height: 255px;
+  perspective: 2000px; /* Enable 3D */
+  animation: dialogAppear 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+
+
+/* --- Dota Patchnote Styles (Scoped) --- */
+#dota-page-container {
+    display: none;
+    width: 100%;
+    min-height: 100vh;
+    background-color: #151618;
+    opacity: 0;
+    transition: opacity 1.2s ease;
+    z-index: 99998; /* Below the overlay but above the base site */
+    position: fixed;
+    inset: 0;
+    overflow-y: auto;
+}
+
+body.dota-active #dota-page-container {
+    display: block;
+    opacity: 1;
+}
+
+#dota-page-container .patchnotespage_PatchNotesPage {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-repeat: repeat-y;
+    background-color: #151618;
+    background-position: center;
+}
+
+#dota-page-container .patchnotespage_Header {
+    width: 100%;
+    background-color: #000;
+    margin-top: 140px;
+    padding: 30px 0px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+#dota-page-container .patchnotespage_Label {
+    width: 900px;
+    color: #ed3b1c;
+    font-size: 32px;
+    letter-spacing: 4px;
+}
+
+#dota-page-container .patchnotespage_NotesTitle {
+    width: 900px;
+    color: #ed3b1c;
+    font-size: 72px;
+    font-weight: bold;
+    letter-spacing: 8px;
+}
+
+#dota-page-container .patchnotespage_Body {
+    width: 100%;
+    max-width: 900px;
+    padding-top: 32px;
+    display: flex;
+    flex-direction: column;
+}
+
+#dota-page-container .patchnotespage_PatchNotesHeaderLabel {
+    background: linear-gradient(to right, #833312FF, #83331200);
+    border-left: 2px solid #ff5005;
+    font-size: 30px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    color: #fff;
+    padding: 12px 20px;
+}
+
+#dota-page-container .patchnotespage_PatchNotesList {
+    width: 100%;
+    border-left: 2px solid #ffffff10;
+    margin-bottom: 30px;
+    background: linear-gradient(90deg, rgba(0, 0, 0, 0.38) 3.07%, rgba(6, 37, 65, 0.3) 88.06%);
+    padding: 20px 0px;
+    display: flex;
+    flex-direction: column;
+}
+
+#dota-page-container .patchnotespage_NoteElement {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+}
+
+#dota-page-container .patchnotespage_Dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background-color: #999;
+    margin-right: 10px;
+    margin-top: 12px;
+}
+
+#dota-page-container .patchnotespage_Note {
+    font-size: 20px;
+    color: #bbbbbbee;
+    line-height: 30px;
+    font-weight: 200;
+}
+
+/* Micro Header */
+#dota-page-container .microheader_MicroHeader {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    height: 80px;
+    padding: 0px 30px;
+    background-color: #000;
+    position: relative;
+    z-index: 100;
+}
+
+#dota-page-container .microheader_MicroHeader.microheader_Overlapping {
+    top: 0;
+    position: absolute;
+    background-color: transparent;
+}
+
+#dota-page-container .microheader_HeaderContents {
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+#dota-page-container .microheader_DotaLogo {
+    width: 200px;
+    height: 50px;
+    background-image: url("https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/global/dota2_logo_horiz.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    opacity: .8;
+    margin-right: 40px;
+}
+
+#dota-page-container .microheader_NavItems {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: row;
+}
+
+#dota-page-container .microheader_NavLink {
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    color: #fff;
+    margin: 0px 20px;
+    text-transform: uppercase;
+    text-decoration: none;
+    opacity: 0.8;
+}
+
+#dota-page-container .microheader_StandardButton {
+    border: 3px solid #ffffff50;
+    padding: 10px 20px;
+    border-radius: 5px;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
+
+#dota-page-container .microheader_SteamLogo {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    background-image: url("https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react//icons/steam_icon.svg");
+    background-size: contain;
+}
+
+#dota-page-container .rootfooter_RootFooter {
+    text-align: center;
+    width: 100%;
+    padding: 60px 100px;
+    background-color: #000;
+}
+
+#dota-page-container .rootfooter_FooterLogo {
+    margin: 0px 15px 20px 15px;
+    max-height: 30px;
+}
+
+#dota-page-container .rootfooter_Legal {
+    font-size: 14px;
+    color: #777;
+}
+
+
+#match-found-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  /* Cinematic rotation */
+  transition: transform 1.2s cubic-bezier(0.15, 1, 0.3, 1);
+  transform-origin: center center -127.5px; /* Pivot exactly at center depth */
+}
+
+#match-found-inner.rotating {
+  transform: rotateX(90deg);
+}
+
+@keyframes dotaShrink {
+  0% { transform: scale(1); opacity: 1; }
+  16.6% { opacity: 1; } /* 0.5s mark in a 3s animation */
+  50% { opacity: 0; }  /* 1.5s mark in a 3s animation */
+  100% { transform: scale(0); opacity: 0; }
+}
+
+#match-found-dialog.shrinking {
+  /* 3s scale-down, opacity done by 1.5s mark (50%) */
+  animation: dotaShrink 3s cubic-bezier(0.16, 1, 0.3, 1) forwards !important;
+}
+
+
+
+
+
+
+
+
+/* Hide main content when dota page is visible */
+body.dota-active .content {
+    display: none !important;
+}
+
+
+
+
+
+
+
+.match-found-face {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: visible; /* Show glow */
+  backface-visibility: hidden;
+  background-image: url('matchfoundbackground.png');
+  background-size: cover;
+  background-position: center;
+  /* Glow properties (faded by default) */
+  transition: opacity 0.6s ease-in-out;
+}
+
+.match-found-face::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+  box-shadow:
+    0 0 0 1px rgba(74,122,84,0.92),
+    3px  0   9px 3px rgba(74,122,84,0.60),
+   -9px  3px 12px 0px rgba(74,122,84,0.35),
+    0    9px 9px 0px rgba(74,122,84,0.20),
+    0   18px 50px rgba(0,0,0,0.85);
+  opacity: 0;
+  transition: opacity 0.6s ease-in-out;
+}
+
+.match-found-face.glow-active::before {
+  opacity: 1;
+}
+
+
+.match-found-face.front {
+  /* Position exactly at the front plane (Z=0) for 1:1 scale with glow */
+  transform: translateZ(0);
+}
+
+.match-found-face.top {
+  /* Positioned at bottom relative to pivot, rotates to front (Z=0) */
+  transform: translateY(127.5px) translateZ(-127.5px) rotateX(-90deg);
+}
+
+
+
+
+/* ---- Sections shared by faces ---- */
+#match-found-top, #match-waiting-top {
+  height: 96px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 0 24px;
+  background: rgba(0, 0, 0, 0.45);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+
+#match-found-middle, #match-waiting-middle {
+  height: 101px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+}
+
+#match-found-bottom, #match-waiting-bottom {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 0 18px;
+  background: transparent;
+}
+
+/* ---- Waiting Face Icons ---- */
+#status-icons-container {
+  display: flex;
+  gap: 10px;
+  padding-top: 5px;
+}
+
+.status-icon {
+  width: 58px;
+  height: 58px;
+  background: rgba(0, 0, 0, 0.35);
+  border: 2px solid rgba(74, 122, 84, 0.4);
+  position: relative;
+  transition: background 0.2s, box-shadow 0.3s;
+}
+
+/* The player icon shape */
+.status-icon::before {
+  content: '👤';
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255,255,255,0.1);
+  font-size: 24px;
+}
+
+.status-icon.active {
+  background: #4A7A54;
+  border-color: #74B882;
+  box-shadow: 0 0 15px rgba(74, 122, 84, 0.8), inset 0 0 10px rgba(255,255,255,0.2);
+}
+
+.status-icon.active::before {
+  color: #fff;
+}
+
+#accepted-count {
+  font-family: 'Hypatia Sans Pro', sans-serif;
+  color: rgba(255,255,255,0.40);
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+}
+
+
+/* ---- Text labels ---- */
+#match-found-subtitle, #match-waiting-subtitle {
+  font-family: 'Hypatia Sans Pro', sans-serif;
+  color: rgba(255,255,255,0.55);
+  font-size: 0.95rem;
+  letter-spacing: 0.15em;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+#match-found-title, #match-waiting-title {
+  font-family: 'Hypatia Sans Pro', sans-serif;
+  color: #ffffff;
+  font-size: 2.1rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+
+/* ---- Accept button: exactly 320 × 65 px (Texture approach) ---- */
+#match-accept-btn {
+  width: 320px;
+  height: 65px;
+  position: relative;
+  background: url('acceptmatchbutton.png') no-repeat center;
+  background-size: 100% 100%;
+  border: none;
+  cursor: pointer;
+  border-radius: 1px;
+  transition: transform 0.1s;
+  overflow: hidden;
+}
+
+#match-accept-btn::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url('acceptmatchbuttonhover.png') no-repeat center;
+  background-size: 100% 100%;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 1;
+}
+
+#match-accept-btn:hover::after,
+#match-accept-btn.pressed::after {
+  opacity: 1;
+}
+
+#match-accept-btn:hover {
+  filter: brightness(1.2);
+}
+
+#match-accept-btn.pressed {
+  box-shadow: inset 0 0 0 2.5px #66C794 !important;
+  filter: brightness(0.95);
+}
+
+#match-accept-btn.pressed {
+  /* Inset shadow simulates the border by replacing the texture edge */
+  box-shadow: inset 0 0 0 5px #66C794, 0 0 15px rgba(102, 199, 148, 0.4);
+  border: none;
+  transform: none !important; /* Remove size reduction */
+}
+
+#match-accept-btn:active { transform: none; filter: brightness(0.92); }
+
+/* ---- Decline link ---- */
+#match-decline {
+  font-family: 'Hypatia Sans Pro', sans-serif;
+  color: rgba(255,255,255,0.40);
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+#match-decline:hover { color: rgba(255,255,255,0.70); }

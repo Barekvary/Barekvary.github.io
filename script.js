@@ -273,3 +273,364 @@ function initializeFullscreen() {
 }
 
 document.addEventListener('DOMContentLoaded', initializeFullscreen);
+
+// ========== Dota 2 Match Found Overlay (Asset-Aware & Embedded) ==========
+
+document.addEventListener('DOMContentLoaded', () => {
+    const AssetLoader = {
+        images: [
+            'acceptmatchbutton.png',
+            'acceptmatchbuttonhover.png',
+            'smokeparticle.png',
+            'https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/backgrounds/featured.jpg',
+            'https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/global/dota2_logo_horiz.png',
+            'https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/valve_logo.png',
+            'https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/footer_logo.png'
+        ],
+        audio: [
+            'start.mpeg',
+            'meepmap.mpeg',
+            'matchready.mp3'
+        ],
+        readyPromise: null,
+        assets: {},
+
+        init() {
+            if (this.readyPromise) return this.readyPromise;
+            this.readyPromise = Promise.all([
+                ...this.images.map(src => new Promise(res => {
+                    const img = new Image();
+                    img.onload = () => {
+                        this.assets[src] = img;
+                        res();
+                    };
+                    img.onerror = () => res();
+                    img.src = src;
+                })),
+                ...this.audio.map(src => new Promise(res => {
+                    const a = new Audio();
+                    a.oncanplaythrough = a.onerror = () => res();
+                    a.src = src;
+                }))
+            ]);
+            return this.readyPromise;
+        }
+    };
+
+    const ParticleSystem = {
+        canvas: null,
+        ctx: null,
+        particles: [],
+        isSpawning: true,
+        animationId: null,
+        fadeMult: 1.0,
+        introFade: 0.0,
+
+        init() {
+            this.canvas = document.getElementById('match-particles');
+            if (!this.canvas) return;
+            this.ctx = this.canvas.getContext('2d');
+            this.resize();
+            const cW = this.canvas.width || window.innerWidth || 1920;
+            const cH = this.canvas.height || window.innerHeight || 1080;
+            window.addEventListener('resize', () => this.resize());
+            this.isSpawning = true;
+            this.particles = [];
+            this.fadeMult = 1.0;
+            this.introFade = 0.0;
+            // Increased count to support 3x smoke
+            for (let i = 0; i < 600; i++) {
+                this.particles.push(this.spawn(true));
+            }
+            this.animate();
+        },
+        resize() {
+            this.canvas.width = window.innerWidth;
+            this.canvas.height = window.innerHeight;
+        },
+        spawn(isInitial = false) {
+            if (!this.isSpawning && !isInitial) return null;
+            
+            const cW = this.canvas.width || window.innerWidth || 1920;
+            const cH = this.canvas.height || window.innerHeight || 1080;
+            
+            // Shard count kept ~300, Smoke count tripled (~300)
+            const type = Math.random() > 0.5 ? 'smoke' : 'shard';
+            const angle = Math.random() * Math.PI * 2;
+            
+            // INCREASED SPEED: Faster particles
+            const speed = type === 'smoke' ? (1.2 + Math.random() * 3.5) : (3.5 + Math.random() * 8.0);
+            
+            // Smoke scale tripled (approx 45-135 range), Shard scale increased (max +50%)
+            // Shards: min 2.0, max 8.625 (was 5.75)
+            const maxR = type === 'smoke' ? (45 + Math.random() * 90) : (2.0 + Math.random() * 6.625);
+
+            let shrink = 0.05;
+            if (type === 'smoke') {
+                shrink = 0.01; // Faster fade via radius shrink as well
+            } else {
+                const absCos = Math.abs(Math.cos(angle));
+                const absSin = Math.abs(Math.sin(angle));
+                // EXTENDED RANGE: Distance traveled 30% larger (Horizontal 715, Vertical 286)
+                const distToFade = Math.min(715 / (absCos || 0.001), 286 / (absSin || 0.001));
+                shrink = (maxR * speed) / distToFade;
+            }
+            
+            return {
+                type: type,
+                x: cW / 2,
+                y: cH / 2,
+                vx: Math.cos(angle) * speed,
+                vy: Math.sin(angle) * speed,
+                // Refined start radius to avoid 'popping'
+                r: isInitial ? Math.random() * maxR : (type === 'smoke' ? (maxR * 0.4) : maxR),
+                maxR: maxR,
+                phase: Math.random() * Math.PI * 2,
+                waftSpeed: 0,
+                rotation: Math.random() * Math.PI * 2,
+                rotSpeed: 0, 
+                color: type === 'smoke' ? '102,199,148' : (Math.random() > 0.4 ? '255,255,255' : '102,199,148'),
+                shrink: shrink,
+                expansion: 0
+            };
+        },
+        animate() {
+            if (!this.ctx) return;
+            this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+            
+            // Faster intro fade (approx 0.6s)
+            if (this.introFade < 1.0) {
+                this.introFade += 0.025;
+                if (this.introFade > 1.0) this.introFade = 1.0;
+            }
+
+            if (!this.isSpawning) {
+                this.fadeMult -= 0.015;
+                if (this.fadeMult <= 0) this.fadeMult = 0;
+            }
+
+            const currentAlpha = this.introFade * this.fadeMult;
+            const smokeImg = AssetLoader.assets['smokeparticle.png'];
+
+            for (let i = this.particles.length - 1; i >= 0; i--) {
+                const p = this.particles[i];
+
+                if (p.type === 'smoke') {
+                    p.y -= 0.3; // Faster drift
+                }
+
+                p.x += p.vx;
+                p.y += p.vy;
+                p.r -= p.shrink;
+
+                // Box-normalized distance fade for smoke (follows rectangle shape)
+                let distAlpha = 1.0;
+                if (p.type === 'smoke') {
+                    const rectW = 510;
+                    const rectH = 298;
+                    const dx = Math.abs(p.x - this.canvas.width / 2);
+                    const dy = Math.abs(p.y - this.canvas.height / 2);
+                    const normDist = Math.max(dx / (rectW / 2), dy / (rectH / 2));
+                    // SHORTER FADE RANGE: 1.0 to 1.3
+                    distAlpha = Math.max(0, Math.min(1.0, 1.0 - (normDist - 1.0) / 0.3));
+                }
+
+                if (p.r <= 0 || (p.type === 'smoke' && distAlpha <= 0)) {
+                    const next = this.spawn();
+                    if (next) this.particles[i] = next;
+                    else this.particles.splice(i, 1);
+                    continue;
+                }
+
+                let alpha = Math.max(0, Math.min(0.7, (p.r / p.maxR) * 0.7)) * currentAlpha * distAlpha;
+                
+                if (p.type === 'smoke' && smokeImg) {
+                    this.ctx.save();
+                    this.ctx.translate(p.x, p.y);
+                    this.ctx.rotate(p.rotation);
+                    // Greener and more opaque smoke
+                    this.ctx.globalAlpha = alpha * 0.75;
+                    this.ctx.drawImage(smokeImg, -p.r, -p.r, p.r * 2, p.r * 2);
+                    this.ctx.globalCompositeOperation = 'source-atop';
+                    this.ctx.fillStyle = 'rgba(102, 199, 148, 0.8)';
+                    this.ctx.fillRect(-p.r, -p.r, p.r * 2, p.r * 2);
+                    this.ctx.restore();
+                } else {
+                    this.ctx.fillStyle = `rgba(${p.color}, ${alpha})`;
+                    this.ctx.beginPath();
+                    this.ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+                    this.ctx.fill();
+                }
+            }
+            if (this.particles.length > 0 || this.isSpawning) {
+                this.animationId = requestAnimationFrame(() => this.animate());
+            }
+        },
+        stopSpawning() {
+            this.isSpawning = false;
+        },
+        stopFull() {
+            cancelAnimationFrame(this.animationId);
+        }
+    };
+
+    let interactionAllowed = false;
+    let acceptInProgress = false;
+    let triggered = false;
+
+    function showOverlay() {
+        if (triggered) return;
+        triggered = true;
+        
+        // Play sound RIGHT at the beginning of the reveal
+        const audio = document.getElementById('matchready-audio');
+        if (audio) {
+            audio.currentTime = 0;
+            audio.play().catch(() => {});
+        }
+
+        const overlay = document.getElementById('match-found-overlay');
+        overlay.classList.add('visible');
+        overlay.classList.remove('hidden');
+        
+        ParticleSystem.init();
+        
+        setTimeout(() => {
+            interactionAllowed = true;
+        }, 500);
+    }
+
+    async function onFirstInteraction(e) {
+        if (e.type === 'keydown' && e.key !== 'Enter' && e.key !== ' ') return;
+        if (e.key === ' ' || e.key === 'Enter') e.preventDefault();
+        
+        window.removeEventListener('click', onFirstInteraction);
+        window.removeEventListener('keydown', onFirstInteraction);
+        
+        // Show overlay first, then handle loading in background if needed (though it's fast)
+        // But the user wants sound IMMEDIATELY. ShowOverlay does that.
+        await AssetLoader.init();
+        showOverlay();
+    }
+
+    window.addEventListener('click', onFirstInteraction);
+    window.addEventListener('keydown', onFirstInteraction);
+
+    const acceptBtn = document.getElementById('match-accept-btn');
+
+    function handleAcceptVisuals(isPressed) {
+        if (!acceptBtn) return;
+        if (isPressed && !acceptInProgress) {
+            acceptBtn.classList.add('pressed');
+        } else {
+            acceptBtn.classList.remove('pressed');
+        }
+    }
+
+    async function handleAccept() {
+        if (acceptInProgress || !interactionAllowed) return;
+        acceptInProgress = true;
+        
+        if (acceptBtn) acceptBtn.classList.add('pressed');
+        
+        const inner = document.getElementById('match-found-inner');
+        const faceFront = document.querySelector('.match-found-face.front');
+        const faceTop = document.querySelector('.match-found-face.top');
+        
+        // No sound here as requested
+
+        setTimeout(() => {
+            if (inner) inner.classList.add('rotating');
+            if (faceFront) faceFront.classList.remove('glow-active');
+            setTimeout(() => faceTop && faceTop.classList.add('glow-active'), 100);
+            if (acceptBtn) acceptBtn.classList.remove('pressed');
+            startReadySequence();
+        }, 150);
+    }
+
+    function startReadySequence() {
+        const icons = document.querySelectorAll('.status-icon');
+        const countLabel = document.getElementById('accepted-count');
+        let currentIndex = 0;
+        let delay = 50;
+
+        function activateNext() {
+            if (currentIndex < icons.length) {
+                icons[currentIndex].classList.add('active');
+                currentIndex++;
+                if (countLabel) countLabel.innerText = currentIndex + ' / 10 ПРИНЯТЫ';
+                
+                if (currentIndex < icons.length) {
+                    delay *= 1.5;
+                    setTimeout(activateNext, delay);
+                } else {
+                    setTimeout(finishSequence, 800);
+                }
+            }
+        }
+        activateNext();
+    }
+
+    function finishSequence() {
+        const startAudio = new Audio('start.mpeg');
+        startAudio.play().catch(() => {});
+        
+        ParticleSystem.stopSpawning();
+        const dialog = document.getElementById('match-found-dialog');
+        const overlay = document.getElementById('match-found-overlay');
+        
+        // 1. Start cinematic shrink animation (3s total, opacity hits zero at 1.5s)
+        if (dialog) dialog.style.animation = 'dotaShrink 3s cubic-bezier(0.16, 1, 0.3, 1) forwards';
+        
+        // 2. Wait for modal to hit 0 opacity (1.5s mark)
+        setTimeout(() => {
+            // 3. Now fade in the dota site AND simultaneously fade out the overlay backdrop
+            document.body.classList.add('dota-active');
+            if (overlay) overlay.classList.add('fading-out');
+        }, 1500);
+
+        // 4. Final cleanup (3s mark)
+        setTimeout(() => {
+            if (overlay) overlay.style.display = 'none';
+            ParticleSystem.stopFull();
+        }, 3000);
+    }
+
+    // Button Events
+    if (acceptBtn) {
+        acceptBtn.addEventListener('mousedown', () => handleAcceptVisuals(true));
+        acceptBtn.addEventListener('click', handleAccept);
+    }
+    window.addEventListener('mouseup', () => handleAcceptVisuals(false));
+
+    // Hotkeys
+    window.addEventListener('keydown', (e) => {
+        if (!interactionAllowed || acceptInProgress) return;
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            handleAcceptVisuals(true);
+        }
+    });
+
+    window.addEventListener('keyup', (e) => {
+        if (!interactionAllowed || acceptInProgress) return;
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            handleAccept();
+        }
+    });
+
+    // Decline: play meepmap sound
+    const declineBtn = document.getElementById('match-decline');
+    if (declineBtn) {
+        declineBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const meepAudio = new Audio('meepmap.mpeg');
+            meepAudio.currentTime = 0;
+            meepAudio.play().catch(() => {});
+        });
+    }
+
+    // Start preloading immediately
+    AssetLoader.init();
+});

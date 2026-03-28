@@ -1,0 +1,657 @@
+* {
+    box-sizing:border-box;
+    font-family:"Radiance","Noto Sans",sans-serif
+}
+
+
+a {
+    text-decoration:none;
+    color:inherit
+}
+
+
+.New {
+	color: #36a15e;
+}
+
+.patchnotespage_PatchNotesPage{
+    width:100%;
+    min-height:0;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    background-repeat:repeat-y;
+    background-color:#151618;
+    background-position:center;
+    clear:both
+}
+
+.patchnotespage_PatchNotesPage .patchnotespage_Header{
+    width:100%;
+    background-color:#000;
+    margin-top:140px;
+    padding:30px 0px;
+    min-height:0;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    position:relative
+}
+
+.patchnotespage_PatchNotesPage .patchnotespage_Header .patchnotespage_Label{
+    width:900px;
+    color:#ed3b1c;
+    font-size:32px;
+    letter-spacing:4px
+}
+
+.patchnotespage_PatchNotesPage .patchnotespage_Header .patchnotespage_NotesTitle{
+    width:900px;
+    color:#ed3b1c;
+    font-size:72px;
+    font-weight:bold;
+    letter-spacing:8px
+}
+
+.patchnotespage_PatchNotesPage .patchnotespage_Header .patchnotespage_SelectorContainer{
+    position:absolute;
+    width:900px;
+    height:100px;
+    top:60px;
+    margin:0 auto
+}
+
+.patchnotespage_PatchNotesPage .patchnotespage_Header .patchnotespage_SelectorContainer .patchnotespage_Selector{
+    width:100px;
+    position:absolute;
+    top:0;
+    right:0
+}
+
+.patchnotespage_PatchNotesPage .patchnotespage_Body{
+    width:100%;
+    max-width:900px;
+    padding-top:32px;
+    min-height:0;
+    display:flex;
+    flex-direction:column
+}
+
+.patchnotespage_UpdatesSection{
+    width:100%;
+    display:none
+}
+
+.patchnotespage_UpdatesSection.patchnotespage_IsShown{
+    display:block
+}
+
+.patchnotespage_UpdatesSection .patchnotespage_PatchNotesHeaderLabel{
+    background:linear-gradient(to right, #833312FF, #83331200);
+    border-left:2px solid #ff5005;
+    font-size:30px;
+    font-weight:600;
+    font-family:"Reaver",serif;
+    text-transform:uppercase;
+    letter-spacing:4px;
+    color:#fff;
+    text-shadow:0px 0px 5px #000;
+    box-shadow:0px 0px 30px #000;
+    padding:12px 20px
+}
+
+.patchnotespage_UpdatesSection .patchnotespage_PatchNotesList{
+    width:100%;
+    border-left:2px solid #ffffff10;
+    margin-bottom:30px;
+    background:linear-gradient(90deg, rgba(0, 0, 0, 0.38) 3.07%, rgba(6, 37, 65, 0.3) 88.06%);
+    box-shadow:0px 0px 50px #000;
+    min-height:0;
+    display:flex;
+    padding:20px 0px;
+    flex-direction:column
+}
+
+.patchnotespage_PatchNoteHero{
+    width:100%;
+    min-height:0;
+    display:flex;
+    flex-direction:column;
+    padding:18px;
+    padding-bottom:0px;
+    border-left:2px solid #ffffff10;
+    margin-bottom:30px;
+    background:linear-gradient(90deg, rgba(0, 0, 0, 0.38) 3.07%, rgba(6, 37, 65, 0.3) 88.06%);
+    box-shadow:0px 0px 50px #000
+}
+
+.patchnotespage_PatchNoteHero .patchnotespage_HeroHeader{
+    width:100%;
+    height:72px;
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    margin-bottom:24px
+}
+
+.patchnotespage_PatchNoteHero .patchnotespage_HeroHeader .patchnotespage_HeroImage{
+    width:128px;
+    height:72px;
+    box-shadow:0px 0px 20px #000;
+    background-size:cover;
+    background-repeat:no-repeat;
+    margin-right:20px
+}
+
+.patchnotespage_PatchNoteHero .patchnotespage_HeroHeader .patchnotespage_RightSection{
+    flex-grow:1;
+    min-height:0;
+    display:flex;
+    flex-direction:column
+}
+
+.patchnotespage_PatchNoteHero .patchnotespage_HeroHeader .patchnotespage_RightSection .patchnotespage_HeroName{
+    font-size:24px;
+    font-weight:600;
+    color:#fff;
+    text-transform:uppercase;
+    letter-spacing:2px;
+    font-family:"Reaver",serif
+}
+
+.patchnotespage_PatchNoteHero .patchnotespage_HeroHeader .patchnotespage_RightSection .patchnotespage_UpdateSubtitle{
+    font-size:16px;
+    font-weight:bold;
+    color:#ff715d;
+    text-transform:uppercase;
+    letter-spacing:3px;
+    margin-bottom:10px
+}
+
+.patchnotespage_PatchNoteHero .patchnotespage_Notes{
+    width:100%;
+    min-height:0;
+    display:flex;
+    flex-direction:column;
+    margin-bottom:24px
+}
+
+.patchnotespage_PatchNoteHero .patchnotespage_Notes .patchnotespage_AbilityNote{
+    width:100%;
+    display:flex;
+    flex-direction:row
+}
+
+.patchnotespage_PatchNoteHero .patchnotespage_Notes .patchnotespage_AbilityNote:not(:last-child){
+    padding-bottom:20px
+}
+
+.patchnotespage_PatchNoteHero .patchnotespage_Notes .patchnotespage_AbilityNote .patchnotespage_AbilityIcon{
+    width:55px;
+    height:55px;
+    min-width:55px;
+    background-size:cover;
+    background-repeat:no-repeat
+}
+
+.patchnotespage_PatchNoteHero .patchnotespage_Notes .patchnotespage_AbilityNote .patchnotespage_RightSection{
+    flex-grow:1;
+    min-height:0;
+    display:flex;
+    flex-direction:column
+}
+
+.patchnotespage_PatchNoteHero .patchnotespage_Notes .patchnotespage_AbilityNote .patchnotespage_RightSection .patchnotespage_AbilityName{
+    font-size:16px;
+    font-weight:600;
+    color:#fff;
+    font-family:"Reaver",serif;
+    text-transform:uppercase;
+    letter-spacing:2px;
+    margin-bottom:4px;
+    margin-left:20px
+}
+
+.patchnotespage_PatchNoteItem{
+    width:100%;
+    min-height:0;
+    display:flex;
+    flex-direction:column;
+    padding:0px 40px;
+    padding-bottom:0px;
+    margin-bottom:20px
+}
+
+.patchnotespage_PatchNoteItem .patchnotespage_ItemHeader{
+    width:100%;
+    display:flex;
+    flex-direction:row;
+    align-items:center
+}
+
+.patchnotespage_PatchNoteItem .patchnotespage_ItemHeader .patchnotespage_ItemImage{
+    width:72px;
+    height:52px;
+    background-size:cover;
+    background-repeat:no-repeat;
+    box-shadow:0px 0px 20px #000;
+    margin-right:16px;
+    margin-bottom:10px
+}
+
+.patchnotespage_PatchNoteItem .patchnotespage_ItemHeader .patchnotespage_RightSection{
+    flex-grow:1;
+    min-height:0;
+    display:flex;
+    flex-direction:column
+}
+
+.patchnotespage_PatchNoteItem .patchnotespage_ItemHeader .patchnotespage_RightSection .patchnotespage_ItemName {
+    font-size:20px;
+    font-weight:600;
+    color:#fff;
+    text-transform:uppercase;
+    letter-spacing:2px;
+    font-family:"Reaver",serif
+}
+
+.patchnotespage_ItemTitle {
+	text-transform: uppercase;
+    color: #ccc;
+    letter-spacing: 2px;
+}
+
+.patchnotespage_AbilityNote .patchnotespage_ItemTitle {
+	margin-left: 20px;
+}
+
+
+.patchnotespage_PatchNoteGeneric{
+    width:100%;
+    min-height:0;
+    display:flex;
+    flex-direction:column;
+    padding:0px 18px
+}
+
+.patchnotespage_NoteElement{
+    display:flex;
+    flex-direction:row;
+    align-items:flex-start
+}
+
+.patchnotespage_NoteElement .patchnotespage_Dot{
+    width:3px;
+    height:3px;
+    min-width:5px;
+    min-height:5px;
+    border-radius:3px;
+    background-color:#999;
+    margin-right:10px;
+    margin-top:12px
+}
+
+.patchnotespage_NoteElement .patchnotespage_Note{
+    font-size:20px;
+    color:#bbbbbbee;
+    line-height:30px;
+    font-weight:200
+}
+
+
+@font-face{
+    font-family:"Radiance";
+    src:url("https://cdn.cloudflare.steamstatic.com/apps/dota2/fonts/radiance.eot");
+    src:url("https://cdn.cloudflare.steamstatic.com/apps/dota2/fonts/radiance.eot?#iefix") format("embedded-opentype"),url("https://cdn.cloudflare.steamstatic.com/apps/dota2/fonts/radiance.woff") format("woff"),url("https://cdn.cloudflare.steamstatic.com/apps/dota2/fonts/radiance.ttf") format("truetype"),url("https://cdn.cloudflare.steamstatic.com/apps/dota2/fonts/radiance.svg#ywftsvg") format("svg");
+    font-weight:normal;
+    font-style:normal
+}
+
+@font-face{
+    font-family:"Radiance";
+    src:url("https://cdn.cloudflare.steamstatic.com/apps/dota2/fonts/radiance-bold.eot");
+    src:url("https://cdn.cloudflare.steamstatic.com/apps/dota2/fonts/radiance-bold.eot?#iefix") format("embedded-opentype"),url("https://cdn.cloudflare.steamstatic.com/apps/dota2/fonts/radiance-bold.woff") format("woff"),url("https://cdn.cloudflare.steamstatic.com/apps/dota2/fonts/radiance-bold.ttf") format("truetype"),url("https://cdn.cloudflare.steamstatic.com/apps/dota2/fonts/radiance-bold.svg#ywftsvg") format("svg");
+    font-weight:900;
+    font-style:normal
+}
+
+@font-face{
+    font-family:"Radiance";
+    src:url("https://cdn.cloudflare.steamstatic.com/apps/dota2/fonts/radiance-semibold.eot");
+    src:url("https://cdn.cloudflare.steamstatic.com/apps/dota2/fonts/radiance-semibold.eot?#iefix") format("embedded-opentype"),url("https://cdn.cloudflare.steamstatic.com/apps/dota2/fonts/radiance-semibold.woff") format("woff"),url("https://cdn.cloudflare.steamstatic.com/apps/dota2/fonts/radiance-semibold.ttf") format("truetype"),url("https://cdn.cloudflare.steamstatic.com/apps/dota2/fonts/radiance-semibold.svg#ywftsvg") format("svg");
+    font-weight:700;
+    font-style:normal
+}
+
+@font-face{
+    font-family:"Goudy Trajan";
+    src:url("https://cdn.cloudflare.steamstatic.com/apps/dota2/fonts/goudytrajan-regular-pro-webfont.eot");
+    src:url("https://cdn.cloudflare.steamstatic.com/apps/dota2/fonts/goudytrajan-regular-pro-webfont.eot?#iefix") format("embedded-opentype"),url("https://cdn.cloudflare.steamstatic.com/apps/dota2/fonts/goudytrajan-regular-pro-webfont.woff") format("woff"),url("https://cdn.cloudflare.steamstatic.com/apps/dota2/fonts/goudytrajan-regular-pro-webfont.ttf") format("truetype");
+    font-weight:normal;
+    font-style:normal
+}
+
+@font-face{
+    font-family:"Goudy Trajan";
+    src:url("https://cdn.cloudflare.steamstatic.com/apps/dota2/fonts/goudytrajan-bold-pro-webfont.eot");
+    src:url("https://cdn.cloudflare.steamstatic.com/apps/dota2/fonts/goudytrajan-bold-pro-webfont.eot?#iefix") format("embedded-opentype"),url("https://cdn.cloudflare.steamstatic.com/apps/dota2/fonts/goudytrajan-bold-pro-webfont.woff") format("woff"),url("https://cdn.cloudflare.steamstatic.com/apps/dota2/fonts/goudytrajan-bold-pro-webfont.ttf") format("truetype");
+    font-weight:900;
+    font-style:normal
+}
+
+@font-face{
+    font-family:"Goudy Trajan";
+    src:url("https://cdn.cloudflare.steamstatic.com/apps/dota2/fonts/goudytrajan-medium-pro-webfont.eot");
+    src:url("https://cdn.cloudflare.steamstatic.com/apps/dota2/fonts/goudytrajan-medium-pro-webfont.eot?#iefix") format("embedded-opentype"),url("https://cdn.cloudflare.steamstatic.com/apps/dota2/fonts/goudytrajan-medium-pro-webfont.woff") format("woff"),url("https://cdn.cloudflare.steamstatic.com/apps/dota2/fonts/goudytrajan-medium-pro-webfont.ttf") format("truetype");
+    font-weight:700;
+    font-style:normal
+}
+
+@font-face{
+    font-family:"Noto Sans";
+    src:url("https://cdn.cloudflare.steamstatic.com/apps/dota2/fonts/notosans-regular.woff") format("woff"),url("https://cdn.cloudflare.steamstatic.com/apps/dota2/fonts/notosans-regular.ttf") format("truetype");
+    font-weight:500;
+    font-style:normal
+}
+
+@font-face{
+    font-family:"Noto Sans";
+    src:url("https://cdn.cloudflare.steamstatic.com/apps/dota2/fonts/notosans-semibold.woff") format("woff"),url("https://cdn.cloudflare.steamstatic.com/apps/dota2/fonts/notosans-semibold.ttf") format("truetype");
+    font-weight:700;
+    font-style:normal
+}
+
+@font-face{
+    font-family:"Noto Sans";
+    src:url("https://cdn.cloudflare.steamstatic.com/apps/dota2/fonts/notosans-bold.woff") format("woff"),url("https://cdn.cloudflare.steamstatic.com/apps/dota2/fonts/notosans-bold.ttf") format("truetype");
+    font-weight:900;
+    font-style:normal
+}
+
+@font-face{
+    font-family:"Averia Serif Libre";
+    src:url("https://cdn.cloudflare.steamstatic.com/apps/dota2/fonts/averiaseriflibre-regular.woff") format("woff"),url("https://cdn.cloudflare.steamstatic.com/apps/dota2/fonts/averiaseriflibre-regular.ttf") format("truetype");
+    font-weight:normal;
+    font-style:normal
+}
+
+@font-face{
+    font-family:"Averia Serif Libre";
+    src:url("https://cdn.cloudflare.steamstatic.com/apps/dota2/fonts/averiaseriflibre-italic.woff") format("woff"),url("https://cdn.cloudflare.steamstatic.com/apps/dota2/fonts/averiaseriflibre-italic.ttf") format("truetype");
+    font-weight:normal;
+    font-style:italic
+}
+
+@font-face{
+    font-family:"Reaver";
+    src:url("https://cdn.cloudflare.steamstatic.com/apps/dota2/fonts/Reaver-Regular.woff") format("woff"),url("https://cdn.cloudflare.steamstatic.com/apps/dota2/fonts/Reaver-Regular.ttf") format("truetype");
+    font-weight:400;
+    font-style:normal
+}
+
+@font-face{
+    font-family:"Reaver";
+    src:url("https://cdn.cloudflare.steamstatic.com/apps/dota2/fonts/Reaver-Light.woff") format("woff"),url("https://cdn.cloudflare.steamstatic.com/apps/dota2/fonts/Reaver-Regular-Light.ttf") format("truetype");
+    font-weight:200;
+    font-style:normal
+}
+
+@font-face{
+    font-family:"Reaver";
+    src:url("https://cdn.cloudflare.steamstatic.com/apps/dota2/fonts/Reaver-SemiBold.woff") format("woff"),url("https://cdn.cloudflare.steamstatic.com/apps/dota2/fonts/Reaver-Regular-SemiBold.ttf") format("truetype");
+    font-weight:600;
+    font-style:normal
+}
+
+@font-face{
+    font-family:"Reaver";
+    src:url("https://cdn.cloudflare.steamstatic.com/apps/dota2/fonts/Reaver-Bold.woff") format("woff"),url("https://cdn.cloudflare.steamstatic.com/apps/dota2/fonts/Reaver-Regular-Bold.ttf") format("truetype");
+    font-weight:700;
+    font-style:normal
+}
+
+@font-face{
+    font-family:"Reaver";
+    src:url("https://cdn.cloudflare.steamstatic.com/apps/dota2/fonts/Reaver-Black.woff") format("woff"),url("https://cdn.cloudflare.steamstatic.com/apps/dota2/fonts/Reaver-Regular-Black.ttf") format("truetype");
+    font-weight:800;
+    font-style:normal
+}
+
+
+
+.microheader_StandardButton{
+    border:3px solid #ffffff50;
+    padding:15px 25px;
+    margin:10px 30px;
+    border-radius:5px;
+    cursor:pointer;
+    width:fit-content;
+    display:flex;
+    flex-direction:row;
+    justify-content:center;
+    align-items:center;
+    transition-duration:.2s
+}
+
+.microheader_StandardButton:hover{
+    border:3px solid #ff6046;
+    transform:translateY(-2px);
+    color:#ff6046
+}
+
+.microheader_StandardButton .microheader_ButtonText{
+    font-size:20px;
+    font-weight:700;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    color:#fff
+}
+
+.microheader_StandardButton .microheader_SteamLogo{
+    width:20px;
+    height:20px;
+    margin-right:10px;
+    background-size:contain;
+    background-repeat:no-repeat;
+    background-image:url("https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react//icons/steam_icon.svg")
+}
+
+.microheader_MicroHeader{
+    width:100%;
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content:center;
+    height:80px;
+    padding:0px 30px;
+    background-color:#000;
+    position:relative
+}
+
+.microheader_MicroHeader.microheader_Overlapping{
+    top:0;
+    position:absolute;
+    z-index:9999;
+    background-color:transparent
+}
+
+.microheader_MicroHeader .microheader_HeaderContents{
+    width:100%;
+    height:100%;
+    display:flex;
+    flex-direction:row;
+    align-items:center
+}
+
+.microheader_MicroHeader .microheader_HeaderContents .microheader_DotaLogo{
+    width:200px;
+    min-width:200px;
+    height:50px;
+    min-height:50px;
+    background-image:url("https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/global/dota2_logo_horiz.png");
+    background-size:contain;
+    background-repeat:no-repeat;
+    background-position:center center;
+    opacity:.8;
+    margin-right:40px
+}
+
+.microheader_MicroHeader .microheader_HeaderContents .microheader_DotaLogo:hover{
+    opacity:1;
+    cursor:pointer
+}
+
+@media(max-width: 1300px){
+    .microheader_MicroHeader .microheader_HeaderContents .microheader_DotaLogo{
+        background-image:url("https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/global/dota2_logo_symbol.png");
+        width:50px;
+        min-width:50px;
+        height:50px;
+        min-height:50px
+    }
+
+}
+
+@media(max-width: 900px){
+    .microheader_MicroHeader .microheader_HeaderContents .microheader_DotaLogo{
+        display:none
+    }
+
+}
+
+@media(max-width: 700px){
+    .microheader_MicroHeader .microheader_HeaderContents .microheader_DotaLogo{
+        display:block
+    }
+
+}
+
+.microheader_MicroHeader .microheader_HeaderContents .microheader_NavItems{
+    flex-grow:1;
+    height:100%;
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    position:relative
+}
+
+@media(max-width: 700px){
+    .microheader_MicroHeader .microheader_HeaderContents .microheader_NavItems{
+        justify-content:center
+    }
+
+}
+
+.microheader_MicroHeader .microheader_HeaderContents .microheader_NavItems .microheader_NavLink{
+    font-size:18px;
+    font-family:"Reaver",serif;
+    font-weight:600;
+    letter-spacing:3px;
+    opacity:.8;
+    color:#fff;
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    padding:3px 0px;
+    margin:0px 20px;
+    text-transform:uppercase;
+    border-top:3px solid transparent;
+    border-bottom:3px solid transparent
+}
+
+@media(max-width: 700px){
+    .microheader_MicroHeader .microheader_HeaderContents .microheader_NavItems .microheader_NavLink{
+        display:none
+    }
+
+}
+
+.microheader_MicroHeader .microheader_HeaderContents .microheader_NavItems .microheader_NavLink:hover{
+    opacity:1;
+    cursor:pointer
+}
+
+.microheader_MicroHeader .microheader_HeaderContents .microheader_OptionsSide{
+    display:flex;
+    flex-direction:row;
+    align-items:center
+}
+
+@media(max-width: 700px){
+    .microheader_MicroHeader .microheader_HeaderContents .microheader_OptionsSide{
+        display:none
+    }
+
+}
+
+.microheader_MicroHeader .microheader_HeaderContents .microheader_OptionsSide .microheader_PlayForFree .microheader_StandardButton{
+    margin:10px 0px 10px 20px
+}
+
+@media(max-width: 1200px){
+    .microheader_MicroHeader .microheader_HeaderContents .microheader_OptionsSide .microheader_PlayForFree{
+        display:none
+    }
+
+}
+
+.rootfooter_RootFooter{
+    text-align:center;
+    width:100%;
+    z-index:5;
+    padding:30px 100px;
+    background-color:#000
+}
+
+
+@media only screen and (max-width: 900px){
+    .rootfooter_RootFooter{
+        width:600px
+    }
+
+}
+
+@media only screen and (max-width: 600px){
+    .rootfooter_RootFooter{
+        width:375px
+    }
+
+}
+
+.rootfooter_RootFooter .rootfooter_Logos{
+    width:500px;
+    margin:0 auto;
+    display:flex;
+    flex-direction:row;
+    justify-content:space-between
+}
+
+@media only screen and (max-width: 600px){
+    .rootfooter_RootFooter .rootfooter_Logos{
+        width:375px
+    }
+
+}
+
+@media only screen and (max-width: 375px){
+    .rootfooter_RootFooter .rootfooter_Logos{
+        width:375px;
+        flex-direction:column;
+        align-items:center
+    }
+
+}
+
+.rootfooter_RootFooter .rootfooter_Logos .rootfooter_FooterLogo{
+    margin:0px 15px 20px 15px;
+    max-height:30px
+}
+
+.rootfooter_RootFooter .rootfooter_Legal{
+    text-align:center;
+    font-size:14px;
+    color:#777;
+    padding:0 20px;
+    width:500px;
+    margin:0 auto
+}

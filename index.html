@@ -16,6 +16,9 @@
 	<link
 		href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
 		rel="stylesheet">
+	<link
+		href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&display=swap"
+		rel="stylesheet">
 </head>
 
 <body>
@@ -218,6 +221,195 @@
 		<button id="fullscreen-next" class="fullscreen-nav" aria-label="Next slide">›</button>
 		<div id="fullscreen-content-wrapper"></div>
 	</div>
+
+	<!-- Dota 2 Match Found Overlay -->
+	<div id="match-found-overlay" class="hidden">
+		<div id="match-found-backdrop"><canvas id="match-particles"></canvas></div>
+		<div id="match-found-dialog">
+			<div id="match-found-inner">
+				<!-- Front Face: The Accept Screen -->
+				<div class="match-found-face front glow-active">
+					<div id="match-found-top">
+						<div id="match-found-subtitle">ВАШ ПРАЗДНИК ГОТОВ</div>
+						<div id="match-found-title">ДЕНЬ РОЖДЕНИЯ</div>
+					</div>
+					<div id="match-found-middle">
+						<button id="match-accept-btn"></button>
+					</div>
+					<div id="match-found-bottom">
+						<div id="match-decline">&#9432; Отменить праздник</div>
+					</div>
+				</div>
+
+				<!-- Top Face: The Waiting Screen -->
+				<div class="match-found-face top">
+					<div id="match-waiting-top">
+						<div id="match-waiting-subtitle">ОЖИДАНИЕ ПОЗДРАВЛЕНИЙ</div>
+						<div id="match-waiting-title">ДЕНЬ РОЖДЕНИЯ</div>
+					</div>
+					<div id="match-waiting-middle">
+						<div id="status-icons-container">
+							<div class="status-icon"></div>
+							<div class="status-icon"></div>
+							<div class="status-icon"></div>
+							<div class="status-icon"></div>
+							<div class="status-icon"></div>
+							<div class="status-icon"></div>
+							<div class="status-icon"></div>
+							<div class="status-icon"></div>
+							<div class="status-icon"></div>
+							<div class="status-icon"></div>
+						</div>
+					</div>
+					<div id="match-waiting-bottom">
+						<div id="accepted-count">0 / 10 ПРИНЯТЫ</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	    <!-- Dota 2 Patchnote Content (Hidden by default, shown after overlay sequence) -->
+    <div id="dota-page-container">
+       <div class="patchnotespage_PatchNotesPage" style="background-image: url('https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/backgrounds/featured.jpg');">
+          <div class="microheader_MicroHeader microheader_Overlapping">
+             <div class="microheader_HeaderContents">
+                <a class="microheader_DotaLogo" href="https://www.dota2.com"></a>
+                <div class="microheader_NavItems">
+                   <a class="microheader_NavLink" href="https://www.dota2.com/game">Game</a>
+                   <a class="microheader_NavLink" href="https://www.dota2.com/heroes">Heroes</a>
+                   <a class="microheader_NavLink" href="https://www.dota2.com/news">News</a>
+                   <a class="microheader_NavLink" href="https://www.dota2.com/esports">Esports</a>
+                </div>
+                <div class="microheader_OptionsSide">
+                   <a class="microheader_PlayForFree" href="https://www.dota2.com/play">
+                      <div class="microheader_StandardButton">
+                         <div class="microheader_SteamLogo"></div>
+                         <div class="microheader_ButtonText">Play for Free</div>
+                      </div>
+                   </a>
+                </div>
+             </div>
+          </div>
+          <div class="patchnotespage_Header">
+             <div class="patchnotespage_Label">Gameplay Update</div>
+             <div class="patchnotespage_NotesTitle">6.87</div>
+             <div class="patchnotespage_SelectorContainer">
+                <select class="patchnotespage_Selector">
+                   <option value="main">6.87</option>
+                </select>
+             </div>
+          </div>
+          <div class="patchnotespage_Body">
+             <div class="patchnotespage_UpdatesSection patchnotespage_IsShown">
+                <div class="patchnotespage_PatchNotesHeaderLabel">General Updates</div>
+                <div class="patchnotespage_PatchNotesList">
+                   <div class="patchnotespage_PatchNoteGeneric" style="margin-bottom: 0px;">
+                      <div class="patchnotespage_NoteElement">
+                         <div style="width: 20px; min-width: 20px;"></div>
+                         <div class="patchnotespage_Dot"></div>
+                         <div class="patchnotespage_Note">Reduced All Pick</div>
+                      </div>
+                   </div>
+                   <div class="patchnotespage_PatchNoteGeneric" style="margin-bottom: 0px;">
+                      <div class="patchnotespage_NoteElement">
+                         <div style="width: 20px; min-width: 20px;"></div>
+                         <div class="patchnotespage_Dot"></div>
+                         <div class="patchnotespage_Note">Random Draft hero pool increased from 1/2/3/4 charges with an Artificer's Hammer</div>
+                      </div>
+                   </div>
+                   <div class="patchnotespage_PatchNoteGeneric" style="margin-bottom: 0px;">
+                      <div class="patchnotespage_NoteElement">
+                         <div style="width: 20px; min-width: 20px;"></div>
+                         <div class="patchnotespage_Dot"></div>
+                         <div class="patchnotespage_Note">Random Draft hero select all items in the armory</div>
+                      </div>
+                   </div>
+                   <div class="patchnotespage_PatchNoteGeneric" style="margin-bottom: 0px;">
+                      <div class="patchnotespage_NoteElement">
+                         <div style="width: 20px; min-width: 20px;"></div>
+                         <div class="patchnotespage_Dot"></div>
+                         <div class="patchnotespage_Note">Private Lobby games now uses Pseudo Random chance</div>
+                      </div>
+                   </div>
+                   <div class="patchnotespage_PatchNoteGeneric" style="margin-bottom: 0px;">
+                      <div class="patchnotespage_NoteElement">
+                         <div style="width: 20px; min-width: 20px;"></div>
+                         <div class="patchnotespage_Dot"></div>
+                         <div class="patchnotespage_Note">The Armory now has a stacking magic resistance</div>
+                      </div>
+                   </div>
+                   <div class="patchnotespage_PatchNoteGeneric" style="margin-bottom: 0px;">
+                      <div class="patchnotespage_NoteElement">
+                         <div style="width: 20px; min-width: 20px;"></div>
+                         <div class="patchnotespage_Dot"></div>
+                         <div class="patchnotespage_Note">Custom Games can now target invulnerable units</div>
+                      </div>
+                   </div>
+                   <div class="patchnotespage_PatchNoteGeneric" style="margin-bottom: 20px;">
+                      <div class="patchnotespage_NoteElement">
+                         <div style="width: 20px; min-width: 20px;"></div>
+                         <div class="patchnotespage_Dot"></div>
+                         <div class="patchnotespage_Note">Character picker can now miss</div>
+                      </div>
+                   </div>
+                   <div class="patchnotespage_PatchNoteGeneric" style="margin-bottom: 0px;">
+                      <div class="patchnotespage_NoteElement">
+                         <div style="width: 20px; min-width: 20px;"></div>
+                         <div class="patchnotespage_Dot"></div>
+                         <div class="patchnotespage_Note">Runes now have 80% Magic Resistance</div>
+                      </div>
+                   </div>
+                   <div class="patchnotespage_PatchNoteGeneric" style="margin-bottom: 0px;">
+                      <div class="patchnotespage_NoteElement">
+                         <div style="width: 20px; min-width: 20px;"></div>
+                         <div class="patchnotespage_Dot"></div>
+                         <div class="patchnotespage_Note">First rune is invisible effects now have a new pathway leading to the enemy</div>
+                      </div>
+                   </div>
+                   <div class="patchnotespage_PatchNoteGeneric" style="margin-bottom: 20px;">
+                      <div class="patchnotespage_NoteElement">
+                         <div style="width: 20px; min-width: 20px;"></div>
+                         <div class="patchnotespage_Dot"></div>
+                         <div class="patchnotespage_Note">First rune spawns are known as illusions to enemies</div>
+                      </div>
+                   </div>
+                   <div class="patchnotespage_PatchNoteGeneric" style="margin-bottom: 20px;">
+                      <div class="patchnotespage_NoteElement">
+                         <div style="width: 20px; min-width: 20px;"></div>
+                         <div class="patchnotespage_Dot"></div>
+                         <div class="patchnotespage_Note">Movement speed reduced from 3 to 2.5</div>
+                      </div>
+                   </div>
+                </div>
+             </div>
+             <!-- Note: Large amount of hero/item data truncated for the main index file as requested -->
+             <div class="patchnotespage_UpdatesSection patchnotespage_IsShown">
+                <div class="patchnotespage_PatchNotesHeaderLabel">Bugfixes</div>
+                <div class="patchnotespage_PatchNotesList">
+                   <div class="patchnotespage_PatchNoteGeneric" style="margin-bottom: 0px;">
+                      <div class="patchnotespage_NoteElement">
+                         <div style="width: 20px; min-width: 20px;"></div>
+                         <div class="patchnotespage_Dot"></div>
+                         <div class="patchnotespage_Note">Fixed Death Effects not pierce Spell Immunity</div>
+                      </div>
+                   </div>
+                </div>
+             </div>
+          </div>
+          <div class="rootfooter_RootFooter">
+             <div class="rootfooter_Logos">
+                <img class="rootfooter_FooterLogo" src="https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/valve_logo.png">
+                <img class="rootfooter_FooterLogo" src="https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/footer_logo.png">
+             </div>
+             <div class="rootfooter_Legal">Original post made by FatzkeFTW. Valve-like website implementation by SurDno.</div>
+          </div>
+       </div>
+    </div>
+
+
+	<script src="script.js"></script>
+	<audio id="matchready-audio" src="./matchready.mp3" preload="auto"></audio>
 </body>
 
 </html>

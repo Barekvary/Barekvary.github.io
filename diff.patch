@@ -1,0 +1,1912 @@
+From cf9f480af95b408ac0ce768cf622b9f3c972bab2 Mon Sep 17 00:00:00 2001
+From: Claude <noreply@anthropic.com>
+Date: Wed, 8 Jul 2026 20:10:42 +0000
+Subject: [PATCH] Embed cleaned-up 7.41 patch notes template into index.html
+
+Replace the old hand-made patchnotespage_* markup inside #dota-page-container
+(shown after the passcode + match-found sequence) with the semantic structure
+from the cleaned-up dota/ assets, trimmed to a workable template:
+
+- All 5 section headers and all 10 group headers from the real 7.41 notes
+- Every unique element: note lines (plain, nested, spacer/elbow, hidden
+  bullet), all 12 stat-icon variants, aghs scepter/shard notes, info
+  tooltip, image preview with zoom icon, New/Reworked/Bold badges
+- Five full hero blocks (Bane, Invoker, Lifestealer, Templar Assassin,
+  Zeus) chosen to cover every within-hero change type and all four
+  attribute icons, with their complete change lists preserved
+- Item and neutral-item/creep samples including New and Reworked items
+
+Styling comes from the new dota-patchnote.css, a copy of dota/main.css with
+every selector scoped under #dota-page-container so nothing leaks into the
+portfolio styles. The superseded patchnotespage_* rules are removed from
+common.css; the microheader/rootfooter markup and styles are kept as-is.
+
+Co-Authored-By: Claude Fable 5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01CrPCqgL3tvqoLz7cFAyUgX
+---
+ common.css         |   88 +---
+ dota-patchnote.css |  750 +++++++++++++++++++++++++++++++++
+ index.html         | 1004 ++++++++++++++++++++++++++++++++++++++------
+ 3 files changed, 1617 insertions(+), 225 deletions(-)
+ create mode 100644 dota-patchnote.css
+
+diff --git a/common.css b/common.css
+index af5de77..a7cf798 100644
+--- a/common.css
++++ b/common.css
+@@ -299,93 +299,7 @@ body.dota-active #dota-page-container {
+     opacity: 1;
+ }
+ 
+-#dota-page-container .patchnotespage_PatchNotesPage {
+-    width: 100%;
+-    min-height: 100vh;
+-    display: flex;
+-    flex-direction: column;
+-    align-items: center;
+-    background-repeat: repeat-y;
+-    background-color: #151618;
+-    background-position: center;
+-}
+-
+-#dota-page-container .patchnotespage_Header {
+-    width: 100%;
+-    background-color: #000;
+-    margin-top: 140px;
+-    padding: 30px 0px;
+-    display: flex;
+-    flex-direction: column;
+-    align-items: center;
+-    position: relative;
+-}
+-
+-#dota-page-container .patchnotespage_Label {
+-    width: 900px;
+-    color: #ed3b1c;
+-    font-size: 32px;
+-    letter-spacing: 4px;
+-}
+-
+-#dota-page-container .patchnotespage_NotesTitle {
+-    width: 900px;
+-    color: #ed3b1c;
+-    font-size: 72px;
+-    font-weight: bold;
+-    letter-spacing: 8px;
+-}
+-
+-#dota-page-container .patchnotespage_Body {
+-    width: 100%;
+-    max-width: 900px;
+-    padding-top: 32px;
+-    display: flex;
+-    flex-direction: column;
+-}
+-
+-#dota-page-container .patchnotespage_PatchNotesHeaderLabel {
+-    background: linear-gradient(to right, #833312FF, #83331200);
+-    border-left: 2px solid #ff5005;
+-    font-size: 30px;
+-    font-weight: 600;
+-    text-transform: uppercase;
+-    letter-spacing: 4px;
+-    color: #fff;
+-    padding: 12px 20px;
+-}
+-
+-#dota-page-container .patchnotespage_PatchNotesList {
+-    width: 100%;
+-    border-left: 2px solid #ffffff10;
+-    margin-bottom: 30px;
+-    background: linear-gradient(90deg, rgba(0, 0, 0, 0.38) 3.07%, rgba(6, 37, 65, 0.3) 88.06%);
+-    padding: 20px 0px;
+-    display: flex;
+-    flex-direction: column;
+-}
+-
+-#dota-page-container .patchnotespage_NoteElement {
+-    display: flex;
+-    flex-direction: row;
+-    align-items: flex-start;
+-}
+-
+-#dota-page-container .patchnotespage_Dot {
+-    width: 5px;
+-    height: 5px;
+-    border-radius: 50%;
+-    background-color: #999;
+-    margin-right: 10px;
+-    margin-top: 12px;
+-}
+-
+-#dota-page-container .patchnotespage_Note {
+-    font-size: 20px;
+-    color: #bbbbbbee;
+-    line-height: 30px;
+-    font-weight: 200;
+-}
++/* Patch-notes content styles now live in dota-patchnote.css (scoped copy of dota/main.css) */
+ 
+ /* Micro Header */
+ #dota-page-container .microheader_MicroHeader {
+diff --git a/dota-patchnote.css b/dota-patchnote.css
+new file mode 100644
+index 0000000..fef6cbb
+--- /dev/null
++++ b/dota-patchnote.css
+@@ -0,0 +1,750 @@
++/* Scoped copy of dota/main.css for embedding the patch notes inside index.html.
++   Every selector is prefixed with #dota-page-container so these styles cannot leak
++   into the portfolio site. Regenerate from dota/main.css when it changes. */
++
++#dota-page-container .app-root {
++  width: 100%;
++  height: 100%;
++}
++#dota-page-container {
++  --indent-level: 0;
++  --field-negative-horizontal-margin: 0px;
++  --field-row-children-spacing: 0px;
++}
++#dota-page-container * {
++  box-sizing: border-box;
++  font-family: "Radiance", sans-serif;
++}
++#dota-page-container a {
++  text-decoration: none;
++  color: inherit;
++}
++#dota-page-container .Bold {
++  font-weight: bold;
++}
++#dota-page-container .Strike {
++  text-decoration: line-through;
++}
++#dota-page-container .__react_component_tooltip.show {
++  opacity: 1 !important;
++}
++@font-face {
++  font-family: "Radiance";
++  src: url("https://cdn.steamstatic.com/apps/dota2/fonts/radiance.eot");
++  src: url("https://cdn.steamstatic.com/apps/dota2/fonts/radiance.eot?#iefix")
++      format("embedded-opentype"),
++    url("https://cdn.steamstatic.com/apps/dota2/fonts/radiance.woff")
++      format("woff"),
++    url("https://cdn.steamstatic.com/apps/dota2/fonts/radiance.ttf")
++      format("truetype"),
++    url("https://cdn.steamstatic.com/apps/dota2/fonts/radiance.svg#ywftsvg")
++      format("svg");
++  font-weight: normal;
++  font-style: normal;
++}
++@font-face {
++  font-family: "Radiance";
++  src: url("https://cdn.steamstatic.com/apps/dota2/fonts/radiance-bold.eot");
++  src: url("https://cdn.steamstatic.com/apps/dota2/fonts/radiance-bold.eot?#iefix")
++      format("embedded-opentype"),
++    url("https://cdn.steamstatic.com/apps/dota2/fonts/radiance-bold.woff")
++      format("woff"),
++    url("https://cdn.steamstatic.com/apps/dota2/fonts/radiance-bold.ttf")
++      format("truetype"),
++    url("https://cdn.steamstatic.com/apps/dota2/fonts/radiance-bold.svg#ywftsvg")
++      format("svg");
++  font-weight: 900;
++  font-style: normal;
++}
++@font-face {
++  font-family: "Radiance";
++  src: url("https://cdn.steamstatic.com/apps/dota2/fonts/radiance-semibold.eot");
++  src: url("https://cdn.steamstatic.com/apps/dota2/fonts/radiance-semibold.eot?#iefix")
++      format("embedded-opentype"),
++    url("https://cdn.steamstatic.com/apps/dota2/fonts/radiance-semibold.woff")
++      format("woff"),
++    url("https://cdn.steamstatic.com/apps/dota2/fonts/radiance-semibold.ttf")
++      format("truetype"),
++    url("https://cdn.steamstatic.com/apps/dota2/fonts/radiance-semibold.svg#ywftsvg")
++      format("svg");
++  font-weight: 700;
++  font-style: normal;
++}
++@font-face {
++  font-family: "Reaver";
++  src: url("https://cdn.steamstatic.com/apps/dota2/fonts/Reaver-SemiBold.woff")
++      format("woff"),
++    url("https://cdn.steamstatic.com/apps/dota2/fonts/Reaver-Regular-SemiBold.ttf")
++      format("truetype");
++  font-weight: 600;
++  font-style: normal;
++}
++#dota-page-container .patch-notes-page {
++  width: 100%;
++  min-height: 0;
++  display: flex;
++  flex-direction: column;
++  align-items: center;
++  background-repeat: repeat-y;
++  background-color: #151618;
++  background-position: center;
++  clear: both;
++}
++#dota-page-container .patch-notes-page .patch-header {
++  width: 100%;
++  background-color: #000;
++  margin-top: 140px;
++  padding: 30px 0px;
++  min-height: 0;
++  display: flex;
++  flex-direction: column;
++  align-items: center;
++  position: relative;
++}
++#dota-page-container .patch-notes-page .patch-header .patch-header-label {
++  width: 100%;
++  max-width: 1200px;
++  color: #ed3b1c;
++  font-size: 32px;
++  letter-spacing: 4px;
++}
++#dota-page-container .patch-notes-page .patch-header .patch-version {
++  width: 100%;
++  max-width: 1200px;
++  color: #ed3b1c;
++  font-size: 72px;
++  font-weight: bold;
++  letter-spacing: 8px;
++}
++#dota-page-container .patch-notes-page .patch-content {
++  width: 100%;
++  max-width: 1200px;
++  padding-top: 32px;
++  min-height: 0;
++  display: flex;
++  flex-direction: column;
++}
++#dota-page-container .patch-section {
++  width: 100%;
++  display: none;
++}
++#dota-page-container .patch-section.is-visible {
++  display: block;
++}
++#dota-page-container .patch-section .section-title {
++  background: linear-gradient(to right, #833312, rgba(131, 51, 18, 0));
++  border-left: 2px solid #ff5005;
++  font-size: clamp(20px, 2vw, 30px);
++  font-weight: 600;
++  font-family: "Reaver", serif;
++  text-transform: uppercase;
++  letter-spacing: 2px;
++  color: #fff;
++  text-shadow: 0px 0px 5px #000;
++  box-shadow: 0px 0px 30px #000;
++  padding: 12px 20px;
++}
++#dota-page-container .patch-section .section-body {
++  width: 100%;
++  border-left: 2px solid hsla(0, 0%, 100%, 0.062745098);
++  margin-bottom: 30px;
++  background: linear-gradient(
++    90deg,
++    rgba(0, 0, 0, 0.38) 3.07%,
++    rgba(6, 37, 65, 0.35) 88.06%
++  );
++  box-shadow: 0px 0px 50px #000;
++  min-height: 0;
++  display: flex;
++  padding-bottom: 20px;
++  flex-direction: column;
++}
++#dota-page-container .hero {
++  width: 100%;
++  min-height: 0;
++  display: flex;
++  flex-direction: column;
++  padding: calc(12px + 2vw);
++  margin-left: -2px;
++  border-top: 2px solid hsla(0, 0%, 100%, 0.062745098);
++  background: linear-gradient(
++    300deg,
++    rgba(0, 0, 0, 0.38) 3.07%,
++    rgba(6, 37, 65, 0.3) 88.06%
++  );
++  box-shadow: 0px 0px 50px #000;
++}
++#dota-page-container .hero .hero-header {
++  width: 100%;
++  display: flex;
++  flex-direction: row;
++  margin-bottom: 16px;
++  align-items: center;
++}
++#dota-page-container .hero .hero-header .hero-portrait {
++  width: calc(10vw + 12px);
++  max-width: 140px;
++  min-width: 80px;
++  max-height: fit-content;
++  height: -moz-max-content;
++  box-shadow: 0px 0px 20px #000;
++  margin-right: 16px;
++}
++#dota-page-container .hero .hero-header .details-column {
++  flex-grow: 1;
++  min-height: 0;
++  display: flex;
++  flex-direction: column;
++}
++#dota-page-container .hero .hero-header .details-column .hero-name-row {
++  display: flex;
++  align-items: center;
++  gap: calc(4px + 0.3vw);
++}
++#dota-page-container .hero
++  .hero-header
++  .details-column
++  .hero-name-row
++  .hero-name-link {
++  font-size: clamp(16px, 1rem + 16 * (100vw - 360px)/1560, 32px);
++  font-weight: 600;
++  color: #f5f5f5;
++  text-transform: uppercase;
++  letter-spacing: 2px;
++  font-family: "Reaver", serif;
++  border-bottom: 2px solid hsla(0, 0%, 100%, 0);
++  line-height: 1.3;
++  transition-property: border, color;
++  transition-duration: 0.15s;
++}
++#dota-page-container .hero
++  .hero-header
++  .details-column
++  .hero-name-row
++  .hero-name-link:hover {
++  border-bottom: 2px solid hsla(0, 0%, 100%, 0.2);
++  color: #fff;
++}
++#dota-page-container .hero
++  .hero-header
++  .details-column
++  .hero-name-row
++  .hero-attribute-icon {
++  width: calc(14px + 1vw);
++  margin-bottom: 2px;
++}
++#dota-page-container .hero .hero-header .details-column .hero-subtitle {
++  font-size: 16px;
++  font-weight: bold;
++  color: #ff715d;
++  text-transform: uppercase;
++  letter-spacing: 3px;
++  margin-bottom: 10px;
++}
++#dota-page-container .hero .hero-divider {
++  width: 100%;
++  height: 1px;
++  margin: 0 auto;
++  background: linear-gradient(to right, #1e2b35, rgba(30, 43, 53, 0));
++  margin-bottom: 16px;
++}
++#dota-page-container .hero .abilities-heading {
++  font-size: 17px;
++  font-weight: bold;
++  color: #fff;
++  text-transform: uppercase;
++  letter-spacing: 3px;
++  margin-bottom: 8px;
++}
++#dota-page-container .hero .notes-list {
++  width: 100%;
++  min-height: 0;
++  display: flex;
++  flex-direction: column;
++  padding-bottom: 20px;
++}
++#dota-page-container .hero .notes-list .ability-row {
++  width: 100%;
++  display: flex;
++  flex-direction: row;
++}
++#dota-page-container .hero .notes-list .ability-row:not(:last-child) {
++  padding-bottom: 20px;
++}
++#dota-page-container .hero
++  .notes-list
++  .ability-row
++  .ability-icon {
++  width: 64px;
++  height: 64px;
++  min-width: 64px;
++  filter: drop-shadow(0px 3px 4px rgba(0, 0, 0, 0.5));
++  background-size: cover;
++  background-repeat: no-repeat;
++}
++#dota-page-container .hero .notes-list .ability-row .details-column {
++  flex-grow: 1;
++  min-height: 0;
++  display: flex;
++  flex-direction: column;
++}
++#dota-page-container .hero
++  .notes-list
++  .ability-row
++  .details-column
++  .ability-name {
++  font-size: clamp(14px, 0.875rem + 4 * (100vw - 360px)/1560, 18px);
++  font-weight: 600;
++  color: #fff;
++  font-family: "Reaver", serif;
++  text-transform: uppercase;
++  letter-spacing: 2px;
++  margin-bottom: 4px;
++  margin-left: 20px;
++}
++#dota-page-container .hero .talents-heading {
++  font-size: 17px;
++  font-weight: bold;
++  color: #fff;
++  text-transform: uppercase;
++  letter-spacing: 3px;
++  margin-bottom: 8px;
++}
++#dota-page-container .hero .talents-row {
++  width: 100%;
++  min-height: 0;
++  display: flex;
++  flex-direction: right;
++  gap: 16px;
++}
++#dota-page-container .hero .talents-row .talents-icon {
++  width: 64px;
++  height: 68px;
++  min-width: 64px;
++  background-size: cover;
++}
++#dota-page-container .item-section {
++  width: 100%;
++  min-height: 0;
++  display: flex;
++  flex-direction: column;
++  padding: 0px 40px;
++  padding-bottom: 0px;
++  margin-bottom: 20px;
++}
++@media (max-width: 600px) {
++  #dota-page-container .item-section {
++    padding: 0vw 2vw;
++  }
++}
++#dota-page-container .item-section .item-header {
++  width: 100%;
++  display: flex;
++  flex-direction: row;
++  align-items: center;
++  border-top: 1px solid;
++  border-image: linear-gradient(
++      to right,
++      rgba(238, 250, 255, 0.15),
++      rgba(0, 0, 0, 0) 60%
++    )
++    1;
++  padding-top: calc(8px + 0.5vw);
++}
++#dota-page-container .item-section .item-header .item-icon {
++  width: 72px;
++  height: 52px;
++  background-size: cover;
++  background-repeat: no-repeat;
++  box-shadow: 0px 0px 20px #000;
++  margin-right: 16px;
++  margin-bottom: 10px;
++}
++#dota-page-container .item-section .item-header .details-column {
++  flex-grow: 1;
++  min-height: 0;
++  display: flex;
++  flex-direction: column;
++}
++#dota-page-container .item-section
++  .item-header
++  .details-column
++  .item-name {
++  font-size: clamp(16px, 2vw, 20px);
++  font-weight: 600;
++  color: #fff;
++  text-transform: uppercase;
++  letter-spacing: 2px;
++  font-family: "Reaver", serif;
++}
++#dota-page-container .item-section
++  .item-header
++  .details-column
++  .item-subtitle {
++  text-transform: uppercase;
++  color: #ccc;
++  letter-spacing: 2px;
++}
++#dota-page-container .item-section
++  .item-header
++  .details-column
++  .notes-list {
++  width: 100%;
++  min-height: 0;
++  display: flex;
++  flex-direction: column;
++  margin-bottom: 24px;
++}
++#dota-page-container .neutral-item-section {
++  width: 100%;
++  min-height: 0;
++  display: flex;
++  flex-direction: column;
++  padding: 0px 40px;
++  padding-bottom: 0px;
++  margin-bottom: 20px;
++}
++#dota-page-container .neutral-item-section .neutral-item-header {
++  width: 100%;
++  display: flex;
++  flex-direction: row;
++  align-items: center;
++}
++#dota-page-container .neutral-item-section .neutral-item-header .neutral-item-icon {
++  width: 92px;
++  height: 52px;
++  background-size: cover;
++  background-repeat: no-repeat;
++  box-shadow: 0px 0px 20px #000;
++  margin-right: 16px;
++  margin-bottom: 10px;
++}
++#dota-page-container .neutral-item-section .neutral-item-header .details-column {
++  flex-grow: 1;
++  min-height: 0;
++  display: flex;
++  flex-direction: column;
++}
++#dota-page-container .neutral-item-section
++  .neutral-item-header
++  .details-column
++  .neutral-item-name {
++  font-size: 20px;
++  font-weight: 600;
++  color: #fff;
++  text-transform: uppercase;
++  letter-spacing: 2px;
++  font-family: "Reaver", serif;
++}
++#dota-page-container .neutral-item-section
++  .neutral-item-header
++  .details-column
++  .notes-list {
++  width: 100%;
++  min-height: 0;
++  display: flex;
++  flex-direction: column;
++  margin-bottom: 24px;
++}
++#dota-page-container .notes-group {
++  margin-bottom: 24px;
++}
++#dota-page-container .notes-group .notes-group-title {
++  background: linear-gradient(
++    to right,
++    rgba(40, 64, 83, 0.5921568627),
++    rgba(131, 51, 18, 0) 60%
++  );
++  font-size: clamp(16px, 1rem + 6 * (100vw - 360px)/1560, 22px);
++  font-weight: 900;
++  color: #fff;
++  text-transform: uppercase;
++  letter-spacing: 2px;
++  padding: 8px 20px;
++  margin-bottom: 8px;
++}
++#dota-page-container .notes-group-body {
++  width: 100%;
++  min-height: 0;
++  display: flex;
++  flex-direction: column;
++  padding: 0px 18px;
++}
++#dota-page-container .notes-group-body .notes-list {
++  width: 100%;
++  min-height: 0;
++  display: flex;
++  flex-direction: column;
++  margin-bottom: 24px;
++}
++#dota-page-container .note-line {
++  display: flex;
++  flex-direction: row;
++  align-items: flex-start;
++  gap: 6px;
++}
++#dota-page-container .note-line .note-bullet {
++  width: 6px;
++  height: 6px;
++  min-width: 6px;
++  border-radius: 3px;
++  margin-top: 8px;
++  margin-left: 8px;
++  margin-right: 8px;
++  background-color: #8b989e;
++}
++#dota-page-container .note-line .note-bullet.bullet-hidden {
++  opacity: 0;
++}
++#dota-page-container .note-line .indent-elbow {
++  height: 10px;
++  width: 10px !important;
++  min-width: 10px !important;
++  margin-left: 15px;
++  margin-top: 2px;
++  border-left: 1px solid hsla(0, 0%, 100%, 0.5);
++  border-bottom: 1px solid hsla(0, 0%, 100%, 0.5);
++}
++#dota-page-container .note-line.stat-strength .note-bullet,
++#dota-page-container .note-line.stat-agility .note-bullet,
++#dota-page-container .note-line.stat-intelligence .note-bullet,
++#dota-page-container .note-line.stat-movement-speed .note-bullet,
++#dota-page-container .note-line.stat-damage .note-bullet,
++#dota-page-container .note-line.stat-attack-range .note-bullet,
++#dota-page-container .note-line.stat-attack-speed .note-bullet,
++#dota-page-container .note-line.stat-armor .note-bullet,
++#dota-page-container .note-line.stat-attack-time .note-bullet,
++#dota-page-container .note-line.stat-health-regen .note-bullet,
++#dota-page-container .note-line.stat-mana-regen .note-bullet,
++#dota-page-container .note-line.stat-projectile-speed .note-bullet,
++#dota-page-container .note-line.aghs-scepter .note-bullet,
++#dota-page-container .note-line.aghs-shard .note-bullet {
++  width: 22px;
++  height: 22px;
++  border-radius: 0px;
++  margin: 0px;
++  background-size: 90%;
++  background-position: center;
++  background-repeat: no-repeat;
++  background-color: unset;
++}
++#dota-page-container .note-line.stat-strength .note-bullet {
++  background-image: url("https://cdn.steamstatic.com/apps/dota2/images/dota_react/icons/hero_strength.png");
++}
++#dota-page-container .note-line.stat-agility .note-bullet {
++  background-image: url("https://cdn.steamstatic.com/apps/dota2/images/dota_react/icons/hero_agility.png");
++}
++#dota-page-container .note-line.stat-intelligence .note-bullet {
++  background-image: url("https://cdn.steamstatic.com/apps/dota2/images/dota_react/icons/hero_intelligence.png");
++}
++#dota-page-container .note-line.stat-movement-speed .note-bullet {
++  background-image: url("https://cdn.steamstatic.com/apps/dota2/images/dota_react/heroes/stats/icon_movement_speed.png");
++}
++#dota-page-container .note-line.stat-damage .note-bullet {
++  background-image: url("https://cdn.steamstatic.com/apps/dota2/images/dota_react/heroes/stats/icon_damage.png");
++}
++#dota-page-container .note-line.stat-attack-range .note-bullet {
++  background-image: url("https://cdn.steamstatic.com/apps/dota2/images/dota_react/heroes/stats/icon_attack_range.png");
++}
++#dota-page-container .note-line.stat-attack-speed .note-bullet {
++  background-image: url("https://cdn.steamstatic.com/apps/dota2/images/dota_react/heroes/stats/icon_attack_speed.png");
++}
++#dota-page-container .note-line.stat-armor .note-bullet {
++  background-image: url("https://cdn.steamstatic.com/apps/dota2/images/dota_react/heroes/stats/icon_armor.png");
++}
++#dota-page-container .note-line.stat-attack-time .note-bullet {
++  background-image: url("https://cdn.steamstatic.com/apps/dota2/images/dota_react/heroes/stats/icon_attack_time.png");
++}
++#dota-page-container .note-line.stat-health-regen .note-bullet {
++  background-image: url("https://cdn.steamstatic.com/apps/dota2/images/dota_react/heroes/stats/health_regen.png");
++}
++#dota-page-container .note-line.stat-mana-regen .note-bullet {
++  background-image: url("https://cdn.steamstatic.com/apps/dota2/images/dota_react/heroes/stats/mana_regen.png");
++}
++#dota-page-container .note-line.stat-projectile-speed .note-bullet {
++  background-image: url("https://cdn.steamstatic.com/apps/dota2/images/dota_react/heroes/stats/icon_projectile_speed.png");
++}
++#dota-page-container .note-line.aghs-scepter .note-bullet {
++  background-image: url("https://cdn.steamstatic.com/apps/dota2/images/dota_react/heroes/stats/aghs_scepter_icon.png");
++}
++#dota-page-container .note-line.aghs-shard .note-bullet {
++  background-image: url("https://cdn.steamstatic.com/apps/dota2/images/dota_react/heroes/stats/aghs_shard_icon.png");
++}
++#dota-page-container .note-line.aghs-scepter,
++#dota-page-container .note-line.aghs-shard {
++  background: linear-gradient(
++    to right,
++    rgba(0, 0, 0, 0) 0px,
++    rgba(0, 0, 0, 0) 20px,
++    rgba(83, 175, 255, 0.1019607843) 20px,
++    rgba(96, 141, 255, 0.0588235294) 30%,
++    rgba(96, 141, 255, 0) 80%
++  );
++}
++#dota-page-container .note-line.aghs-scepter .note-bullet,
++#dota-page-container .note-line.aghs-shard .note-bullet {
++  background-size: 100%;
++}
++#dota-page-container .note-line.aghs-scepter .note-text,
++#dota-page-container .note-line.aghs-shard .note-text {
++  color: #8190a5;
++}
++#dota-page-container .note-line .note-text {
++  font-size: 17px;
++  color: #8b989e;
++  line-height: 1.3;
++  font-weight: 600;
++}
++#dota-page-container .note-line .note-text .Bold {
++  color: #fff;
++}
++#dota-page-container .image-preview {
++  position: relative;
++  height: 100%;
++  display: inline-block;
++}
++#dota-page-container .image-preview img:first-child {
++  display: block;
++}
++#dota-page-container .image-zoom-icon {
++  position: absolute;
++  width: 30px;
++  top: 100%;
++  left: 50%;
++  transform: translate(-50%, -50%);
++  background-color: rgba(9, 11, 14, 0.97);
++  border-radius: 50%;
++  box-shadow: 0px 6px 16px -2px rgba(0, 0, 0, 0.3);
++}
++#dota-page-container span.New {
++  color: #36a15e;
++}
++#dota-page-container span.Reworked {
++  color: #d05307;
++}
++#dota-page-container .info-tooltip {
++  display: inline-block;
++}
++#dota-page-container .info-tooltip .info-icon {
++  transform: translateY(4px);
++  display: inline-block;
++  width: 18px;
++  height: 18px;
++  cursor: default;
++  background-image: url("https://cdn.steamstatic.com/apps/dota2/images/icon_info.png");
++  background-size: contain;
++  background-repeat: no-repeat;
++  background-position: center;
++}
++@property --GradientColor1 {
++  syntax: "<color>";
++  initial-value: #81399a;
++  inherits: false;
++}
++@property --GradientColor2 {
++  syntax: "<color>";
++  initial-value: #0094a2;
++  inherits: false;
++}
++#dota-page-container .FullModalOverlay {
++  position: fixed;
++  top: 0;
++  right: 0;
++  bottom: 0;
++  left: 0;
++  z-index: 1500;
++}
++#dota-page-container .ModalOverlayContent {
++  position: fixed;
++  top: 0;
++  right: 0;
++  bottom: 0;
++  left: 0;
++}
++#dota-page-container .ModalOverlayContent.active {
++  z-index: 10;
++  -webkit-app-region: no-drag;
++}
++#dota-page-container .ModalOverlayBackground {
++  background: rgba(0, 0, 0, 0.8);
++  z-index: 7;
++}
++@keyframes loading_throbber_bar {
++  0% {
++    transform: scaleX(1) scaleY(0.6);
++  }
++  30% {
++    transform: scaleX(1) scaleY(1);
++  }
++  55% {
++    transform: scaleX(1) scaleY(0.6);
++  }
++  100% {
++    transform: scaleX(1) scaleY(0.6);
++  }
++}
++#dota-page-container .form {
++  border: 1px dotted cyan;
++  height: 100%;
++  display: flex;
++  flex-direction: column;
++}
++#dota-page-container .A {
++  background-color: rgba(255, 0, 0, 0.4);
++  height: 40px;
++}
++#dota-page-container .__react_component_tooltip {
++  border-radius: 3px;
++  display: inline-block;
++  font-size: 13px;
++  left: -999em;
++  opacity: 0;
++  padding: 8px 21px;
++  position: fixed;
++  pointer-events: none;
++  transition: opacity 0.3s ease-out;
++  top: -999em;
++  visibility: hidden;
++  z-index: 999;
++}
++#dota-page-container .__react_component_tooltip::before,
++#dota-page-container .__react_component_tooltip::after {
++  content: "";
++  width: 0;
++  height: 0;
++  position: absolute;
++}
++#dota-page-container .__react_component_tooltip.show {
++  opacity: 0.9;
++  margin-top: 0;
++  margin-left: 0;
++  visibility: visible;
++}
++#dota-page-container .__react_component_tooltip.place-top::before {
++  border-left: 10px solid transparent;
++  border-right: 10px solid transparent;
++  bottom: -8px;
++  left: 50%;
++  margin-left: -10px;
++}
++#dota-page-container .__react_component_tooltip {
++  color: #fff;
++  background: #222;
++  border: 1px solid transparent;
++}
++#dota-page-container .__react_component_tooltip.place-top {
++  margin-top: -10px;
++}
++#dota-page-container .__react_component_tooltip.place-top::before {
++  border-top: 8px solid transparent;
++}
++#dota-page-container .__react_component_tooltip.place-top::after {
++  border-left: 8px solid transparent;
++  border-right: 8px solid transparent;
++  bottom: -6px;
++  left: 50%;
++  margin-left: -8px;
++  border-top-color: #222;
++  border-top-style: solid;
++  border-top-width: 6px;
++}
+diff --git a/index.html b/index.html
+index 5c58920..050c246 100644
+--- a/index.html
++++ b/index.html
+@@ -9,6 +9,7 @@
+ 	<link rel="stylesheet" type="text/css" href="./desktop.css" media="screen and (min-width: 768px)">
+ 	<link rel="stylesheet" type="text/css" href="./mobile.css" media="screen and (max-width: 768px)">
+ 	<link rel="stylesheet" type="text/css" href="./common.css">
++	<link rel="stylesheet" type="text/css" href="./dota-patchnote.css">
+ 	<link rel="icon" href="favicon.ico" sizes="any">
+ 	<script src="script.js"></script>
+ 	<link rel="preconnect" href="https://fonts.googleapis.com">
+@@ -269,144 +270,871 @@
+ 		</div>
+ 	</div>
+ 
+-	    <!-- Dota 2 Patchnote Content (Hidden by default, shown after overlay sequence) -->
+-    <div id="dota-page-container">
+-       <div class="patchnotespage_PatchNotesPage" style="background-image: url('https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/backgrounds/featured.jpg');">
+-          <div class="microheader_MicroHeader microheader_Overlapping">
+-             <div class="microheader_HeaderContents">
+-                <a class="microheader_DotaLogo" href="https://www.dota2.com"></a>
+-                <div class="microheader_NavItems">
+-                   <a class="microheader_NavLink" href="https://www.dota2.com/game">Game</a>
+-                   <a class="microheader_NavLink" href="https://www.dota2.com/heroes">Heroes</a>
+-                   <a class="microheader_NavLink" href="https://www.dota2.com/news">News</a>
+-                   <a class="microheader_NavLink" href="https://www.dota2.com/esports">Esports</a>
+-                </div>
+-                <div class="microheader_OptionsSide">
+-                   <a class="microheader_PlayForFree" href="https://www.dota2.com/play">
+-                      <div class="microheader_StandardButton">
+-                         <div class="microheader_SteamLogo"></div>
+-                         <div class="microheader_ButtonText">Play for Free</div>
+-                      </div>
+-                   </a>
+-                </div>
+-             </div>
+-          </div>
+-          <div class="patchnotespage_Header">
+-             <div class="patchnotespage_Label">Gameplay Update</div>
+-             <div class="patchnotespage_NotesTitle">6.87</div>
+-             <div class="patchnotespage_SelectorContainer">
+-                <select class="patchnotespage_Selector">
+-                   <option value="main">6.87</option>
+-                </select>
+-             </div>
+-          </div>
+-          <div class="patchnotespage_Body">
+-             <div class="patchnotespage_UpdatesSection patchnotespage_IsShown">
+-                <div class="patchnotespage_PatchNotesHeaderLabel">General Updates</div>
+-                <div class="patchnotespage_PatchNotesList">
+-                   <div class="patchnotespage_PatchNoteGeneric" style="margin-bottom: 0px;">
+-                      <div class="patchnotespage_NoteElement">
+-                         <div style="width: 20px; min-width: 20px;"></div>
+-                         <div class="patchnotespage_Dot"></div>
+-                         <div class="patchnotespage_Note">Reduced All Pick</div>
+-                      </div>
+-                   </div>
+-                   <div class="patchnotespage_PatchNoteGeneric" style="margin-bottom: 0px;">
+-                      <div class="patchnotespage_NoteElement">
+-                         <div style="width: 20px; min-width: 20px;"></div>
+-                         <div class="patchnotespage_Dot"></div>
+-                         <div class="patchnotespage_Note">Random Draft hero pool increased from 1/2/3/4 charges with an Artificer's Hammer</div>
+-                      </div>
+-                   </div>
+-                   <div class="patchnotespage_PatchNoteGeneric" style="margin-bottom: 0px;">
+-                      <div class="patchnotespage_NoteElement">
+-                         <div style="width: 20px; min-width: 20px;"></div>
+-                         <div class="patchnotespage_Dot"></div>
+-                         <div class="patchnotespage_Note">Random Draft hero select all items in the armory</div>
+-                      </div>
+-                   </div>
+-                   <div class="patchnotespage_PatchNoteGeneric" style="margin-bottom: 0px;">
+-                      <div class="patchnotespage_NoteElement">
+-                         <div style="width: 20px; min-width: 20px;"></div>
+-                         <div class="patchnotespage_Dot"></div>
+-                         <div class="patchnotespage_Note">Private Lobby games now uses Pseudo Random chance</div>
+-                      </div>
+-                   </div>
+-                   <div class="patchnotespage_PatchNoteGeneric" style="margin-bottom: 0px;">
+-                      <div class="patchnotespage_NoteElement">
+-                         <div style="width: 20px; min-width: 20px;"></div>
+-                         <div class="patchnotespage_Dot"></div>
+-                         <div class="patchnotespage_Note">The Armory now has a stacking magic resistance</div>
+-                      </div>
+-                   </div>
+-                   <div class="patchnotespage_PatchNoteGeneric" style="margin-bottom: 0px;">
+-                      <div class="patchnotespage_NoteElement">
+-                         <div style="width: 20px; min-width: 20px;"></div>
+-                         <div class="patchnotespage_Dot"></div>
+-                         <div class="patchnotespage_Note">Custom Games can now target invulnerable units</div>
+-                      </div>
+-                   </div>
+-                   <div class="patchnotespage_PatchNoteGeneric" style="margin-bottom: 20px;">
+-                      <div class="patchnotespage_NoteElement">
+-                         <div style="width: 20px; min-width: 20px;"></div>
+-                         <div class="patchnotespage_Dot"></div>
+-                         <div class="patchnotespage_Note">Character picker can now miss</div>
+-                      </div>
+-                   </div>
+-                   <div class="patchnotespage_PatchNoteGeneric" style="margin-bottom: 0px;">
+-                      <div class="patchnotespage_NoteElement">
+-                         <div style="width: 20px; min-width: 20px;"></div>
+-                         <div class="patchnotespage_Dot"></div>
+-                         <div class="patchnotespage_Note">Runes now have 80% Magic Resistance</div>
+-                      </div>
+-                   </div>
+-                   <div class="patchnotespage_PatchNoteGeneric" style="margin-bottom: 0px;">
+-                      <div class="patchnotespage_NoteElement">
+-                         <div style="width: 20px; min-width: 20px;"></div>
+-                         <div class="patchnotespage_Dot"></div>
+-                         <div class="patchnotespage_Note">First rune is invisible effects now have a new pathway leading to the enemy</div>
+-                      </div>
+-                   </div>
+-                   <div class="patchnotespage_PatchNoteGeneric" style="margin-bottom: 20px;">
+-                      <div class="patchnotespage_NoteElement">
+-                         <div style="width: 20px; min-width: 20px;"></div>
+-                         <div class="patchnotespage_Dot"></div>
+-                         <div class="patchnotespage_Note">First rune spawns are known as illusions to enemies</div>
+-                      </div>
+-                   </div>
+-                   <div class="patchnotespage_PatchNoteGeneric" style="margin-bottom: 20px;">
+-                      <div class="patchnotespage_NoteElement">
+-                         <div style="width: 20px; min-width: 20px;"></div>
+-                         <div class="patchnotespage_Dot"></div>
+-                         <div class="patchnotespage_Note">Movement speed reduced from 3 to 2.5</div>
+-                      </div>
+-                   </div>
+-                </div>
+-             </div>
+-             <!-- Note: Large amount of hero/item data truncated for the main index file as requested -->
+-             <div class="patchnotespage_UpdatesSection patchnotespage_IsShown">
+-                <div class="patchnotespage_PatchNotesHeaderLabel">Bugfixes</div>
+-                <div class="patchnotespage_PatchNotesList">
+-                   <div class="patchnotespage_PatchNoteGeneric" style="margin-bottom: 0px;">
+-                      <div class="patchnotespage_NoteElement">
+-                         <div style="width: 20px; min-width: 20px;"></div>
+-                         <div class="patchnotespage_Dot"></div>
+-                         <div class="patchnotespage_Note">Fixed Death Effects not pierce Spell Immunity</div>
+-                      </div>
+-                   </div>
+-                </div>
+-             </div>
+-          </div>
+-          <div class="rootfooter_RootFooter">
+-             <div class="rootfooter_Logos">
+-                <img class="rootfooter_FooterLogo" src="https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/valve_logo.png">
+-                <img class="rootfooter_FooterLogo" src="https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/footer_logo.png">
+-             </div>
+-             <div class="rootfooter_Legal">Original post made by FatzkeFTW. Valve-like website implementation by SurDno.</div>
+-          </div>
+-       </div>
+-    </div>
+-
++	<!-- Dota 2 Patchnote Content (Hidden by default, shown after overlay sequence).
++	Markup mirrors the cleaned-up 7.41 patch notes in dota/ — trimmed to every unique
++	element plus all section/group headers, as a template to build the real content from. -->
++	<div id="dota-page-container">
++		<div class="patch-notes-page" style="background-image: url('https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/backgrounds/featured.jpg');">
++			<div class="microheader_MicroHeader microheader_Overlapping">
++				<div class="microheader_HeaderContents">
++					<a class="microheader_DotaLogo" href="https://www.dota2.com"></a>
++					<div class="microheader_NavItems">
++						<a class="microheader_NavLink" href="https://www.dota2.com/game">Game</a>
++						<a class="microheader_NavLink" href="https://www.dota2.com/heroes">Heroes</a>
++						<a class="microheader_NavLink" href="https://www.dota2.com/news">News</a>
++						<a class="microheader_NavLink" href="https://www.dota2.com/esports">Esports</a>
++					</div>
++					<div class="microheader_OptionsSide">
++						<a class="microheader_PlayForFree" href="https://www.dota2.com/play">
++							<div class="microheader_StandardButton">
++								<div class="microheader_SteamLogo"></div>
++								<div class="microheader_ButtonText">Play for Free</div>
++							</div>
++						</a>
++					</div>
++				</div>
++			</div>
++			<div class="patch-header">
++				<div class="patch-header-label">Gameplay Update</div>
++				<div class="patch-version">7.41</div>
++			</div>
++			<div class="patch-content">
++				<div class="patch-section is-visible">
++					<div class="section-title">General Updates</div>
++					<div class="section-body">
++						<div class="notes-group section-body">
++							<div class="notes-group-title">Global Changes</div>
++							<div class="notes-group-body" style="margin-bottom: 0px;">
++								<div class="note-line">
++									<div style="width: 20px; min-width: 20px;"></div>
++									<div class="note-bullet"></div>
++									<div class="note-text">Facets removed from the game</div>
++								</div>
++								<div class="note-line">
++									<div style="width: 40px; min-width: 40px;"></div>
++									<div class="note-bullet"></div>
++									<div class="note-text">Abilities that improve with hero level have base value and increment value. Some also have amount of levels required for increment</div>
++									<div class="info-tooltip">
++										<div class="info-icon" data-tip="true" data-for="infoTip0" currentitem="false"></div>
++										<div class="__react_component_tooltip place-top type-dark" id="infoTip0" data-id="tooltip">
++											<div>Abilities that improve each level provide their increment value at level 1</div>
++										</div>
++									</div>
++								</div>
++								<div class="note-line">
++									<div style="width: 20px; min-width: 20px;"></div>
++									<div class="note-bullet"></div>
++									<div class="note-text">Vision and True Sight radius increased from 500 to 600</div>
++								</div>
++								<div class="note-line">
++									<div style="width: 20px; min-width: 20px;"></div>
++									<div class="note-spacer"></div>
++									<div class="note-text">Damage source changed from Nimbus to the caster</div>
++								</div>
++							</div>
++						</div>
++						<div class="notes-group section-body">
++							<div class="notes-group-title">Map Objectives</div>
++							<div class="notes-group-body" style="margin-bottom: 0px;">
++								<div class="note-line">
++									<div style="width: 0px; min-width: 0px;"></div>
++									<div class="note-bullet bullet-hidden"></div>
++									<div class="note-text">
++										<br><span class="Bold">Tormentor</span></div>
++								</div>
++							</div>
++						</div>
++						<div class="notes-group section-body">
++							<div class="notes-group-title">Terrain Changes</div>
++							<div class="notes-group-body" style="margin-bottom: 0px;">
++								<div class="note-line">
++									<div style="width: 20px; min-width: 20px;"></div>
++									<div class="note-bullet"></div>
++									<div class="note-text">Tormentor spawns have been positioned closer towards Lotus Pools</div>
++								</div>
++							</div>
++						</div>
++						<div class="notes-group section-body">
++							<div class="notes-group-title">Mechanics Changes</div>
++							<div class="notes-group-body" style="margin-bottom: 0px;">
++								<div class="note-line">
++									<div style="width: 0px; min-width: 0px;"></div>
++									<div class="note-bullet bullet-hidden"></div>
++									<div class="note-text">
++										<br><span class="Bold">Health Restoration</span></div>
++								</div>
++							</div>
++						</div>
++					</div>
++				</div>
++				<div class="patch-section is-visible">
++					<div class="section-title">Neutral Creep Updates</div>
++					<div class="section-body">
++						<div class="neutral-item-section">
++							<div class="neutral-item-header">
++								<div class="neutral-item-icon" style="background-image: url(&quot;https://cdn.steamstatic.com/apps/dota2/images/dota_react/units/npc_dota_neutral_kobold_taskmaster.png&quot;);"></div>
++								<div class="details-column">
++									<div class="neutral-item-name">Kobold Foreman</div>
++								</div>
++							</div>
++							<div class="notes-list">
++								<div class="note-line">
++									<div class="note-bullet"></div>
++									<div class="note-text">Damage increased from 22–24 to 24–26</div>
++								</div>
++							</div>
++						</div>
++					</div>
++				</div>
++				<div class="patch-section is-visible">
++					<div class="section-title">Item Updates</div>
++					<div class="section-body">
++						<div class="notes-group">
++							<div class="notes-group-title">Shop Reshuffle</div>
++							<div class="notes-group-body" style="margin-bottom: 0px;">
++								<div class="note-line">
++									<div style="width: 20px; min-width: 20px;"></div>
++									<div class="note-bullet"></div>
++									<div class="note-text">Items in all shop categories except for Consumables have been rearranged to accommodate new items</div>
++								</div>
++							</div>
++						</div>
++						<div class="notes-group">
++							<div class="notes-group-title">Basic Items</div>
++						</div>
++						<div class="item-section" style="padding-bottom: 0px;">
++							<div class="item-header">
++								<div class="item-icon" style="background-image: url(&quot;https://cdn.steamstatic.com/apps/dota2/images/dota_react/items/chasm_stone.png&quot;);"></div>
++								<div class="details-column">
++									<div class="item-name">Chasm Stone</div>
++									<div class="item-subtitle"><span class="New">New Miscellaneous Item</span></div>
++								</div>
++							</div>
++							<div class="notes-list">
++								<div class="note-line">
++									<div class="note-bullet"></div>
++									<div class="note-text">Costs 800 gold</div>
++								</div>
++								<div class="note-line">
++									<div class="note-bullet"></div>
++									<div class="note-text">Provides +40 Area of Effect</div>
++								</div>
++								<div class="note-line">
++									<div class="note-bullet"></div>
++									<div class="note-text">Area of Effect bonuses from multiple Chasm Stones or its upgrades do not stack</div>
++								</div>
++							</div>
++						</div>
++						<div class="notes-group">
++							<div class="notes-group-title">Upgrades</div>
++						</div>
++						<div class="item-section" style="padding-bottom: 0px;">
++							<div class="item-header">
++								<div class="item-icon" style="background-image: url(&quot;https://cdn.steamstatic.com/apps/dota2/images/dota_react/items/shivas_guard.png&quot;);"></div>
++								<div class="details-column">
++									<div class="item-name">Shiva's Guard</div>
++									<div class="item-subtitle"><span class="Reworked">Item Reworked</span></div>
++								</div>
++							</div>
++							<div class="notes-list">
++								<div class="note-line">
++									<div class="note-bullet"></div>
++									<div class="note-text">Recipe changed</div>
++								</div>
++								<div class="note-line">
++									<div class="note-bullet"></div>
++									<div class="note-text">Now requires Splintmail (950) and Chasm Stone (800) instead of Veil of Discord (1725)</div>
++								</div>
++								<div class="note-line">
++									<div class="note-bullet"></div>
++									<div class="note-text">Recipe cost decreased from 2050 to 1350. Total cost decreased from 5175g to 4500g</div>
++								</div>
++								<div class="note-line">
++									<div class="note-bullet"></div>
++									<div class="note-text">No longer provides +5 Strength, +5 Agility, +5 Intelligence, or +5 Health Regen</div>
++								</div>
++								<div class="note-line">
++									<div class="note-bullet"></div>
++									<div class="note-text">Armor bonus increased from +15 to +17</div>
++								</div>
++								<div class="note-line">
++									<div class="note-bullet"></div>
++									<div class="note-text">Now also provides +75 Area of Effect</div>
++								</div>
++								<div class="note-line">
++									<div class="note-bullet"></div>
++									<div class="note-text">Area of Effect bonuses from multiple Chasm Stones or its upgrades do not stack</div>
++								</div>
++								<div class="note-line">
++									<div class="note-bullet"></div>
++									<div class="note-text">Arctic Blast damage increased from 200 to 260</div>
++								</div>
++								<div class="note-line">
++									<div class="note-bullet"></div>
++									<div class="note-text">Arctic Blast radius decreased from 900 to 825 </div>
++									<div class="info-tooltip">
++										<div class="info-icon" data-tip="true" data-for="infoTip23" currentitem="false"></div>
++										<div class="__react_component_tooltip place-top type-dark" id="infoTip23" data-id="tooltip">
++											<div>Effective spell radius unchanged due to item's built-in Area of Effect bonus</div>
++										</div>
++									</div>
++								</div>
++								<div class="note-line">
++									<div class="note-bullet"></div>
++									<div class="note-text">Arctic Blast no longer increases damage taken from spells</div>
++								</div>
++								<div class="note-line">
++									<div class="note-bullet"></div>
++									<div class="note-text">Freezing Aura no longer reduces Health Restoration and Incoming Heal Amplification by 25%</div>
++								</div>
++								<div class="note-line">
++									<div class="note-bullet"></div>
++									<div class="note-text">Freezing Aura now pierces debuff immunity</div>
++								</div>
++							</div>
++						</div>
++					</div>
++				</div>
++				<div class="patch-section is-visible">
++					<div class="section-title">Neutral Item Updates</div>
++					<div class="section-body">
++						<div class="notes-group">
++							<div class="notes-group-title">General changes</div>
++							<div class="notes-group-body" style="margin-bottom: 0px;">
++								<div class="note-line">
++									<div style="width: 20px; min-width: 20px;"></div>
++									<div class="note-bullet"></div>
++									<div class="note-text">Tier 1 availability changed from 5:00 to 0:00</div>
++								</div>
++							</div>
++						</div>
++						<div class="notes-group">
++							<div class="notes-group-title">Artifact changes</div>
++							<div class="notes-group-body" style="margin-bottom: 0px;">
++								<div class="note-line">
++									<div style="width: 20px; min-width: 20px;"></div>
++									<div class="note-bullet"></div>
++									<div class="note-text">Number of artifact choices increased from 4 to 5 for Tiers 2-5</div>
++								</div>
++							</div>
++						</div>
++						<div class="notes-group">
++							<div class="notes-group-title">Enchantment Changes</div>
++							<div class="notes-group-body" style="margin-bottom: 0px;">
++								<div class="note-line">
++									<div style="width: 20px; min-width: 20px;"></div>
++									<div class="note-bullet"></div>
++									<div class="note-text">Number of Enchantment choices increased from 4 to 5 for Tiers 2-5</div>
++								</div>
++							</div>
++						</div>
++					</div>
++				</div>
++				<div class="patch-section is-visible">
++					<div class="section-title">Hero Updates</div>
++					<div class="section-body">
++						<div class="hero">
++							<div class="hero-header">
++								<a href="https://www.dota2.com/hero/bane"><img class="hero-portrait" src="https://cdn.steamstatic.com/apps/dota2/images/dota_react/heroes/bane.png"></a>
++								<div class="details-column">
++									<div class="hero-name-row"><img class="hero-attribute-icon" src="https://cdn.steamstatic.com/apps/dota2/images/dota_react/icons/hero_universal.png"><a class="hero-name-link" href="https://www.dota2.com/hero/bane">Bane</a></div>
++									<div class="hero-subtitle"></div>
++								</div>
++							</div>
++							<div class="hero-divider"></div>
++							<div class="notes-list">
++								<div class="note-line stat-strength">
++									<div class="" style="width: 0px; min-width: 0px;"></div>
++									<div class="note-bullet"></div>
++									<div class="note-text">Strength gain decreased from 2.7 to 2.5</div>
++								</div>
++								<div class="note-line stat-agility">
++									<div class="" style="width: 0px; min-width: 0px;"></div>
++									<div class="note-bullet"></div>
++									<div class="note-text">Agility gain decreased from 2.7 to 2.5</div>
++								</div>
++								<div class="note-line stat-intelligence">
++									<div class="" style="width: 0px; min-width: 0px;"></div>
++									<div class="note-bullet"></div>
++									<div class="note-text">Intelligence gain decreased from 2.7 to 2.5</div>
++								</div>
++								<div class="note-line stat-damage">
++									<div class="indent-elbow" style="width: 20px; min-width: 20px;"></div>
++									<div class="note-bullet"></div>
++									<div class="note-text">Damage gain per level decreased from 3.6 to 3.4</div>
++								</div>
++								<div class="note-line stat-attack-range">
++									<div class="" style="width: 0px; min-width: 0px;"></div>
++									<div class="note-bullet"></div>
++									<div class="note-text">Attack Range increased from 400 to 425</div>
++								</div>
++								<!-- One sample note per remaining stat icon (taken from other heroes) -->
++								<div class="note-line stat-attack-time">
++									<div class="" style="width: 0px; min-width: 0px;"></div>
++									<div class="note-bullet"></div>
++									<div class="note-text">Base Attack Time improved from 1.7s to 1.5s</div>
++								</div>
++								<div class="note-line stat-mana-regen">
++									<div class="" style="width: 0px; min-width: 0px;"></div>
++									<div class="note-bullet"></div>
++									<div class="note-text">Base Mana Regen decreased from 0.75 to -1</div>
++								</div>
++								<div class="note-line stat-projectile-speed">
++									<div class="" style="width: 0px; min-width: 0px;"></div>
++									<div class="note-bullet"></div>
++									<div class="note-text">Attack projectile speed increased from 900 to 1125</div>
++								</div>
++							</div>
++							<div class="abilities-heading">Abilities</div>
++							<div class="notes-list">
++								<div class="ability-row">
++									<div class="image-preview"><img class="ability-icon" src="https://cdn.steamstatic.com/apps/dota2/images/dota_react/abilities/bane_ichor_of_nyctasha.png"><img class="image-zoom-icon" src="https://cdn.steamstatic.com/apps/dota2/images/dota_react/icons/innate_icon.png"></div>
++									<div class="details-column">
++										<div class="ability-name">Ichor of Nyctasha</div>
++										<div class="note-line">
++											<div style="width: 20px; min-width: 20px;"></div>
++											<div class="note-bullet"></div>
++											<div class="note-text">Ability reworked</div>
++										</div>
++										<div class="note-line">
++											<div style="width: 40px; min-width: 40px;"></div>
++											<div class="note-bullet"></div>
++											<div class="note-text">Every time Bane kills an enemy hero or they die under the effect of any debuff applied by Bane, they receive a Terror for the rest of the game. Each Terror stack decreases the enemy's status resistance to all Bane's debuffs
++												by 5%. Max Terror stacks per hero: 5</div>
++										</div>
++									</div>
++								</div>
++								<div class="ability-row"><img class="ability-icon" src="https://cdn.steamstatic.com/apps/dota2/images/dota_react/abilities/bane_nightmare.png">
++									<div class="details-column">
++										<div class="ability-name">Nightmare</div>
++										<div class="note-line">
++											<div style="width: 20px; min-width: 20px;"></div>
++											<div class="note-bullet"></div>
++											<div class="note-text">Now a Unit Vector Target Spell</div>
++										</div>
++										<div class="note-line">
++											<div style="width: 20px; min-width: 20px;"></div>
++											<div class="note-bullet"></div>
++											<div class="note-text">Sleeping units walk in Bane's chosen direction at a speed of 110</div>
++										</div>
++										<div class="note-line">
++											<div style="width: 40px; min-width: 40px;"></div>
++											<div class="note-bullet"></div>
++											<div class="note-text">Can be put on alt-cast to disable sleepwalking behavior</div>
++										</div>
++									</div>
++								</div>
++							</div>
++						</div>
++						<div class="hero">
++							<div class="hero-header">
++								<a href="https://www.dota2.com/hero/invoker"><img class="hero-portrait" src="https://cdn.steamstatic.com/apps/dota2/images/dota_react/heroes/invoker.png"></a>
++								<div class="details-column">
++									<div class="hero-name-row"><img class="hero-attribute-icon" src="https://cdn.steamstatic.com/apps/dota2/images/dota_react/icons/hero_intelligence.png"><a class="hero-name-link" href="https://www.dota2.com/hero/invoker">Invoker</a></div>
++									<div class="hero-subtitle"></div>
++								</div>
++							</div>
++							<div class="hero-divider"></div>
++							<div class="abilities-heading">Abilities</div>
++							<div class="notes-list">
++								<div class="ability-row"><img class="ability-icon" src="https://cdn.steamstatic.com/apps/dota2/images/dota_react/abilities/invoker_quas.png">
++									<div class="details-column">
++										<div class="ability-name">Quas</div>
++										<div class="note-line">
++											<div style="width: 20px; min-width: 20px;"></div>
++											<div class="note-bullet"></div>
++											<div class="note-text">Max Level increased from 7 to 8</div>
++										</div>
++									</div>
++								</div>
++								<div class="ability-row"><img class="ability-icon" src="https://cdn.steamstatic.com/apps/dota2/images/dota_react/abilities/invoker_wex.png">
++									<div class="details-column">
++										<div class="ability-name">Wex</div>
++										<div class="note-line">
++											<div style="width: 20px; min-width: 20px;"></div>
++											<div class="note-bullet"></div>
++											<div class="note-text">Max Level increased from 7 to 8</div>
++										</div>
++									</div>
++								</div>
++								<div class="ability-row"><img class="ability-icon" src="https://cdn.steamstatic.com/apps/dota2/images/dota_react/abilities/invoker_exort.png">
++									<div class="details-column">
++										<div class="ability-name">Exort</div>
++										<div class="note-line">
++											<div style="width: 20px; min-width: 20px;"></div>
++											<div class="note-bullet"></div>
++											<div class="note-text">Max Level increased from 7 to 8</div>
++										</div>
++									</div>
++								</div>
++								<div class="ability-row"><img class="ability-icon" src="https://cdn.steamstatic.com/apps/dota2/images/dota_react/abilities/invoker_tornado.png">
++									<div class="details-column">
++										<div class="ability-name">Tornado</div>
++										<div class="note-line aghs-scepter">
++											<div style="width: 20px; min-width: 20px;"></div>
++											<div class="note-bullet"></div>
++											<div class="note-text">Aghanim's Scepter twister damage decreased from 40 + 10 * Wex Level to 30 + 10 * Wex Level </div>
++											<div class="info-tooltip">
++												<div class="info-icon" data-tip="true" data-for="infoTip57" currentitem="false"></div>
++												<div class="__react_component_tooltip place-top type-dark" id="infoTip57" data-id="tooltip">
++													<div>60/70/80/90/100/110/120/130/140/150 to 50/60/70/80/90/100/110/120/130/140</div>
++												</div>
++											</div>
++										</div>
++									</div>
++								</div>
++								<div class="ability-row">
++									<div class="image-preview"><img class="ability-icon" src="https://cdn.steamstatic.com/apps/dota2/images/dota_react/abilities/invoker_invoke.png"><img class="image-zoom-icon" src="https://cdn.steamstatic.com/apps/dota2/images/dota_react/icons/innate_icon.png"></div>
++									<div class="details-column">
++										<div class="ability-name">Invoke</div>
++										<div class="note-line aghs-scepter">
++											<div style="width: 20px; min-width: 20px;"></div>
++											<div class="note-bullet"></div>
++											<div class="note-text">Now whenever Invoker gets Aghanim's Scepter or Aghanim's Shard, these items are inert in the inventory until Invoker activates them manually. Upon activation, he will be presented with three upgrades to choose from. Upgrades
++												themselves for both Aghanim's Scepter and Aghanim's Shard are unchanged</div>
++										</div>
++										<div class="note-line aghs-scepter">
++											<div style="width: 40px; min-width: 40px;"></div>
++											<div class="note-bullet"></div>
++											<div class="note-text">You can't change selected upgrades. Selling Aghanim's Scepter and buying it again will provide the same upgrade you chose the first time</div>
++										</div>
++										<div class="note-line aghs-scepter">
++											<div style="width: 20px; min-width: 20px;"></div>
++											<div class="note-bullet"></div>
++											<div class="note-text">Aghanim's Scepter no longer provides +1 level to all three orbs. Now it provides +1 level only to a single orb you choose</div>
++										</div>
++									</div>
++								</div>
++							</div>
++							<div class="talents-heading">Talents</div>
++							<div class="talents-row">
++								<div class="talents-icon" style="background-image: url(&quot;https://cdn.steamstatic.com/apps/dota2/images/dota_react/icons/talents.svg&quot;);"></div>
++								<div class="notes-list">
++									<div class="note-line">
++										<div style="width: 0px; min-width: 0px;"></div>
++										<div class="note-bullet"></div>
++										<div class="note-text">Level 15 Talent +1 Facet Orb Level replaced with +25 Alacrity Speed/Damage</div>
++									</div>
++									<div class="note-line">
++										<div style="width: 0px; min-width: 0px;"></div>
++										<div class="note-bullet"></div>
++										<div class="note-text">Level 20 Talent +50 Alacrity Speed/Damage replaced with +1 Orb Levels</div>
++									</div>
++								</div>
++							</div>
++						</div>
++						<div class="hero">
++							<div class="hero-header">
++								<a href="https://www.dota2.com/hero/lifestealer"><img class="hero-portrait" src="https://cdn.steamstatic.com/apps/dota2/images/dota_react/heroes/life_stealer.png"></a>
++								<div class="details-column">
++									<div class="hero-name-row"><img class="hero-attribute-icon" src="https://cdn.steamstatic.com/apps/dota2/images/dota_react/icons/hero_strength.png"><a class="hero-name-link" href="https://www.dota2.com/hero/lifestealer">Lifestealer</a></div>
++									<div class="hero-subtitle"></div>
++								</div>
++							</div>
++							<div class="hero-divider"></div>
++							<div class="notes-list">
++								<div class="note-line stat-damage">
++									<div class="" style="width: 0px; min-width: 0px;"></div>
++									<div class="note-bullet"></div>
++									<div class="note-text">Base Damage increased by 10</div>
++								</div>
++								<div class="note-line stat-damage">
++									<div class="indent-elbow" style="width: 20px; min-width: 20px;"></div>
++									<div class="note-bullet"></div>
++									<div class="note-text">Damage at level 1 increased from 39–45 to 49–55</div>
++								</div>
++								<div class="note-line stat-attack-speed">
++									<div class="" style="width: 0px; min-width: 0px;"></div>
++									<div class="note-bullet"></div>
++									<div class="note-text">Base Attack Speed increased from 100 to 120</div>
++								</div>
++								<div class="note-line stat-movement-speed">
++									<div class="" style="width: 0px; min-width: 0px;"></div>
++									<div class="note-bullet"></div>
++									<div class="note-text">Base Movement Speed increased from 315 to 320</div>
++								</div>
++							</div>
++							<div class="abilities-heading">Abilities</div>
++							<div class="notes-list">
++								<div class="ability-row">
++									<div class="image-preview"><img class="ability-icon" src="https://cdn.steamstatic.com/apps/dota2/images/dota_react/abilities/life_stealer_ghoul_frenzy.png"><img class="image-zoom-icon" src="https://cdn.steamstatic.com/apps/dota2/images/dota_react/icons/innate_icon.png"></div>
++									<div class="details-column">
++										<div class="ability-name">Ghoul Frenzy</div>
++										<div class="note-line">
++											<div style="width: 20px; min-width: 20px;"></div>
++											<div class="note-bullet"></div>
++											<div class="note-text">Reworked into Innate ability. Passive</div>
++										</div>
++										<div class="note-line">
++											<div style="width: 40px; min-width: 40px;"></div>
++											<div class="note-bullet"></div>
++											<div class="note-text">Provides Lifestealer with 5 bonus Attack Speed per level</div>
++										</div>
++									</div>
++								</div>
++								<div class="ability-row"><img class="ability-icon" src="https://cdn.steamstatic.com/apps/dota2/images/dota_react/abilities/life_stealer_rage.png">
++									<div class="details-column">
++										<div class="ability-name">Rage</div>
++										<div class="note-line">
++											<div style="width: 20px; min-width: 20px;"></div>
++											<div class="note-bullet"></div>
++											<div class="note-text">Now also provides 9/12/15/18% bonus movement speed while active</div>
++										</div>
++									</div>
++								</div>
++								<div class="ability-row"><img class="ability-icon" src="https://cdn.steamstatic.com/apps/dota2/images/dota_react/abilities/life_stealer_open_wounds.png">
++									<div class="details-column">
++										<div class="ability-name">Open Wounds</div>
++										<div class="note-line">
++											<div style="width: 20px; min-width: 20px;"></div>
++											<div class="note-bullet"></div>
++											<div class="note-text">Mana Cost decreased from 100 to 90</div>
++										</div>
++										<div class="note-line">
++											<div style="width: 20px; min-width: 20px;"></div>
++											<div class="note-bullet"></div>
++											<div class="note-text">Max Slow increased from 35/40/45/50% to 50%</div>
++										</div>
++									</div>
++								</div>
++								<div class="ability-row"><img class="ability-icon" src="https://cdn.steamstatic.com/apps/dota2/images/dota_react/abilities/life_stealer_feast.png">
++									<div class="details-column">
++										<div class="ability-name">Feast</div>
++										<div class="note-line">
++											<div style="width: 20px; min-width: 20px;"></div>
++											<div class="note-bullet"></div>
++											<div class="note-text">Now is a basic ability</div>
++										</div>
++										<div class="note-line">
++											<div style="width: 20px; min-width: 20px;"></div>
++											<div class="note-bullet"></div>
++											<div class="note-text">Heal From Target's Max Health rescaled from 2/2.25/2.5/2.75% to 1.45/2.05/2.65/3.25%</div>
++										</div>
++										<div class="note-line">
++											<div style="width: 20px; min-width: 20px;"></div>
++											<div class="note-bullet"></div>
++											<div class="note-text">Max Health Damage rescaled from 2/2.25/2.5/2.75% to 1.45/2.05/2.65/3.25%</div>
++										</div>
++										<div class="note-line">
++											<div style="width: 20px; min-width: 20px;"></div>
++											<div class="note-bullet"></div>
++											<div class="note-text">Max Health per Hero Kill increased from 10 to 10/15/20/25 </div>
++											<div class="info-tooltip">
++												<div class="info-icon" data-tip="true" data-for="infoTip63" currentitem="false"></div>
++												<div class="__react_component_tooltip place-top type-dark" id="infoTip63" data-id="tooltip">
++													<div>Is not retroactive</div>
++												</div>
++											</div>
++										</div>
++										<div class="note-line">
++											<div style="width: 20px; min-width: 20px;"></div>
++											<div class="note-bullet"></div>
++											<div class="note-text">No longer increases deny health threshold to 75%</div>
++										</div>
++									</div>
++								</div>
++								<div class="ability-row"><img class="ability-icon" src="https://cdn.steamstatic.com/apps/dota2/images/dota_react/abilities/life_stealer_infest.png">
++									<div class="details-column">
++										<div class="ability-name">Infest</div>
++										<div class="note-line">
++											<div style="width: 20px; min-width: 20px;"></div>
++											<div class="note-bullet"></div>
++											<div class="note-text">Now can be used on Ancient creeps by default</div>
++										</div>
++										<div class="note-line aghs-shard">
++											<div style="width: 20px; min-width: 20px;"></div>
++											<div class="note-bullet"></div>
++											<div class="note-text">Aghanim's Shard upgrade reworked</div>
++										</div>
++										<div class="note-line">
++											<div style="width: 40px; min-width: 40px;"></div>
++											<div class="note-bullet"></div>
++											<div class="note-text">When consuming a creep, enemies also take damage over time equal to 30% of the creep's remaining health. Damage duration: 3s. Has no effect when bursting out of enemy heroes</div>
++										</div>
++									</div>
++								</div>
++							</div>
++							<div class="talents-heading">Talents</div>
++							<div class="talents-row">
++								<div class="talents-icon" style="background-image: url(&quot;https://cdn.steamstatic.com/apps/dota2/images/dota_react/icons/talents.svg&quot;);"></div>
++								<div class="notes-list">
++									<div class="note-line">
++										<div style="width: 0px; min-width: 0px;"></div>
++										<div class="note-bullet"></div>
++										<div class="note-text">Level 10 Talent +3% Ghoul Frenzy Movement Speed replaced with +20 Movement Speed</div>
++									</div>
++									<div class="note-line">
++										<div style="width: 0px; min-width: 0px;"></div>
++										<div class="note-bullet"></div>
++										<div class="note-text">Level 15 Talent +15% Open Wounds Slow replaced with 50 Attack Speed on Open Wounds Target</div>
++									</div>
++									<div class="note-line">
++										<div style="width: 0px; min-width: 0px;"></div>
++										<div class="note-bullet"></div>
++										<div class="note-text">Level 15 Talent +50 Ghoul Frenzy Attack Speed replaced with +175 Infest Damage</div>
++									</div>
++									<div class="note-line">
++										<div style="width: 0px; min-width: 0px;"></div>
++										<div class="note-bullet"></div>
++										<div class="note-text">Level 20 Talent Infest Target Movespeed/Health decreased from +15% to +12%</div>
++									</div>
++								</div>
++							</div>
++						</div>
++						<div class="hero">
++							<div class="hero-header">
++								<a href="https://www.dota2.com/hero/templarassassin"><img class="hero-portrait" src="https://cdn.steamstatic.com/apps/dota2/images/dota_react/heroes/templar_assassin.png"></a>
++								<div class="details-column">
++									<div class="hero-name-row"><img class="hero-attribute-icon" src="https://cdn.steamstatic.com/apps/dota2/images/dota_react/icons/hero_agility.png"><a class="hero-name-link" href="https://www.dota2.com/hero/templarassassin">Templar Assassin</a></div>
++									<div class="hero-subtitle"></div>
++								</div>
++							</div>
++							<div class="hero-divider"></div>
++							<div class="notes-list">
++								<div class="note-line stat-health-regen">
++									<div class="" style="width: 0px; min-width: 0px;"></div>
++									<div class="note-bullet"></div>
++									<div class="note-text">Base Health Regen decreased from 1 to 0</div>
++								</div>
++								<div class="note-line">
++									<div class="" style="width: 0px; min-width: 0px;"></div>
++									<div class="note-bullet"></div>
++									<div class="note-text">Removed Third Eye innate ability</div>
++								</div>
++							</div>
++							<div class="abilities-heading">Abilities</div>
++							<div class="notes-list">
++								<div class="ability-row"><img class="ability-icon" src="https://cdn.steamstatic.com/apps/dota2/images/dota_react/abilities/templar_assassin_inner_peace.png">
++									<div class="details-column">
++										<div class="ability-name">Inner Peace</div>
++										<div class="note-line">
++											<div style="width: 20px; min-width: 20px;"></div>
++											<div class="note-bullet"></div>
++											<div class="note-text">New innate ability, improves with Templar Assassin's level</div>
++										</div>
++										<div class="note-line">
++											<div style="width: 40px; min-width: 40px;"></div>
++											<div class="note-bullet"></div>
++											<div class="note-text">After remaining stationary for 0.25s, Templar Assassin begins meditating, gaining bonus health regen and mana regen. Bonuses linearly increase from 0 up to their maximum, which is reached after 2.05s - 0.05s per level.
++												Moving from the current position or taking damage from an enemy resets regen bonuses. Max Health Regen is 2.7 + 0.3 per level. Max Mana Regen is 2.2 + 0.2 per level</div>
++										</div>
++									</div>
++								</div>
++								<div class="ability-row"><img class="ability-icon" src="https://cdn.steamstatic.com/apps/dota2/images/dota_react/abilities/templar_assassin_refraction.png">
++									<div class="details-column">
++										<div class="ability-name">Refraction</div>
++										<div class="note-line aghs-shard">
++											<div style="width: 20px; min-width: 20px;"></div>
++											<div class="note-bullet"></div>
++											<div class="note-text">Now upgraded with Aghanim's Shard</div>
++										</div>
++										<div class="note-line">
++											<div style="width: 40px; min-width: 40px;"></div>
++											<div class="note-bullet"></div>
++											<div class="note-text">Increases bonus damage by 30 and allows Refraction to be cast while disabled</div>
++										</div>
++									</div>
++								</div>
++								<div class="ability-row"><img class="ability-icon" src="https://cdn.steamstatic.com/apps/dota2/images/dota_react/abilities/templar_assassin_meld.png">
++									<div class="details-column">
++										<div class="ability-name">Meld</div>
++										<div class="note-line">
++											<div style="width: 20px; min-width: 20px;"></div>
++											<div class="note-bullet"></div>
++											<div class="note-text">Now, if the attack that broke Meld splits with Psi Blades, Bonus Damage and Armor Reduction are now applied to all affected enemies</div>
++										</div>
++									</div>
++								</div>
++								<div class="ability-row"><img class="ability-icon" src="https://cdn.steamstatic.com/apps/dota2/images/dota_react/abilities/templar_assassin_psionic_trap.png">
++									<div class="details-column">
++										<div class="ability-name">Psionic Trap</div>
++										<div class="note-line">
++											<div style="width: 20px; min-width: 20px;"></div>
++											<div class="note-bullet"></div>
++											<div class="note-text">No longer upgraded with Aghanim's Shard</div>
++										</div>
++										<div class="note-line aghs-scepter">
++											<div style="width: 20px; min-width: 20px;"></div>
++											<div class="note-bullet"></div>
++											<div class="note-text">Now upgraded with Aghanim's Scepter</div>
++										</div>
++										<div class="note-line">
++											<div style="width: 40px; min-width: 40px;"></div>
++											<div class="note-bullet"></div>
++											<div class="note-text">When activated, Traps now also silence enemies from 0.25s up to 3s depending on the trap charge</div>
++										</div>
++									</div>
++								</div>
++							</div>
++							<div class="talents-heading">Talents</div>
++							<div class="talents-row">
++								<div class="talents-icon" style="background-image: url(&quot;https://cdn.steamstatic.com/apps/dota2/images/dota_react/icons/talents.svg&quot;);"></div>
++								<div class="notes-list">
++									<div class="note-line">
++										<div style="width: 0px; min-width: 0px;"></div>
++										<div class="note-bullet"></div>
++										<div class="note-text">Level 15 Talent +3 Meld Armor reduction replaced with +3 Psionic Traps</div>
++									</div>
++									<div class="note-line">
++										<div style="width: 0px; min-width: 0px;"></div>
++										<div class="note-bullet"></div>
++										<div class="note-text">Level 15 Talent Refraction Can Be Cast While Disabled replaced with +225 Meld Attack Range</div>
++									</div>
++									<div class="note-line">
++										<div style="width: 0px; min-width: 0px;"></div>
++										<div class="note-bullet"></div>
++										<div class="note-text">Level 20 Talent +40 Refraction Damage replaced with +4 Meld Armor Reduction</div>
++									</div>
++								</div>
++							</div>
++						</div>
++						<div class="hero">
++							<div class="hero-header">
++								<a href="https://www.dota2.com/hero/zeus"><img class="hero-portrait" src="https://cdn.steamstatic.com/apps/dota2/images/dota_react/heroes/zuus.png"></a>
++								<div class="details-column">
++									<div class="hero-name-row"><img class="hero-attribute-icon" src="https://cdn.steamstatic.com/apps/dota2/images/dota_react/icons/hero_intelligence.png"><a class="hero-name-link" href="https://www.dota2.com/hero/zeus">Zeus</a></div>
++									<div class="hero-subtitle"></div>
++								</div>
++							</div>
++							<div class="hero-divider"></div>
++							<div class="notes-list">
++								<div class="note-line stat-strength">
++									<div class="" style="width: 0px; min-width: 0px;"></div>
++									<div class="note-bullet"></div>
++									<div class="note-text">Base Strength increased from 19 to 21</div>
++								</div>
++								<div class="note-line stat-damage">
++									<div class="" style="width: 0px; min-width: 0px;"></div>
++									<div class="note-bullet"></div>
++									<div class="note-text">Base Damage increased by 1–3 </div>
++									<div class="info-tooltip">
++										<div class="info-icon" data-tip="true" data-for="infoTip91" currentitem="false"></div>
++										<div class="__react_component_tooltip place-top type-dark" id="infoTip91" data-id="tooltip">
++											<div>Damage spread increased from 8 to 10</div>
++										</div>
++									</div>
++								</div>
++								<div class="note-line stat-damage">
++									<div class="indent-elbow" style="width: 20px; min-width: 20px;"></div>
++									<div class="note-bullet"></div>
++									<div class="note-text">Damage at level 1 increased from 52–60 to 53–63</div>
++								</div>
++								<div class="note-line stat-movement-speed">
++									<div class="" style="width: 0px; min-width: 0px;"></div>
++									<div class="note-bullet"></div>
++									<div class="note-text">Base Movement Speed decreased from 315 to 305</div>
++								</div>
++								<div class="note-line stat-armor">
++									<div class="" style="width: 0px; min-width: 0px;"></div>
++									<div class="note-bullet"></div>
++									<div class="note-text">Base Armor decreased by 1</div>
++								</div>
++							</div>
++							<div class="abilities-heading">Abilities</div>
++							<div class="notes-list">
++								<div class="ability-row">
++									<div class="image-preview"><img class="ability-icon" src="https://cdn.steamstatic.com/apps/dota2/images/dota_react/abilities/zuus_static_field.png"><img class="image-zoom-icon" src="https://cdn.steamstatic.com/apps/dota2/images/dota_react/icons/innate_icon.png"></div>
++									<div class="details-column">
++										<div class="ability-name">Static Field</div>
++										<div class="note-line">
++											<div style="width: 20px; min-width: 20px;"></div>
++											<div class="note-bullet"></div>
++											<div class="note-text">No longer levels with Thundergod's Wrath</div>
++										</div>
++										<div class="note-line">
++											<div style="width: 20px; min-width: 20px;"></div>
++											<div class="note-bullet"></div>
++											<div class="note-text">Damage changed from 2.5/3/3.5/4% to 3.45% + 0.05% per level</div>
++										</div>
++									</div>
++								</div>
++								<div class="ability-row"><img class="ability-icon" src="https://cdn.steamstatic.com/apps/dota2/images/dota_react/abilities/zuus_arc_lightning.png">
++									<div class="details-column">
++										<div class="ability-name">Arc Lightning</div>
++										<div class="note-line">
++											<div style="width: 20px; min-width: 20px;"></div>
++											<div class="note-bullet"></div>
++											<div class="note-text">Mana Cost rescaled from 75/85/95/105 to 85/90/95/100</div>
++										</div>
++										<div class="note-line">
++											<div style="width: 20px; min-width: 20px;"></div>
++											<div class="note-bullet"></div>
++											<div class="note-text">Base Damage increased from 90/120/150/180 to 105/130/155/180</div>
++										</div>
++									</div>
++								</div>
++								<div class="ability-row"><img class="ability-icon" src="https://cdn.steamstatic.com/apps/dota2/images/dota_react/abilities/zuus_lightning_bolt.png">
++									<div class="details-column">
++										<div class="ability-name">Lightning Bolt</div>
++										<div class="note-line">
++											<div style="width: 20px; min-width: 20px;"></div>
++											<div class="note-bullet"></div>
++											<div class="note-text">Vision and True Sight radius increased from 500 to 600</div>
++										</div>
++									</div>
++								</div>
++								<div class="ability-row"><img class="ability-icon" src="https://cdn.steamstatic.com/apps/dota2/images/dota_react/abilities/zuus_thundergods_wrath.png">
++									<div class="details-column">
++										<div class="ability-name">Thundergod's Wrath</div>
++										<div class="note-line">
++											<div style="width: 20px; min-width: 20px;"></div>
++											<div class="note-bullet"></div>
++											<div class="note-text">Now applies the True Sight before the damage and strikes even untargetable and still invisible enemies </div>
++											<div class="info-tooltip">
++												<div class="info-icon" data-tip="true" data-for="infoTip92" currentitem="false"></div>
++												<div class="__react_component_tooltip place-top type-dark" id="infoTip92" data-id="tooltip">
++													<div>It used to simply reveal invisible heroes without dealing damage to them. Now it will work similarly to Lightning Bolt, dealing damage even to units affected by Smoke of Deceit, Dark Willow's Shadow Realm, Phantom
++														Assassin's Blur, Slark's Shadow Dance or Depth Shroud, etc.</div>
++												</div>
++											</div>
++										</div>
++										<div class="note-line">
++											<div style="width: 20px; min-width: 20px;"></div>
++											<div class="note-bullet"></div>
++											<div class="note-text">Vision and True Sight radius increased from 500 to 600</div>
++										</div>
++									</div>
++								</div>
++								<div class="ability-row"><img class="ability-icon" src="https://cdn.steamstatic.com/apps/dota2/images/dota_react/abilities/zuus_cloud.png">
++									<div class="details-column">
++										<div class="ability-name">Nimbus</div>
++										<div class="note-line">
++											<div style="width: 20px; min-width: 20px;"></div>
++											<div class="note-spacer"></div>
++											<div class="note-text">Damage source changed from Nimbus to the caster</div>
++										</div>
++									</div>
++								</div>
++							</div>
++							<div class="talents-heading">Talents</div>
++							<div class="talents-row">
++								<div class="talents-icon" style="background-image: url(&quot;https://cdn.steamstatic.com/apps/dota2/images/dota_react/icons/talents.svg&quot;);"></div>
++								<div class="notes-list">
++									<div class="note-line">
++										<div style="width: 0px; min-width: 0px;"></div>
++										<div class="note-spacer"></div>
++										<div class="note-text">Level 15 Talent -0.4s Arc Lightning Cooldown replaced with -20% Arc Lightning Mana Cost/Cooldown</div>
++									</div>
++									<div class="note-line">
++										<div style="width: 0px; min-width: 0px;"></div>
++										<div class="note-spacer"></div>
++										<div class="note-text">Level 25 Talent +2% Static Field Damage replaced with 3 Heavenly Jump Charges</div>
++									</div>
++								</div>
++							</div>
++						</div>
++					</div>
++				</div>
++			</div>
++			<div class="rootfooter_RootFooter">
++				<div class="rootfooter_Logos">
++					<img class="rootfooter_FooterLogo" src="https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/valve_logo.png">
++					<img class="rootfooter_FooterLogo" src="https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/footer_logo.png">
++				</div>
++				<div class="rootfooter_Legal">Original post made by FatzkeFTW. Valve-like website implementation by SurDno.</div>
++			</div>
++		</div>
++	</div>
+ 
+ 	<script src="script.js"></script>
+ 	<audio id="matchready-audio" src="./matchready.mp3" preload="auto"></audio>
+-- 
+2.43.0
+

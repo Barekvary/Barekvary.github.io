@@ -1,0 +1,750 @@
+/* Scoped copy of dota/main.css for embedding the patch notes inside index.html.
+   Every selector is prefixed with #dota-page-container so these styles cannot leak
+   into the portfolio site. Regenerate from dota/main.css when it changes. */
+
+#dota-page-container .app-root {
+  width: 100%;
+  height: 100%;
+}
+#dota-page-container {
+  --indent-level: 0;
+  --field-negative-horizontal-margin: 0px;
+  --field-row-children-spacing: 0px;
+}
+#dota-page-container * {
+  box-sizing: border-box;
+  font-family: "Radiance", sans-serif;
+}
+#dota-page-container a {
+  text-decoration: none;
+  color: inherit;
+}
+#dota-page-container .Bold {
+  font-weight: bold;
+}
+#dota-page-container .Strike {
+  text-decoration: line-through;
+}
+#dota-page-container .__react_component_tooltip.show {
+  opacity: 1 !important;
+}
+@font-face {
+  font-family: "Radiance";
+  src: url("https://cdn.steamstatic.com/apps/dota2/fonts/radiance.eot");
+  src: url("https://cdn.steamstatic.com/apps/dota2/fonts/radiance.eot?#iefix")
+      format("embedded-opentype"),
+    url("https://cdn.steamstatic.com/apps/dota2/fonts/radiance.woff")
+      format("woff"),
+    url("https://cdn.steamstatic.com/apps/dota2/fonts/radiance.ttf")
+      format("truetype"),
+    url("https://cdn.steamstatic.com/apps/dota2/fonts/radiance.svg#ywftsvg")
+      format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Radiance";
+  src: url("https://cdn.steamstatic.com/apps/dota2/fonts/radiance-bold.eot");
+  src: url("https://cdn.steamstatic.com/apps/dota2/fonts/radiance-bold.eot?#iefix")
+      format("embedded-opentype"),
+    url("https://cdn.steamstatic.com/apps/dota2/fonts/radiance-bold.woff")
+      format("woff"),
+    url("https://cdn.steamstatic.com/apps/dota2/fonts/radiance-bold.ttf")
+      format("truetype"),
+    url("https://cdn.steamstatic.com/apps/dota2/fonts/radiance-bold.svg#ywftsvg")
+      format("svg");
+  font-weight: 900;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Radiance";
+  src: url("https://cdn.steamstatic.com/apps/dota2/fonts/radiance-semibold.eot");
+  src: url("https://cdn.steamstatic.com/apps/dota2/fonts/radiance-semibold.eot?#iefix")
+      format("embedded-opentype"),
+    url("https://cdn.steamstatic.com/apps/dota2/fonts/radiance-semibold.woff")
+      format("woff"),
+    url("https://cdn.steamstatic.com/apps/dota2/fonts/radiance-semibold.ttf")
+      format("truetype"),
+    url("https://cdn.steamstatic.com/apps/dota2/fonts/radiance-semibold.svg#ywftsvg")
+      format("svg");
+  font-weight: 700;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Reaver";
+  src: url("https://cdn.steamstatic.com/apps/dota2/fonts/Reaver-SemiBold.woff")
+      format("woff"),
+    url("https://cdn.steamstatic.com/apps/dota2/fonts/Reaver-Regular-SemiBold.ttf")
+      format("truetype");
+  font-weight: 600;
+  font-style: normal;
+}
+#dota-page-container .patch-notes-page {
+  width: 100%;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-repeat: repeat-y;
+  background-color: #151618;
+  background-position: center;
+  clear: both;
+}
+#dota-page-container .patch-notes-page .patch-header {
+  width: 100%;
+  background-color: #000;
+  margin-top: 140px;
+  padding: 30px 0px;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+#dota-page-container .patch-notes-page .patch-header .patch-header-label {
+  width: 100%;
+  max-width: 1200px;
+  color: #ed3b1c;
+  font-size: 32px;
+  letter-spacing: 4px;
+}
+#dota-page-container .patch-notes-page .patch-header .patch-version {
+  width: 100%;
+  max-width: 1200px;
+  color: #ed3b1c;
+  font-size: 72px;
+  font-weight: bold;
+  letter-spacing: 8px;
+}
+#dota-page-container .patch-notes-page .patch-content {
+  width: 100%;
+  max-width: 1200px;
+  padding-top: 32px;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+#dota-page-container .patch-section {
+  width: 100%;
+  display: none;
+}
+#dota-page-container .patch-section.is-visible {
+  display: block;
+}
+#dota-page-container .patch-section .section-title {
+  background: linear-gradient(to right, #833312, rgba(131, 51, 18, 0));
+  border-left: 2px solid #ff5005;
+  font-size: clamp(20px, 2vw, 30px);
+  font-weight: 600;
+  font-family: "Reaver", serif;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #fff;
+  text-shadow: 0px 0px 5px #000;
+  box-shadow: 0px 0px 30px #000;
+  padding: 12px 20px;
+}
+#dota-page-container .patch-section .section-body {
+  width: 100%;
+  border-left: 2px solid hsla(0, 0%, 100%, 0.062745098);
+  margin-bottom: 30px;
+  background: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 0.38) 3.07%,
+    rgba(6, 37, 65, 0.35) 88.06%
+  );
+  box-shadow: 0px 0px 50px #000;
+  min-height: 0;
+  display: flex;
+  padding-bottom: 20px;
+  flex-direction: column;
+}
+#dota-page-container .hero {
+  width: 100%;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  padding: calc(12px + 2vw);
+  margin-left: -2px;
+  border-top: 2px solid hsla(0, 0%, 100%, 0.062745098);
+  background: linear-gradient(
+    300deg,
+    rgba(0, 0, 0, 0.38) 3.07%,
+    rgba(6, 37, 65, 0.3) 88.06%
+  );
+  box-shadow: 0px 0px 50px #000;
+}
+#dota-page-container .hero .hero-header {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 16px;
+  align-items: center;
+}
+#dota-page-container .hero .hero-header .hero-portrait {
+  width: calc(10vw + 12px);
+  max-width: 140px;
+  min-width: 80px;
+  max-height: fit-content;
+  height: -moz-max-content;
+  box-shadow: 0px 0px 20px #000;
+  margin-right: 16px;
+}
+#dota-page-container .hero .hero-header .details-column {
+  flex-grow: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+#dota-page-container .hero .hero-header .details-column .hero-name-row {
+  display: flex;
+  align-items: center;
+  gap: calc(4px + 0.3vw);
+}
+#dota-page-container .hero
+  .hero-header
+  .details-column
+  .hero-name-row
+  .hero-name-link {
+  font-size: clamp(16px, 1rem + 16 * (100vw - 360px)/1560, 32px);
+  font-weight: 600;
+  color: #f5f5f5;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-family: "Reaver", serif;
+  border-bottom: 2px solid hsla(0, 0%, 100%, 0);
+  line-height: 1.3;
+  transition-property: border, color;
+  transition-duration: 0.15s;
+}
+#dota-page-container .hero
+  .hero-header
+  .details-column
+  .hero-name-row
+  .hero-name-link:hover {
+  border-bottom: 2px solid hsla(0, 0%, 100%, 0.2);
+  color: #fff;
+}
+#dota-page-container .hero
+  .hero-header
+  .details-column
+  .hero-name-row
+  .hero-attribute-icon {
+  width: calc(14px + 1vw);
+  margin-bottom: 2px;
+}
+#dota-page-container .hero .hero-header .details-column .hero-subtitle {
+  font-size: 16px;
+  font-weight: bold;
+  color: #ff715d;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  margin-bottom: 10px;
+}
+#dota-page-container .hero .hero-divider {
+  width: 100%;
+  height: 1px;
+  margin: 0 auto;
+  background: linear-gradient(to right, #1e2b35, rgba(30, 43, 53, 0));
+  margin-bottom: 16px;
+}
+#dota-page-container .hero .abilities-heading {
+  font-size: 17px;
+  font-weight: bold;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  margin-bottom: 8px;
+}
+#dota-page-container .hero .notes-list {
+  width: 100%;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 20px;
+}
+#dota-page-container .hero .notes-list .ability-row {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+#dota-page-container .hero .notes-list .ability-row:not(:last-child) {
+  padding-bottom: 20px;
+}
+#dota-page-container .hero
+  .notes-list
+  .ability-row
+  .ability-icon {
+  width: 64px;
+  height: 64px;
+  min-width: 64px;
+  filter: drop-shadow(0px 3px 4px rgba(0, 0, 0, 0.5));
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+#dota-page-container .hero .notes-list .ability-row .details-column {
+  flex-grow: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+#dota-page-container .hero
+  .notes-list
+  .ability-row
+  .details-column
+  .ability-name {
+  font-size: clamp(14px, 0.875rem + 4 * (100vw - 360px)/1560, 18px);
+  font-weight: 600;
+  color: #fff;
+  font-family: "Reaver", serif;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 4px;
+  margin-left: 20px;
+}
+#dota-page-container .hero .talents-heading {
+  font-size: 17px;
+  font-weight: bold;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  margin-bottom: 8px;
+}
+#dota-page-container .hero .talents-row {
+  width: 100%;
+  min-height: 0;
+  display: flex;
+  flex-direction: right;
+  gap: 16px;
+}
+#dota-page-container .hero .talents-row .talents-icon {
+  width: 64px;
+  height: 68px;
+  min-width: 64px;
+  background-size: cover;
+}
+#dota-page-container .item-section {
+  width: 100%;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 0px 40px;
+  padding-bottom: 0px;
+  margin-bottom: 20px;
+}
+@media (max-width: 600px) {
+  #dota-page-container .item-section {
+    padding: 0vw 2vw;
+  }
+}
+#dota-page-container .item-section .item-header {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border-top: 1px solid;
+  border-image: linear-gradient(
+      to right,
+      rgba(238, 250, 255, 0.15),
+      rgba(0, 0, 0, 0) 60%
+    )
+    1;
+  padding-top: calc(8px + 0.5vw);
+}
+#dota-page-container .item-section .item-header .item-icon {
+  width: 72px;
+  height: 52px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  box-shadow: 0px 0px 20px #000;
+  margin-right: 16px;
+  margin-bottom: 10px;
+}
+#dota-page-container .item-section .item-header .details-column {
+  flex-grow: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+#dota-page-container .item-section
+  .item-header
+  .details-column
+  .item-name {
+  font-size: clamp(16px, 2vw, 20px);
+  font-weight: 600;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-family: "Reaver", serif;
+}
+#dota-page-container .item-section
+  .item-header
+  .details-column
+  .item-subtitle {
+  text-transform: uppercase;
+  color: #ccc;
+  letter-spacing: 2px;
+}
+#dota-page-container .item-section
+  .item-header
+  .details-column
+  .notes-list {
+  width: 100%;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 24px;
+}
+#dota-page-container .neutral-item-section {
+  width: 100%;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 0px 40px;
+  padding-bottom: 0px;
+  margin-bottom: 20px;
+}
+#dota-page-container .neutral-item-section .neutral-item-header {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+#dota-page-container .neutral-item-section .neutral-item-header .neutral-item-icon {
+  width: 92px;
+  height: 52px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  box-shadow: 0px 0px 20px #000;
+  margin-right: 16px;
+  margin-bottom: 10px;
+}
+#dota-page-container .neutral-item-section .neutral-item-header .details-column {
+  flex-grow: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+#dota-page-container .neutral-item-section
+  .neutral-item-header
+  .details-column
+  .neutral-item-name {
+  font-size: 20px;
+  font-weight: 600;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-family: "Reaver", serif;
+}
+#dota-page-container .neutral-item-section
+  .neutral-item-header
+  .details-column
+  .notes-list {
+  width: 100%;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 24px;
+}
+#dota-page-container .notes-group {
+  margin-bottom: 24px;
+}
+#dota-page-container .notes-group .notes-group-title {
+  background: linear-gradient(
+    to right,
+    rgba(40, 64, 83, 0.5921568627),
+    rgba(131, 51, 18, 0) 60%
+  );
+  font-size: clamp(16px, 1rem + 6 * (100vw - 360px)/1560, 22px);
+  font-weight: 900;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  padding: 8px 20px;
+  margin-bottom: 8px;
+}
+#dota-page-container .notes-group-body {
+  width: 100%;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 0px 18px;
+}
+#dota-page-container .notes-group-body .notes-list {
+  width: 100%;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 24px;
+}
+#dota-page-container .note-line {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 6px;
+}
+#dota-page-container .note-line .note-bullet {
+  width: 6px;
+  height: 6px;
+  min-width: 6px;
+  border-radius: 3px;
+  margin-top: 8px;
+  margin-left: 8px;
+  margin-right: 8px;
+  background-color: #8b989e;
+}
+#dota-page-container .note-line .note-bullet.bullet-hidden {
+  opacity: 0;
+}
+#dota-page-container .note-line .indent-elbow {
+  height: 10px;
+  width: 10px !important;
+  min-width: 10px !important;
+  margin-left: 15px;
+  margin-top: 2px;
+  border-left: 1px solid hsla(0, 0%, 100%, 0.5);
+  border-bottom: 1px solid hsla(0, 0%, 100%, 0.5);
+}
+#dota-page-container .note-line.stat-strength .note-bullet,
+#dota-page-container .note-line.stat-agility .note-bullet,
+#dota-page-container .note-line.stat-intelligence .note-bullet,
+#dota-page-container .note-line.stat-movement-speed .note-bullet,
+#dota-page-container .note-line.stat-damage .note-bullet,
+#dota-page-container .note-line.stat-attack-range .note-bullet,
+#dota-page-container .note-line.stat-attack-speed .note-bullet,
+#dota-page-container .note-line.stat-armor .note-bullet,
+#dota-page-container .note-line.stat-attack-time .note-bullet,
+#dota-page-container .note-line.stat-health-regen .note-bullet,
+#dota-page-container .note-line.stat-mana-regen .note-bullet,
+#dota-page-container .note-line.stat-projectile-speed .note-bullet,
+#dota-page-container .note-line.aghs-scepter .note-bullet,
+#dota-page-container .note-line.aghs-shard .note-bullet {
+  width: 22px;
+  height: 22px;
+  border-radius: 0px;
+  margin: 0px;
+  background-size: 90%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: unset;
+}
+#dota-page-container .note-line.stat-strength .note-bullet {
+  background-image: url("https://cdn.steamstatic.com/apps/dota2/images/dota_react/icons/hero_strength.png");
+}
+#dota-page-container .note-line.stat-agility .note-bullet {
+  background-image: url("https://cdn.steamstatic.com/apps/dota2/images/dota_react/icons/hero_agility.png");
+}
+#dota-page-container .note-line.stat-intelligence .note-bullet {
+  background-image: url("https://cdn.steamstatic.com/apps/dota2/images/dota_react/icons/hero_intelligence.png");
+}
+#dota-page-container .note-line.stat-movement-speed .note-bullet {
+  background-image: url("https://cdn.steamstatic.com/apps/dota2/images/dota_react/heroes/stats/icon_movement_speed.png");
+}
+#dota-page-container .note-line.stat-damage .note-bullet {
+  background-image: url("https://cdn.steamstatic.com/apps/dota2/images/dota_react/heroes/stats/icon_damage.png");
+}
+#dota-page-container .note-line.stat-attack-range .note-bullet {
+  background-image: url("https://cdn.steamstatic.com/apps/dota2/images/dota_react/heroes/stats/icon_attack_range.png");
+}
+#dota-page-container .note-line.stat-attack-speed .note-bullet {
+  background-image: url("https://cdn.steamstatic.com/apps/dota2/images/dota_react/heroes/stats/icon_attack_speed.png");
+}
+#dota-page-container .note-line.stat-armor .note-bullet {
+  background-image: url("https://cdn.steamstatic.com/apps/dota2/images/dota_react/heroes/stats/icon_armor.png");
+}
+#dota-page-container .note-line.stat-attack-time .note-bullet {
+  background-image: url("https://cdn.steamstatic.com/apps/dota2/images/dota_react/heroes/stats/icon_attack_time.png");
+}
+#dota-page-container .note-line.stat-health-regen .note-bullet {
+  background-image: url("https://cdn.steamstatic.com/apps/dota2/images/dota_react/heroes/stats/health_regen.png");
+}
+#dota-page-container .note-line.stat-mana-regen .note-bullet {
+  background-image: url("https://cdn.steamstatic.com/apps/dota2/images/dota_react/heroes/stats/mana_regen.png");
+}
+#dota-page-container .note-line.stat-projectile-speed .note-bullet {
+  background-image: url("https://cdn.steamstatic.com/apps/dota2/images/dota_react/heroes/stats/icon_projectile_speed.png");
+}
+#dota-page-container .note-line.aghs-scepter .note-bullet {
+  background-image: url("https://cdn.steamstatic.com/apps/dota2/images/dota_react/heroes/stats/aghs_scepter_icon.png");
+}
+#dota-page-container .note-line.aghs-shard .note-bullet {
+  background-image: url("https://cdn.steamstatic.com/apps/dota2/images/dota_react/heroes/stats/aghs_shard_icon.png");
+}
+#dota-page-container .note-line.aghs-scepter,
+#dota-page-container .note-line.aghs-shard {
+  background: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0) 0px,
+    rgba(0, 0, 0, 0) 20px,
+    rgba(83, 175, 255, 0.1019607843) 20px,
+    rgba(96, 141, 255, 0.0588235294) 30%,
+    rgba(96, 141, 255, 0) 80%
+  );
+}
+#dota-page-container .note-line.aghs-scepter .note-bullet,
+#dota-page-container .note-line.aghs-shard .note-bullet {
+  background-size: 100%;
+}
+#dota-page-container .note-line.aghs-scepter .note-text,
+#dota-page-container .note-line.aghs-shard .note-text {
+  color: #8190a5;
+}
+#dota-page-container .note-line .note-text {
+  font-size: 17px;
+  color: #8b989e;
+  line-height: 1.3;
+  font-weight: 600;
+}
+#dota-page-container .note-line .note-text .Bold {
+  color: #fff;
+}
+#dota-page-container .image-preview {
+  position: relative;
+  height: 100%;
+  display: inline-block;
+}
+#dota-page-container .image-preview img:first-child {
+  display: block;
+}
+#dota-page-container .image-zoom-icon {
+  position: absolute;
+  width: 30px;
+  top: 100%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(9, 11, 14, 0.97);
+  border-radius: 50%;
+  box-shadow: 0px 6px 16px -2px rgba(0, 0, 0, 0.3);
+}
+#dota-page-container span.New {
+  color: #36a15e;
+}
+#dota-page-container span.Reworked {
+  color: #d05307;
+}
+#dota-page-container .info-tooltip {
+  display: inline-block;
+}
+#dota-page-container .info-tooltip .info-icon {
+  transform: translateY(4px);
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  cursor: default;
+  background-image: url("https://cdn.steamstatic.com/apps/dota2/images/icon_info.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+@property --GradientColor1 {
+  syntax: "<color>";
+  initial-value: #81399a;
+  inherits: false;
+}
+@property --GradientColor2 {
+  syntax: "<color>";
+  initial-value: #0094a2;
+  inherits: false;
+}
+#dota-page-container .FullModalOverlay {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1500;
+}
+#dota-page-container .ModalOverlayContent {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+#dota-page-container .ModalOverlayContent.active {
+  z-index: 10;
+  -webkit-app-region: no-drag;
+}
+#dota-page-container .ModalOverlayBackground {
+  background: rgba(0, 0, 0, 0.8);
+  z-index: 7;
+}
+@keyframes loading_throbber_bar {
+  0% {
+    transform: scaleX(1) scaleY(0.6);
+  }
+  30% {
+    transform: scaleX(1) scaleY(1);
+  }
+  55% {
+    transform: scaleX(1) scaleY(0.6);
+  }
+  100% {
+    transform: scaleX(1) scaleY(0.6);
+  }
+}
+#dota-page-container .form {
+  border: 1px dotted cyan;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+#dota-page-container .A {
+  background-color: rgba(255, 0, 0, 0.4);
+  height: 40px;
+}
+#dota-page-container .__react_component_tooltip {
+  border-radius: 3px;
+  display: inline-block;
+  font-size: 13px;
+  left: -999em;
+  opacity: 0;
+  padding: 8px 21px;
+  position: fixed;
+  pointer-events: none;
+  transition: opacity 0.3s ease-out;
+  top: -999em;
+  visibility: hidden;
+  z-index: 999;
+}
+#dota-page-container .__react_component_tooltip::before,
+#dota-page-container .__react_component_tooltip::after {
+  content: "";
+  width: 0;
+  height: 0;
+  position: absolute;
+}
+#dota-page-container .__react_component_tooltip.show {
+  opacity: 0.9;
+  margin-top: 0;
+  margin-left: 0;
+  visibility: visible;
+}
+#dota-page-container .__react_component_tooltip.place-top::before {
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  bottom: -8px;
+  left: 50%;
+  margin-left: -10px;
+}
+#dota-page-container .__react_component_tooltip {
+  color: #fff;
+  background: #222;
+  border: 1px solid transparent;
+}
+#dota-page-container .__react_component_tooltip.place-top {
+  margin-top: -10px;
+}
+#dota-page-container .__react_component_tooltip.place-top::before {
+  border-top: 8px solid transparent;
+}
+#dota-page-container .__react_component_tooltip.place-top::after {
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  bottom: -6px;
+  left: 50%;
+  margin-left: -8px;
+  border-top-color: #222;
+  border-top-style: solid;
+  border-top-width: 6px;
+}

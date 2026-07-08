@@ -1,0 +1,752 @@
+
+._2cvxxeAj5gGKb86simBsB- {
+  width: 100%;
+  height: 100%;
+}
+:root {
+  --indent-level: 0;
+  --field-negative-horizontal-margin: 0px;
+  --field-row-children-spacing: 0px;
+}
+* {
+  box-sizing: border-box;
+  font-family: "Radiance", sans-serif;
+}
+a {
+  text-decoration: none;
+  color: inherit;
+}
+.Bold {
+  font-weight: bold;
+}
+.Strike {
+  text-decoration: line-through;
+}
+.__react_component_tooltip.show {
+  opacity: 1 !important;
+}
+@font-face {
+  font-family: "Radiance";
+  src: url("https://cdn.steamstatic.com/apps/dota2/fonts/radiance.eot");
+  src: url("https://cdn.steamstatic.com/apps/dota2/fonts/radiance.eot?#iefix")
+      format("embedded-opentype"),
+    url("https://cdn.steamstatic.com/apps/dota2/fonts/radiance.woff")
+      format("woff"),
+    url("https://cdn.steamstatic.com/apps/dota2/fonts/radiance.ttf")
+      format("truetype"),
+    url("https://cdn.steamstatic.com/apps/dota2/fonts/radiance.svg#ywftsvg")
+      format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Radiance";
+  src: url("https://cdn.steamstatic.com/apps/dota2/fonts/radiance-bold.eot");
+  src: url("https://cdn.steamstatic.com/apps/dota2/fonts/radiance-bold.eot?#iefix")
+      format("embedded-opentype"),
+    url("https://cdn.steamstatic.com/apps/dota2/fonts/radiance-bold.woff")
+      format("woff"),
+    url("https://cdn.steamstatic.com/apps/dota2/fonts/radiance-bold.ttf")
+      format("truetype"),
+    url("https://cdn.steamstatic.com/apps/dota2/fonts/radiance-bold.svg#ywftsvg")
+      format("svg");
+  font-weight: 900;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Radiance";
+  src: url("https://cdn.steamstatic.com/apps/dota2/fonts/radiance-semibold.eot");
+  src: url("https://cdn.steamstatic.com/apps/dota2/fonts/radiance-semibold.eot?#iefix")
+      format("embedded-opentype"),
+    url("https://cdn.steamstatic.com/apps/dota2/fonts/radiance-semibold.woff")
+      format("woff"),
+    url("https://cdn.steamstatic.com/apps/dota2/fonts/radiance-semibold.ttf")
+      format("truetype"),
+    url("https://cdn.steamstatic.com/apps/dota2/fonts/radiance-semibold.svg#ywftsvg")
+      format("svg");
+  font-weight: 700;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Reaver";
+  src: url("https://cdn.steamstatic.com/apps/dota2/fonts/Reaver-SemiBold.woff")
+      format("woff"),
+    url("https://cdn.steamstatic.com/apps/dota2/fonts/Reaver-Regular-SemiBold.ttf")
+      format("truetype");
+  font-weight: 600;
+  font-style: normal;
+}
+
+.HCTcnylDZuHHB0U-7Jsoo {
+  width: 100%;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-repeat: repeat-y;
+  background-color: #151618;
+  background-position: center;
+  clear: both;
+}
+.HCTcnylDZuHHB0U-7Jsoo ._2uAz0lnbdn99LZdqUW_LdS {
+  width: 100%;
+  background-color: #000;
+  margin-top: 140px;
+  padding: 30px 0px;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+.HCTcnylDZuHHB0U-7Jsoo ._2uAz0lnbdn99LZdqUW_LdS ._2khtsjRlFphktZZ7RTfsOw {
+  width: 100%;
+  max-width: 1200px;
+  color: #ed3b1c;
+  font-size: 32px;
+  letter-spacing: 4px;
+}
+.HCTcnylDZuHHB0U-7Jsoo ._2uAz0lnbdn99LZdqUW_LdS .oyfUTD3R9D883pLDopRL4 {
+  width: 100%;
+  max-width: 1200px;
+  color: #ed3b1c;
+  font-size: 72px;
+  font-weight: bold;
+  letter-spacing: 8px;
+}
+.HCTcnylDZuHHB0U-7Jsoo ._11CXiESmwL3SlATflSnd2B {
+  width: 100%;
+  max-width: 1200px;
+  padding-top: 32px;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+._3n8oLh1MQKLU3OvB6YYdRp {
+  width: 100%;
+  display: none;
+}
+._3n8oLh1MQKLU3OvB6YYdRp.rKsLhXLkYn4GGxF5S5hO9 {
+  display: block;
+}
+._3n8oLh1MQKLU3OvB6YYdRp ._1WjLC7cyf3OYHlVCT3ulSq {
+  background: linear-gradient(to right, #833312, rgba(131, 51, 18, 0));
+  border-left: 2px solid #ff5005;
+  font-size: clamp(20px, 2vw, 30px);
+  font-weight: 600;
+  font-family: "Reaver", serif;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #fff;
+  text-shadow: 0px 0px 5px #000;
+  box-shadow: 0px 0px 30px #000;
+  padding: 12px 20px;
+}
+._3n8oLh1MQKLU3OvB6YYdRp ._2bYtA0vNC3MBq5XyWDcwak {
+  width: 100%;
+  border-left: 2px solid hsla(0, 0%, 100%, 0.062745098);
+  margin-bottom: 30px;
+  background: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 0.38) 3.07%,
+    rgba(6, 37, 65, 0.35) 88.06%
+  );
+  box-shadow: 0px 0px 50px #000;
+  min-height: 0;
+  display: flex;
+  padding-bottom: 20px;
+  flex-direction: column;
+}
+.hero {
+  width: 100%;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  padding: calc(12px + 2vw);
+  margin-left: -2px;
+  border-top: 2px solid hsla(0, 0%, 100%, 0.062745098);
+  background: linear-gradient(
+    300deg,
+    rgba(0, 0, 0, 0.38) 3.07%,
+    rgba(6, 37, 65, 0.3) 88.06%
+  );
+  box-shadow: 0px 0px 50px #000;
+}
+.hero .EYgE09jEZdFCZhy4TH8ww {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 16px;
+  align-items: center;
+}
+.hero .EYgE09jEZdFCZhy4TH8ww .ym_hieAqDQ6vA9Cp_IcyG {
+  width: calc(10vw + 12px);
+  max-width: 140px;
+  min-width: 80px;
+  max-height: fit-content;
+  height: -moz-max-content;
+  box-shadow: 0px 0px 20px #000;
+  margin-right: 16px;
+}
+.hero .EYgE09jEZdFCZhy4TH8ww .Jyw3SZNEO88QDeiKxt6Kq {
+  flex-grow: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+.hero .EYgE09jEZdFCZhy4TH8ww .Jyw3SZNEO88QDeiKxt6Kq ._18vUeo5ZAq1SEbyrfLKxtv {
+  display: flex;
+  align-items: center;
+  gap: calc(4px + 0.3vw);
+}
+.hero
+  .EYgE09jEZdFCZhy4TH8ww
+  .Jyw3SZNEO88QDeiKxt6Kq
+  ._18vUeo5ZAq1SEbyrfLKxtv
+  ._1nuWb0v7v-TK3ir2UfjBRB {
+  font-size: clamp(16px, 1rem + 16 * (100vw - 360px)/1560, 32px);
+  font-weight: 600;
+  color: #f5f5f5;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-family: "Reaver", serif;
+  border-bottom: 2px solid hsla(0, 0%, 100%, 0);
+  line-height: 1.3;
+  transition-property: border, color;
+  transition-duration: 0.15s;
+}
+.hero
+  .EYgE09jEZdFCZhy4TH8ww
+  .Jyw3SZNEO88QDeiKxt6Kq
+  ._18vUeo5ZAq1SEbyrfLKxtv
+  ._1nuWb0v7v-TK3ir2UfjBRB:hover {
+  border-bottom: 2px solid hsla(0, 0%, 100%, 0.2);
+  color: #fff;
+}
+.hero
+  .EYgE09jEZdFCZhy4TH8ww
+  .Jyw3SZNEO88QDeiKxt6Kq
+  ._18vUeo5ZAq1SEbyrfLKxtv
+  ._38Ad6bJGKx_UdXOtfaaYvw {
+  width: calc(14px + 1vw);
+  margin-bottom: 2px;
+}
+.hero .EYgE09jEZdFCZhy4TH8ww .Jyw3SZNEO88QDeiKxt6Kq ._1zdBQJ8wfShlHp-m9AjDXF {
+  font-size: 16px;
+  font-weight: bold;
+  color: #ff715d;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  margin-bottom: 10px;
+}
+.hero ._239ktsMekdjQNlGgcouXe0 {
+  width: 100%;
+  height: 1px;
+  margin: 0 auto;
+  background: linear-gradient(to right, #1e2b35, rgba(30, 43, 53, 0));
+  margin-bottom: 16px;
+}
+.hero ._3yrZMMc63yBUz22e59QbKE {
+  font-size: 17px;
+  font-weight: bold;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  margin-bottom: 8px;
+}
+.hero ._16viLxUBhU2mCSgOCMsABo {
+  width: 100%;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 20px;
+}
+.hero ._16viLxUBhU2mCSgOCMsABo ._3W8ymeNM1TufRomg7R4XPH {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+.hero ._16viLxUBhU2mCSgOCMsABo ._3W8ymeNM1TufRomg7R4XPH:not(:last-child) {
+  padding-bottom: 20px;
+}
+.hero
+  ._16viLxUBhU2mCSgOCMsABo
+  ._3W8ymeNM1TufRomg7R4XPH
+  ._2dkGQPtrNeyagsZp-qdfjd {
+  width: 64px;
+  height: 64px;
+  min-width: 64px;
+  filter: drop-shadow(0px 3px 4px rgba(0, 0, 0, 0.5));
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+.hero ._16viLxUBhU2mCSgOCMsABo ._3W8ymeNM1TufRomg7R4XPH .Jyw3SZNEO88QDeiKxt6Kq {
+  flex-grow: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+.hero
+  ._16viLxUBhU2mCSgOCMsABo
+  ._3W8ymeNM1TufRomg7R4XPH
+  .Jyw3SZNEO88QDeiKxt6Kq
+  ._3evA101ENI-a3qPk48RRZW {
+  font-size: clamp(14px, 0.875rem + 4 * (100vw - 360px)/1560, 18px);
+  font-weight: 600;
+  color: #fff;
+  font-family: "Reaver", serif;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 4px;
+  margin-left: 20px;
+}
+.hero ._2hNAuf_qMzwmThpNOgTEd8 {
+  font-size: 17px;
+  font-weight: bold;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  margin-bottom: 8px;
+}
+.hero ._2307YYMnPjkJ2LP6g4HN89 {
+  width: 100%;
+  min-height: 0;
+  display: flex;
+  flex-direction: right;
+  gap: 16px;
+}
+.hero ._2307YYMnPjkJ2LP6g4HN89 ._3lVDzpEuh96hv_OLZNcLO1 {
+  width: 64px;
+  height: 68px;
+  min-width: 64px;
+  background-size: cover;
+}
+._32hr0bqoR1q_QIS3Fg_fsc {
+  width: 100%;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 0px 40px;
+  padding-bottom: 0px;
+  margin-bottom: 20px;
+}
+@media (max-width: 600px) {
+  ._32hr0bqoR1q_QIS3Fg_fsc {
+    padding: 0vw 2vw;
+  }
+}
+._32hr0bqoR1q_QIS3Fg_fsc ._3Luq5YVV2o4MRK_CC6y2o5 {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border-top: 1px solid;
+  border-image: linear-gradient(
+      to right,
+      rgba(238, 250, 255, 0.15),
+      rgba(0, 0, 0, 0) 60%
+    )
+    1;
+  padding-top: calc(8px + 0.5vw);
+}
+._32hr0bqoR1q_QIS3Fg_fsc ._3Luq5YVV2o4MRK_CC6y2o5 ._2LRUzK50G8HnT_lXlo0Nvs {
+  width: 72px;
+  height: 52px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  box-shadow: 0px 0px 20px #000;
+  margin-right: 16px;
+  margin-bottom: 10px;
+}
+._32hr0bqoR1q_QIS3Fg_fsc ._3Luq5YVV2o4MRK_CC6y2o5 .Jyw3SZNEO88QDeiKxt6Kq {
+  flex-grow: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+._32hr0bqoR1q_QIS3Fg_fsc
+  ._3Luq5YVV2o4MRK_CC6y2o5
+  .Jyw3SZNEO88QDeiKxt6Kq
+  ._1MKhqwpq2QdCgvldsg6djR {
+  font-size: clamp(16px, 2vw, 20px);
+  font-weight: 600;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-family: "Reaver", serif;
+}
+._32hr0bqoR1q_QIS3Fg_fsc
+  ._3Luq5YVV2o4MRK_CC6y2o5
+  .Jyw3SZNEO88QDeiKxt6Kq
+  ._2kpOY2HFJ7ImyitGV6xV5w {
+  text-transform: uppercase;
+  color: #ccc;
+  letter-spacing: 2px;
+}
+._32hr0bqoR1q_QIS3Fg_fsc
+  ._3Luq5YVV2o4MRK_CC6y2o5
+  .Jyw3SZNEO88QDeiKxt6Kq
+  ._16viLxUBhU2mCSgOCMsABo {
+  width: 100%;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 24px;
+}
+._2bwMhQ6Iax-7-UXxhUNVaf {
+  width: 100%;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 0px 40px;
+  padding-bottom: 0px;
+  margin-bottom: 20px;
+}
+._2bwMhQ6Iax-7-UXxhUNVaf ._3bydUQCaRMUsoVMjCy7--t {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+._2bwMhQ6Iax-7-UXxhUNVaf ._3bydUQCaRMUsoVMjCy7--t ._3EBUNM4sW85sTrULVhMBA1 {
+  width: 92px;
+  height: 52px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  box-shadow: 0px 0px 20px #000;
+  margin-right: 16px;
+  margin-bottom: 10px;
+}
+._2bwMhQ6Iax-7-UXxhUNVaf ._3bydUQCaRMUsoVMjCy7--t .Jyw3SZNEO88QDeiKxt6Kq {
+  flex-grow: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+._2bwMhQ6Iax-7-UXxhUNVaf
+  ._3bydUQCaRMUsoVMjCy7--t
+  .Jyw3SZNEO88QDeiKxt6Kq
+  ._2SxiJz8zGSkJQerssvs-oZ {
+  font-size: 20px;
+  font-weight: 600;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-family: "Reaver", serif;
+}
+._2bwMhQ6Iax-7-UXxhUNVaf
+  ._3bydUQCaRMUsoVMjCy7--t
+  .Jyw3SZNEO88QDeiKxt6Kq
+  ._16viLxUBhU2mCSgOCMsABo {
+  width: 100%;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 24px;
+}
+._159KxpRscp0hikZipdrXs_ {
+  margin-bottom: 24px;
+}
+._159KxpRscp0hikZipdrXs_ ._3WahKl9hlC9-63yKM1QLGa {
+  background: linear-gradient(
+    to right,
+    rgba(40, 64, 83, 0.5921568627),
+    rgba(131, 51, 18, 0) 60%
+  );
+  font-size: clamp(16px, 1rem + 6 * (100vw - 360px)/1560, 22px);
+  font-weight: 900;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  padding: 8px 20px;
+  margin-bottom: 8px;
+}
+._3780o1c91ESe44gnPBnlBy {
+  width: 100%;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 0px 18px;
+}
+._3780o1c91ESe44gnPBnlBy ._16viLxUBhU2mCSgOCMsABo {
+  width: 100%;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 24px;
+}
+._1gbgxXB1xPzbrmV9U5RoWd {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 6px;
+}
+._1gbgxXB1xPzbrmV9U5RoWd .aghs-placeholder {
+  width: 6px;
+  height: 6px;
+  min-width: 6px;
+  border-radius: 3px;
+  margin-top: 8px;
+  margin-left: 8px;
+  margin-right: 8px;
+  background-color: #8b989e;
+}
+._1gbgxXB1xPzbrmV9U5RoWd .aghs-placeholder.t11N2eJ8KYUkNxoD_zs09 {
+  opacity: 0;
+}
+._1gbgxXB1xPzbrmV9U5RoWd .V3z41L9Gc_yqykDggGKHF {
+  height: 10px;
+  width: 10px !important;
+  min-width: 10px !important;
+  margin-left: 15px;
+  margin-top: 2px;
+  border-left: 1px solid hsla(0, 0%, 100%, 0.5);
+  border-bottom: 1px solid hsla(0, 0%, 100%, 0.5);
+}
+._1gbgxXB1xPzbrmV9U5RoWd._3QMdEPqcghn6MwXQma18Fv .aghs-placeholder,
+._1gbgxXB1xPzbrmV9U5RoWd._3yEP6bE45VXkWpmSuZVjWv .aghs-placeholder,
+._1gbgxXB1xPzbrmV9U5RoWd.yVkAyS7ircR6Zcadrd_g0 .aghs-placeholder,
+._1gbgxXB1xPzbrmV9U5RoWd.FQQ6-bz-7sBm_qDoxHaH1 .aghs-placeholder,
+._1gbgxXB1xPzbrmV9U5RoWd._3YDxb2HJIgpV-T7Myt2TUc .aghs-placeholder,
+._1gbgxXB1xPzbrmV9U5RoWd.G2CYsOtO5Cm-e7A60Rnpk .aghs-placeholder,
+._1gbgxXB1xPzbrmV9U5RoWd._187U_-pfTyG0r1iXWndv2B .aghs-placeholder,
+._1gbgxXB1xPzbrmV9U5RoWd._3_OYis6i0O2AXlyIiZfRlh .aghs-placeholder,
+._1gbgxXB1xPzbrmV9U5RoWd._12ZEKDL8uy0yQ4rd17L1o- .aghs-placeholder,
+._1gbgxXB1xPzbrmV9U5RoWd._2_neZtEEcSQ5JkeNpjrnj6 .aghs-placeholder,
+._1gbgxXB1xPzbrmV9U5RoWd._2IXvnRSmM21J7NQiNH9Zmm .aghs-placeholder,
+._1gbgxXB1xPzbrmV9U5RoWd._1_tWiqdKs3fesWlLVFBmHc .aghs-placeholder,
+._1gbgxXB1xPzbrmV9U5RoWd.soC8eNv0AZgj8NFcF6CB0 .aghs-placeholder,
+._1gbgxXB1xPzbrmV9U5RoWd.KYQ8ZNRwpgkf3w9e6745H .aghs-placeholder {
+  width: 22px;
+  height: 22px;
+  border-radius: 0px;
+  margin: 0px;
+  background-size: 90%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: unset;
+}
+._1gbgxXB1xPzbrmV9U5RoWd._3QMdEPqcghn6MwXQma18Fv .aghs-placeholder {
+  background-image: url("https://cdn.steamstatic.com/apps/dota2/images/dota_react/icons/hero_strength.png");
+}
+._1gbgxXB1xPzbrmV9U5RoWd._3yEP6bE45VXkWpmSuZVjWv .aghs-placeholder {
+  background-image: url("https://cdn.steamstatic.com/apps/dota2/images/dota_react/icons/hero_agility.png");
+}
+._1gbgxXB1xPzbrmV9U5RoWd.yVkAyS7ircR6Zcadrd_g0 .aghs-placeholder {
+  background-image: url("https://cdn.steamstatic.com/apps/dota2/images/dota_react/icons/hero_intelligence.png");
+}
+._1gbgxXB1xPzbrmV9U5RoWd.FQQ6-bz-7sBm_qDoxHaH1 .aghs-placeholder {
+  background-image: url("https://cdn.steamstatic.com/apps/dota2/images/dota_react/heroes/stats/icon_movement_speed.png");
+}
+._1gbgxXB1xPzbrmV9U5RoWd._3YDxb2HJIgpV-T7Myt2TUc .aghs-placeholder {
+  background-image: url("https://cdn.steamstatic.com/apps/dota2/images/dota_react/heroes/stats/icon_damage.png");
+}
+._1gbgxXB1xPzbrmV9U5RoWd.G2CYsOtO5Cm-e7A60Rnpk .aghs-placeholder {
+  background-image: url("https://cdn.steamstatic.com/apps/dota2/images/dota_react/heroes/stats/icon_attack_range.png");
+}
+._1gbgxXB1xPzbrmV9U5RoWd._187U_-pfTyG0r1iXWndv2B .aghs-placeholder {
+  background-image: url("https://cdn.steamstatic.com/apps/dota2/images/dota_react/heroes/stats/icon_attack_speed.png");
+}
+._1gbgxXB1xPzbrmV9U5RoWd._3_OYis6i0O2AXlyIiZfRlh .aghs-placeholder {
+  background-image: url("https://cdn.steamstatic.com/apps/dota2/images/dota_react/heroes/stats/icon_armor.png");
+}
+._1gbgxXB1xPzbrmV9U5RoWd._12ZEKDL8uy0yQ4rd17L1o- .aghs-placeholder {
+  background-image: url("https://cdn.steamstatic.com/apps/dota2/images/dota_react/heroes/stats/icon_attack_time.png");
+}
+._1gbgxXB1xPzbrmV9U5RoWd._2_neZtEEcSQ5JkeNpjrnj6 .aghs-placeholder {
+  background-image: url("https://cdn.steamstatic.com/apps/dota2/images/dota_react/heroes/stats/health_regen.png");
+}
+._1gbgxXB1xPzbrmV9U5RoWd._2IXvnRSmM21J7NQiNH9Zmm .aghs-placeholder {
+  background-image: url("https://cdn.steamstatic.com/apps/dota2/images/dota_react/heroes/stats/mana_regen.png");
+}
+._1gbgxXB1xPzbrmV9U5RoWd._1_tWiqdKs3fesWlLVFBmHc .aghs-placeholder {
+  background-image: url("https://cdn.steamstatic.com/apps/dota2/images/dota_react/heroes/stats/icon_projectile_speed.png");
+}
+._1gbgxXB1xPzbrmV9U5RoWd.soC8eNv0AZgj8NFcF6CB0 .aghs-placeholder {
+  background-image: url("https://cdn.steamstatic.com/apps/dota2/images/dota_react/heroes/stats/aghs_scepter_icon.png");
+}
+._1gbgxXB1xPzbrmV9U5RoWd.KYQ8ZNRwpgkf3w9e6745H .aghs-placeholder {
+  background-image: url("https://cdn.steamstatic.com/apps/dota2/images/dota_react/heroes/stats/aghs_shard_icon.png");
+}
+._1gbgxXB1xPzbrmV9U5RoWd.soC8eNv0AZgj8NFcF6CB0,
+._1gbgxXB1xPzbrmV9U5RoWd.KYQ8ZNRwpgkf3w9e6745H {
+  background: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0) 0px,
+    rgba(0, 0, 0, 0) 20px,
+    rgba(83, 175, 255, 0.1019607843) 20px,
+    rgba(96, 141, 255, 0.0588235294) 30%,
+    rgba(96, 141, 255, 0) 80%
+  );
+}
+._1gbgxXB1xPzbrmV9U5RoWd.soC8eNv0AZgj8NFcF6CB0 .aghs-placeholder,
+._1gbgxXB1xPzbrmV9U5RoWd.KYQ8ZNRwpgkf3w9e6745H .aghs-placeholder {
+  background-size: 100%;
+}
+._1gbgxXB1xPzbrmV9U5RoWd.soC8eNv0AZgj8NFcF6CB0 .eSxyZNZqYCF1Y3wTL5PaK,
+._1gbgxXB1xPzbrmV9U5RoWd.KYQ8ZNRwpgkf3w9e6745H .eSxyZNZqYCF1Y3wTL5PaK {
+  color: #8190a5;
+}
+._1gbgxXB1xPzbrmV9U5RoWd .eSxyZNZqYCF1Y3wTL5PaK {
+  font-size: 17px;
+  color: #8b989e;
+  line-height: 1.3;
+  font-weight: 600;
+}
+._1gbgxXB1xPzbrmV9U5RoWd .eSxyZNZqYCF1Y3wTL5PaK .Bold {
+  color: #fff;
+}
+._2yvzkjSQ_JjkuS_gCosDXY {
+  position: relative;
+  height: 100%;
+  display: inline-block;
+}
+._2yvzkjSQ_JjkuS_gCosDXY img:first-child {
+  display: block;
+}
+._30f0gmRbaJ8WauzFjdB0X7 {
+  position: absolute;
+  width: 30px;
+  top: 100%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(9, 11, 14, 0.97);
+  border-radius: 50%;
+  box-shadow: 0px 6px 16px -2px rgba(0, 0, 0, 0.3);
+}
+span.New {
+  color: #36a15e;
+}
+span.Reworked {
+  color: #d05307;
+}
+._2jgesjf6ByT5s0kMJkQc0x {
+  display: inline-block;
+}
+._2jgesjf6ByT5s0kMJkQc0x ._1WQgrT4jOPX596Ot_1Y1Ui {
+  transform: translateY(4px);
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  cursor: default;
+  background-image: url("https://cdn.steamstatic.com/apps/dota2/images/icon_info.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+@property --GradientColor1 {
+  syntax: "<color>";
+  initial-value: #81399a;
+  inherits: false;
+}
+@property --GradientColor2 {
+  syntax: "<color>";
+  initial-value: #0094a2;
+  inherits: false;
+}
+.FullModalOverlay {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1500;
+}
+.ModalOverlayContent {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+.ModalOverlayContent.active {
+  z-index: 10;
+  -webkit-app-region: no-drag;
+}
+.ModalOverlayBackground {
+  background: rgba(0, 0, 0, 0.8);
+  z-index: 7;
+}
+@keyframes loading_throbber_bar {
+  0% {
+    transform: scaleX(1) scaleY(0.6);
+  }
+  30% {
+    transform: scaleX(1) scaleY(1);
+  }
+  55% {
+    transform: scaleX(1) scaleY(0.6);
+  }
+  100% {
+    transform: scaleX(1) scaleY(0.6);
+  }
+}
+.form {
+  border: 1px dotted cyan;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.A {
+  background-color: rgba(255, 0, 0, 0.4);
+  height: 40px;
+}
+
+.__react_component_tooltip {
+  border-radius: 3px;
+  display: inline-block;
+  font-size: 13px;
+  left: -999em;
+  opacity: 0;
+  padding: 8px 21px;
+  position: fixed;
+  pointer-events: none;
+  transition: opacity 0.3s ease-out;
+  top: -999em;
+  visibility: hidden;
+  z-index: 999;
+}
+.__react_component_tooltip::before,
+.__react_component_tooltip::after {
+  content: "";
+  width: 0;
+  height: 0;
+  position: absolute;
+}
+.__react_component_tooltip.show {
+  opacity: 0.9;
+  margin-top: 0;
+  margin-left: 0;
+  visibility: visible;
+}
+.__react_component_tooltip.place-top::before {
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  bottom: -8px;
+  left: 50%;
+  margin-left: -10px;
+}
+
+.__react_component_tooltip {
+  color: #fff;
+  background: #222;
+  border: 1px solid transparent;
+}
+
+.__react_component_tooltip.place-top {
+  margin-top: -10px;
+}
+.__react_component_tooltip.place-top::before {
+  border-top: 8px solid transparent;
+}
+.__react_component_tooltip.place-top::after {
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  bottom: -6px;
+  left: 50%;
+  margin-left: -8px;
+  border-top-color: #222;
+  border-top-style: solid;
+  border-top-width: 6px;
+}

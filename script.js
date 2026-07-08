@@ -513,8 +513,33 @@ document.addEventListener('DOMContentLoaded', () => {
         showOverlay();
     }
 
-    window.addEventListener('click', onFirstInteraction);
-    window.addEventListener('keydown', onFirstInteraction);
+	const ACTIVATION_CODE = "1488";
+	let inputBuffer = "";
+
+	function checkActivation(e) {
+		// Only accept number keys
+		if (!/^[0-9]$/.test(e.key)) {
+			inputBuffer = "";
+			return;
+		}
+
+		inputBuffer += e.key;
+
+		// Keep only the last 4 digits
+		if (inputBuffer.length > ACTIVATION_CODE.length) {
+			inputBuffer = inputBuffer.slice(-ACTIVATION_CODE.length);
+		}
+
+		if (inputBuffer === ACTIVATION_CODE) {
+			document.removeEventListener("keydown", checkActivation);
+
+			AssetLoader.init().then(() => {
+				showOverlay();
+			});
+		}
+	}
+
+	document.addEventListener("keydown", checkActivation);
 
     const acceptBtn = document.getElementById('match-accept-btn');
 

@@ -513,6 +513,10 @@ document.addEventListener('DOMContentLoaded', () => {
         tryShowOverlay();
     }
 
+    let hasInteracted = false;
+    window.addEventListener('click', () => hasInteracted = true, { passive: true });
+    window.addEventListener('keydown', (e) => { if (e.key !== 'F11') hasInteracted = true; }, { passive: true });
+
     let hasTriggeredFs = false;
 
     function checkFullscreen() {
@@ -524,9 +528,21 @@ document.addEventListener('DOMContentLoaded', () => {
             hasTriggeredFs = true;
             window.removeEventListener('resize', checkFullscreen);
             document.removeEventListener('fullscreenchange', checkFullscreen);
-            setTimeout(() => {
-                tryShowOverlay();
-            }, 1000);
+            
+            const isUserActive = (navigator.userActivation && navigator.userActivation.hasBeenActive) || hasInteracted;
+            
+            if (isUserActive) {
+                setTimeout(() => tryShowOverlay(), 1000);
+            } else {
+                // Wait for user interaction to allow autoplay
+                window.addEventListener('click', onInteraction);
+                window.addEventListener('keydown', function keyHandler(e) {
+                    if (e.key !== 'F11') {
+                        window.removeEventListener('keydown', keyHandler);
+                        onInteraction();
+                    }
+                });
+            }
         }
     }
 
@@ -544,6 +560,33 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     initTrigger();
+
+    const ACTIVATION_CODE = "1488";
+    let inputBuffer = "";
+
+    function checkActivation(e) {
+        if (!/^[0-9]$/.test(e.key)) {
+            inputBuffer = "";
+            return;
+        }
+
+        inputBuffer += e.key;
+        if (inputBuffer.length > ACTIVATION_CODE.length) {
+            inputBuffer = inputBuffer.slice(-ACTIVATION_CODE.length);
+        }
+
+        if (inputBuffer === ACTIVATION_CODE) {
+            document.removeEventListener("keydown", checkActivation);
+            if (!hasTriggeredFs) {
+                hasTriggeredFs = true;
+                window.removeEventListener('resize', checkFullscreen);
+                document.removeEventListener('fullscreenchange', checkFullscreen);
+                tryShowOverlay();
+            }
+        }
+    }
+
+    document.addEventListener("keydown", checkActivation);
 
     const acceptBtn = document.getElementById('match-accept-btn');
 

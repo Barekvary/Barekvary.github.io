@@ -481,6 +481,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function showOverlay() {
         if (triggered) return;
         triggered = true;
+        document.body.style.overflow = 'hidden';
         
         // Play sound RIGHT at the beginning of the reveal
         const audio = document.getElementById('matchready-audio');
@@ -500,46 +501,49 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 500);
     }
 
-    async function onFirstInteraction(e) {
-        if (e.type === 'keydown' && e.key !== 'Enter' && e.key !== ' ') return;
-        if (e.key === ' ' || e.key === 'Enter') e.preventDefault();
-        
-        window.removeEventListener('click', onFirstInteraction);
-        window.removeEventListener('keydown', onFirstInteraction);
-        
-        // Show overlay first, then handle loading in background if needed (though it's fast)
-        // But the user wants sound IMMEDIATELY. ShowOverlay does that.
-        await AssetLoader.init();
-        showOverlay();
+    function tryShowOverlay() {
+        AssetLoader.init().then(() => {
+            showOverlay();
+        });
     }
 
-	const ACTIVATION_CODE = "1488";
-	let inputBuffer = "";
+    function onInteraction() {
+        window.removeEventListener('click', onInteraction);
+        window.removeEventListener('keydown', onInteraction);
+        tryShowOverlay();
+    }
 
-	function checkActivation(e) {
-		// Only accept number keys
-		if (!/^[0-9]$/.test(e.key)) {
-			inputBuffer = "";
-			return;
-		}
+    let hasTriggeredFs = false;
 
-		inputBuffer += e.key;
+    function checkFullscreen() {
+        if (hasTriggeredFs) return;
+        
+        const isFs = document.fullscreenElement || (window.innerWidth === screen.width && window.innerHeight === screen.height);
+        
+        if (isFs) {
+            hasTriggeredFs = true;
+            window.removeEventListener('resize', checkFullscreen);
+            document.removeEventListener('fullscreenchange', checkFullscreen);
+            setTimeout(() => {
+                tryShowOverlay();
+            }, 1000);
+        }
+    }
 
-		// Keep only the last 4 digits
-		if (inputBuffer.length > ACTIVATION_CODE.length) {
-			inputBuffer = inputBuffer.slice(-ACTIVATION_CODE.length);
-		}
+    function initTrigger() {
+        const isFs = document.fullscreenElement || (window.innerWidth === screen.width && window.innerHeight === screen.height);
+        if (isFs) {
+            // Already in fullscreen on page load, wait for interaction to avoid autoplay issues
+            window.addEventListener('click', onInteraction);
+            window.addEventListener('keydown', onInteraction);
+        } else {
+            // Wait for F11 (resize) or Fullscreen API
+            window.addEventListener('resize', checkFullscreen);
+            document.addEventListener('fullscreenchange', checkFullscreen);
+        }
+    }
 
-		if (inputBuffer === ACTIVATION_CODE) {
-			document.removeEventListener("keydown", checkActivation);
-
-			AssetLoader.init().then(() => {
-				showOverlay();
-			});
-		}
-	}
-
-	document.addEventListener("keydown", checkActivation);
+    initTrigger();
 
     const acceptBtn = document.getElementById('match-accept-btn');
 
@@ -612,6 +616,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // 3. Now fade in the dota site AND simultaneously fade out the overlay backdrop
             document.body.classList.add('dota-active');
             if (overlay) overlay.classList.add('fading-out');
+            document.body.style.overflow = ''; // Восстанавливаем скроллбар
         }, 1500);
 
         // 4. Final cleanup (3s mark)

@@ -748,3 +748,25 @@
   border-top-style: solid;
   border-top-width: 6px;
 }
+#dota-page-container .info-tooltip {
+    position: relative;
+}
+
+#dota-page-container .info-tooltip:hover .__react_component_tooltip {
+    opacity: 0.9;
+    visibility: visible;
+    left: 50%;
+    transform: translateX(-50%);
+    top: auto;
+    bottom: 100%;
+    margin-bottom: 10px;
+}
+
+#dota-page-container .__react_component_tooltip {
+    position: absolute !important;
+    width: max-content;
+    max-width: 300px;
+    white-space: normal;
+    text-align: center;
+}
+

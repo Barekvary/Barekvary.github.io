@@ -695,7 +695,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     // Relaunch the overlay immediately
                     showOverlay();
                 }, 400);
-            }, 5000);
+            }, 3500);
         }
 
         function activateNext() {

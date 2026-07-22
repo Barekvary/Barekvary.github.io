@@ -568,7 +568,7 @@
   background-image: url("https://cdn.steamstatic.com/apps/dota2/images/dota_react/heroes/stats/aghs_scepter_icon.png");
 }
 #dota-page-container .note-line.aghs-shard .note-bullet {
-  background-image: url("https://cdn.steamstatic.com/apps/dota2/images/dota_react/heroes/stats/aghs_shard_icon.png");
+  background-image: url("./patchnote/shard.png");
 }
 #dota-page-container .note-line.aghs-scepter,
 #dota-page-container .note-line.aghs-shard {

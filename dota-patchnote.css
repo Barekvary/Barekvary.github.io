@@ -1,4 +1,4 @@
-/* Scoped copy of dota/main.css for embedding the patch notes inside index.html.
+﻿/* Scoped copy of dota/main.css for embedding the patch notes inside index.html.
    Every selector is prefixed with #dota-page-container so these styles cannot leak
    into the portfolio site. Regenerate from dota/main.css when it changes. */
 
@@ -568,7 +568,7 @@
   background-image: url("https://cdn.steamstatic.com/apps/dota2/images/dota_react/heroes/stats/aghs_scepter_icon.png");
 }
 #dota-page-container .note-line.aghs-shard .note-bullet {
-  background-image: url("./patchnote/shard.png");
+  background-image: url("./patchnote/shard.webp");
 }
 #dota-page-container .note-line.aghs-scepter,
 #dota-page-container .note-line.aghs-shard {

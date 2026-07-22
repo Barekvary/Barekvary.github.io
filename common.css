@@ -1,4 +1,4 @@
-body {/* Fonts */
+﻿body {/* Fonts */
 @font-face {
   font-family: 'Hypatia Sans Pro';
   src: url('./fonts/fonnts.com-Hypatia_Sans_Pro_Semibold.otf');
@@ -443,7 +443,7 @@ body.dota-active .content {
   flex-direction: column;
   overflow: visible; /* Show glow */
   backface-visibility: hidden;
-  background-image: url('matchfoundbackground.png');
+  background-image: url('matchfoundbackground.webp');
   background-size: cover;
   background-position: center;
   /* Glow properties (faded by default) */
@@ -538,7 +538,7 @@ body.dota-active .content {
   content: '';
   position: absolute;
   inset: 0;
-  background-image: url('person.png');
+  background-image: url('person.webp');
   background-size: cover;
   background-position: center;
 }
@@ -560,7 +560,7 @@ body.dota-active .content {
 }
 
 .status-icon.active::after {
-  background-image: url('personaccept.png');
+  background-image: url('personaccept.webp');
   opacity: 1;
 }
 
@@ -571,7 +571,7 @@ body.dota-active .content {
 }
 
 .status-icon.failed::after {
-  background-image: url('personfail.png');
+  background-image: url('personfail.webp');
   opacity: 1;
 }
 
@@ -627,7 +627,7 @@ body.dota-active .content {
   width: 320px;
   height: 65px;
   position: relative;
-  background: url('acceptmatchbutton.png') no-repeat center;
+  background: url('acceptmatchbutton.webp') no-repeat center;
   background-size: 100% 100%;
   border: none;
   cursor: pointer;
@@ -640,7 +640,7 @@ body.dota-active .content {
   content: '';
   position: absolute;
   inset: 0;
-  background: url('acceptmatchbuttonhover.png') no-repeat center;
+  background: url('acceptmatchbuttonhover.webp') no-repeat center;
   background-size: 100% 100%;
   opacity: 0;
   transition: opacity 0.3s ease;

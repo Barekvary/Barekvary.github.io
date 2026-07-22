@@ -1,4 +1,4 @@
-// Clock / timer function
+﻿// Clock / timer function
 function initializeClock() {
     function updateClock() {
         const now = new Date();
@@ -178,7 +178,7 @@ function updatePhotoOnFullscreen() {
     const isFs = document.fullscreenElement || (window.innerWidth === screen.width && window.innerHeight === screen.height);
     const mainPhoto = document.getElementById('main-photo');
     if (mainPhoto) {
-        mainPhoto.src = isFs ? './img/photo_bignose.jpg' : './img/photo.jpg';
+        mainPhoto.src = isFs ? './img/photo_bignose.webp' : './img/photo.webp';
     }
 }
 window.addEventListener('resize', updatePhotoOnFullscreen);
@@ -291,9 +291,9 @@ document.addEventListener('DOMContentLoaded', initializeFullscreen);
 document.addEventListener('DOMContentLoaded', () => {
     const AssetLoader = {
         images: [
-            'acceptmatchbutton.png',
-            'acceptmatchbuttonhover.png',
-            'smokeparticle.png',
+            'acceptmatchbutton.webp',
+            'acceptmatchbuttonhover.webp',
+            'smokeparticle.webp',
             'https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/backgrounds/featured.jpg',
             'https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/global/dota2_logo_horiz.png',
             'https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/valve_logo.png',
@@ -432,7 +432,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             const currentAlpha = this.introFade * this.fadeMult;
-            const smokeImg = AssetLoader.assets['smokeparticle.png'];
+            const smokeImg = AssetLoader.assets['smokeparticle.webp'];
 
             for (let i = this.particles.length - 1; i >= 0; i--) {
                 const p = this.particles[i];

@@ -173,6 +173,18 @@ function initializeSliders() {
 
 document.addEventListener('DOMContentLoaded', initializeSliders);
 
+// Change photo on fullscreen
+function updatePhotoOnFullscreen() {
+    const isFs = document.fullscreenElement || (window.innerWidth === screen.width && window.innerHeight === screen.height);
+    const mainPhoto = document.getElementById('main-photo');
+    if (mainPhoto) {
+        mainPhoto.src = isFs ? './img/photo_bignose.jpg' : './img/photo.jpg';
+    }
+}
+window.addEventListener('resize', updatePhotoOnFullscreen);
+document.addEventListener('fullscreenchange', updatePhotoOnFullscreen);
+document.addEventListener('DOMContentLoaded', updatePhotoOnFullscreen);
+
 // Fullscreen functionality
 // Fullscreen functionality
 function initializeFullscreen() {

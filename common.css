@@ -527,21 +527,30 @@ body.dota-active .content {
   width: 58px;
   height: 58px;
   background: rgba(0, 0, 0, 0.35);
-  border: 2px solid rgba(74, 122, 84, 0.4);
+  border: 1px solid rgba(0, 0, 0, 0.6);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.5);
   position: relative;
-  transition: background 0.2s, box-shadow 0.3s;
+  transition: background 0.2s, box-shadow 0.3s, border-color 0.2s;
 }
 
 /* The player icon shape */
 .status-icon::before {
-  content: '👤';
+  content: '';
   position: absolute;
   inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: rgba(255,255,255,0.1);
-  font-size: 24px;
+  background-image: url('person.png');
+  background-size: cover;
+  background-position: center;
+}
+
+.status-icon::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
 
 .status-icon.active {
@@ -550,8 +559,38 @@ body.dota-active .content {
   box-shadow: 0 0 15px rgba(74, 122, 84, 0.8), inset 0 0 10px rgba(255,255,255,0.2);
 }
 
-.status-icon.active::before {
-  color: #fff;
+.status-icon.active::after {
+  background-image: url('personaccept.png');
+  opacity: 1;
+}
+
+.status-icon.failed {
+  background: rgba(122, 74, 74, 0.7);
+  border-color: #B87474;
+  box-shadow: 0 0 15px rgba(200, 50, 50, 0.8), inset 0 0 10px rgba(255,255,255,0.2);
+}
+
+.status-icon.failed::after {
+  background-image: url('personfail.png');
+  opacity: 1;
+}
+
+#return-to-matchmaking {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin-top: 25px;
+  font-family: 'Hypatia Sans Pro', sans-serif;
+  color: #B1BDC3;
+  font-size: 1.3rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  white-space: nowrap;
+}
+
+.hidden {
+  display: none !important;
 }
 
 #accepted-count {

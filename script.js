@@ -394,18 +394,28 @@ document.addEventListener('DOMContentLoaded', () => {
                 expansion: 0
             };
         },
-        animate() {
+        animate(currentTime) {
             if (!this.ctx) return;
+            
+            if (!currentTime) currentTime = performance.now();
+            if (!this.lastTime) this.lastTime = currentTime;
+            // Normalize to 60FPS so existing values work as expected
+            const dt = (currentTime - this.lastTime) / 16.666;
+            this.lastTime = currentTime;
+            
+            // Cap delta time to prevent massive jumps on lag/tab switch
+            const safeDt = Math.min(dt, 3.0);
+            
             this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
             
             // Faster intro fade (approx 0.6s)
             if (this.introFade < 1.0) {
-                this.introFade += 0.025;
+                this.introFade += 0.025 * safeDt;
                 if (this.introFade > 1.0) this.introFade = 1.0;
             }
 
             if (!this.isSpawning) {
-                this.fadeMult -= 0.015;
+                this.fadeMult -= 0.015 * safeDt;
                 if (this.fadeMult <= 0) this.fadeMult = 0;
             }
 
@@ -416,12 +426,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 const p = this.particles[i];
 
                 if (p.type === 'smoke') {
-                    p.y -= 0.3; // Faster drift
+                    p.y -= 0.3 * safeDt; // Faster drift
                 }
 
-                p.x += p.vx;
-                p.y += p.vy;
-                p.r -= p.shrink;
+                p.x += p.vx * safeDt;
+                p.y += p.vy * safeDt;
+                p.r -= p.shrink * safeDt;
 
                 // Box-normalized distance fade for smoke (follows rectangle shape)
                 let distAlpha = 1.0;
@@ -463,7 +473,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
             if (this.particles.length > 0 || this.isSpawning) {
-                this.animationId = requestAnimationFrame(() => this.animate());
+                this.animationId = requestAnimationFrame((t) => this.animate(t));
             }
         },
         stopSpawning() {
@@ -609,7 +619,9 @@ document.addEventListener('DOMContentLoaded', () => {
         const faceFront = document.querySelector('.match-found-face.front');
         const faceTop = document.querySelector('.match-found-face.top');
         
-        // No sound here as requested
+        // Simple trick to boost volume without AudioContext restrictions
+        new Audio('accept.m4a').play().catch(() => {});
+        new Audio('accept.m4a').play().catch(() => {});
 
         setTimeout(() => {
             if (inner) inner.classList.add('rotating');
@@ -620,23 +632,91 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 150);
     }
 
+    let hasFailedOnce = false;
+
     function startReadySequence() {
         const icons = document.querySelectorAll('.status-icon');
         const countLabel = document.getElementById('accepted-count');
+        const iconsContainer = document.getElementById('status-icons-container');
+        const returnMsg = document.getElementById('return-to-matchmaking');
+        
         let currentIndex = 0;
         let delay = 50;
 
+        function failSequence() {
+            if (iconsContainer) iconsContainer.classList.add('hidden');
+            if (countLabel) countLabel.classList.add('hidden');
+            if (returnMsg) returnMsg.classList.remove('hidden');
+            
+            setTimeout(() => {
+                ParticleSystem.stopSpawning();
+                const dialog = document.getElementById('match-found-dialog');
+                if (dialog) dialog.style.animation = 'dotaShrink 3s cubic-bezier(0.16, 1, 0.3, 1) forwards';
+                
+                setTimeout(() => {
+                    // Reset state
+                    hasFailedOnce = true;
+                    acceptInProgress = false;
+                    interactionAllowed = true;
+                    triggered = false; // allow showOverlay to run again
+                    
+                    // Reset UI
+                    if (iconsContainer) iconsContainer.classList.remove('hidden');
+                    if (countLabel) countLabel.classList.remove('hidden');
+                    if (returnMsg) returnMsg.classList.add('hidden');
+                    if (countLabel) countLabel.innerText = '0 / 10 ПРИНЯТЫ';
+                    icons.forEach(i => {
+                        i.classList.remove('active');
+                        i.classList.remove('failed');
+                    });
+                    
+                    const inner = document.getElementById('match-found-inner');
+                    const faceFront = document.querySelector('.match-found-face.front');
+                    const faceTop = document.querySelector('.match-found-face.top');
+                    
+                    if (inner) {
+                        inner.style.transition = 'none';
+                        inner.classList.remove('rotating');
+                        void inner.offsetWidth;
+                        inner.style.transition = '';
+                    }
+                    if (faceFront) faceFront.classList.add('glow-active');
+                    if (faceTop) faceTop.classList.remove('glow-active');
+                    
+                    const acceptBtn = document.getElementById('match-accept-btn');
+                    if (acceptBtn) acceptBtn.classList.remove('pressed');
+                    
+                    if (dialog) {
+                        dialog.style.animation = 'none'; 
+                        void dialog.offsetWidth; 
+                        dialog.style.animation = ''; 
+                    }
+                    
+                    // Relaunch the overlay immediately
+                    showOverlay();
+                }, 400);
+            }, 5000);
+        }
+
         function activateNext() {
             if (currentIndex < icons.length) {
-                icons[currentIndex].classList.add('active');
-                currentIndex++;
-                if (countLabel) countLabel.innerText = currentIndex + ' / 10 ПРИНЯТЫ';
-                
-                if (currentIndex < icons.length) {
-                    delay *= 1.5;
-                    setTimeout(activateNext, delay);
+                if (!hasFailedOnce && currentIndex === 9) {
+                    icons[currentIndex].classList.add('failed');
+                    currentIndex++;
+                    if (countLabel) countLabel.innerText = currentIndex + ' / 10 ПРИНЯТЫ';
+                    
+                    setTimeout(failSequence, 500);
                 } else {
-                    setTimeout(finishSequence, 800);
+                    icons[currentIndex].classList.add('active');
+                    currentIndex++;
+                    if (countLabel) countLabel.innerText = currentIndex + ' / 10 ПРИНЯТЫ';
+                    
+                    if (currentIndex < icons.length) {
+                        delay *= 1.5;
+                        setTimeout(activateNext, delay);
+                    } else {
+                        setTimeout(finishSequence, 800);
+                    }
                 }
             }
         }
@@ -654,19 +734,25 @@ document.addEventListener('DOMContentLoaded', () => {
         // 1. Start cinematic shrink animation (3s total, opacity hits zero at 1.5s)
         if (dialog) dialog.style.animation = 'dotaShrink 3s cubic-bezier(0.16, 1, 0.3, 1) forwards';
         
-        // 2. Wait for modal to hit 0 opacity (1.5s mark)
+        // Play loaded sound slightly before the visual fade-in starts
+        setTimeout(() => {
+            const loadedAudio = new Audio('loaded.mp3');
+            loadedAudio.play().catch(() => {});
+        }, 2000);
+
+        // 2. Wait for modal to hit 0 opacity (1.5s mark) + 1 second extra pause
         setTimeout(() => {
             // 3. Now fade in the dota site AND simultaneously fade out the overlay backdrop
             document.body.classList.add('dota-active');
             if (overlay) overlay.classList.add('fading-out');
-            document.body.style.overflow = ''; // Восстанавливаем скроллбар
-        }, 1500);
+            document.body.style.overflow = ''; // Restore scrollbar
+        }, 2500);
 
-        // 4. Final cleanup (3s mark)
+        // 4. Final cleanup
         setTimeout(() => {
             if (overlay) overlay.style.display = 'none';
             ParticleSystem.stopFull();
-        }, 3000);
+        }, 4500);
     }
 
     // Button Events
